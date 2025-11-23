@@ -1,7 +1,7 @@
 import React from "react";
 import PageBanner from "../common/PageBanner";
 
-const LoginComponent = () => {
+const RegisterComponent = () => {
   return (
     <main>
       <PageBanner title="My account" />
@@ -11,30 +11,23 @@ const LoginComponent = () => {
           <div className="row justify-content-center">
             <div className="col-lg-6">
               <div className="basic-login">
-                <h5>Login</h5>
+                <h5>Register</h5>
 
                 <form>
-                  <label>Username or email address <span>*</span></label>
+                  <label>Username <span>*</span></label>
                   <input type="text" placeholder="Enter Username" />
+
+                  <label>Email <span>*</span></label>
+                  <input type="email" placeholder="Enter email" />
 
                   <label>Password <span>*</span></label>
                   <input type="password" placeholder="Enter password" />
 
-                  <div className="login-action mb-10 fix">
-                    <span className="log-rem f-left">
-                      <input id="remember" type="checkbox" />
-                      <label htmlFor="remember">Remember me</label>
-                    </span>
-                    <span className="forgot-login f-right">
-                      <a href="#">Lost your password?</a>
-                    </span>
-                  </div>
-
-                  <button className="tp-in-btn w-100">Login</button>
+                  <button className="tp-in-btn w-100 mt-3">Register</button>
                 </form>
 
                 <p className="text-center mt-3">
-                  Don’t have an account? <a href="/register">Register</a>
+                  Already have an account? <a href="/login">Login</a>
                 </p>
 
               </div>
@@ -46,4 +39,4 @@ const LoginComponent = () => {
   );
 };
 
-export default LoginComponent;
+export default RegisterComponent;

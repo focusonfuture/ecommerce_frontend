@@ -1,16 +1,16 @@
 import React from "react";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
-import LoginComponent from "../../components/auth/LoginComponent";
+import RegisterComponent from "../../components/auth/RegisterComponent";
 
-const Login = () => {
+const Register = () => {
   return (
     <>
       <Header />
-      <LoginComponent />
+      <RegisterComponent />
       <Footer />
     </>
   );
 };
 
-export default Login;
+export default Register;
