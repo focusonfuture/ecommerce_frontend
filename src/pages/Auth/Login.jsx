@@ -8,7 +8,6 @@ import LoginComponent from '../../components/auth/LoginComponent'
 const Login = () => {
     return (
         <>
-            <Preloader />
             <Header />
             <LoginComponent />
             <Footer />

@@ -9,7 +9,6 @@ import Main from '../../components/home/Main'
 const Home = () => {
   return (
     <>
-      <Preloader />
       <Header />
       <Main />
       <Footer />
