@@ -1,6 +1,71 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Header = () => {
+    useEffect(() => {
+        // Enhance menu dropdowns: hover on desktop, click toggle on mobile/touch
+        const mq = window.matchMedia('(min-width: 992px)')
+
+        const menu = document.querySelector('.main-menu')
+        if (!menu) return
+
+        const items = menu.querySelectorAll('ul > li')
+
+        const clearHover = (li) => li.classList.remove('open')
+        const setHover = (li) => li.classList.add('open')
+
+        items.forEach((li) => {
+            const submenu = li.querySelector('ul, .mega-menu')
+            if (!submenu) return
+
+            // remove previously attached handlers by cloning node (defensive)
+            const newLi = li.cloneNode(true)
+            li.parentNode.replaceChild(newLi, li)
+        })
+
+        // requery after clone
+        const items2 = menu.querySelectorAll('ul > li')
+        items2.forEach((li) => {
+            const submenu = li.querySelector('ul, .mega-menu')
+            if (!submenu) return
+
+            const link = li.querySelector('a')
+
+            const onEnter = () => setHover(li)
+            const onLeave = () => clearHover(li)
+            const onClick = (e) => {
+                // on small screens toggle open class and submenu visibility
+                if (!mq.matches) {
+                    e.preventDefault()
+                    const isOpen = li.classList.toggle('open')
+                    if (submenu) submenu.style.display = isOpen ? 'block' : 'none'
+                }
+            }
+
+            li.addEventListener('mouseenter', onEnter)
+            li.addEventListener('mouseleave', onLeave)
+            if (link) link.addEventListener('click', onClick)
+
+            // ensure mobile starts hidden
+            if (!mq.matches && submenu) submenu.style.display = 'none'
+
+            // store handlers for potential cleanup (not strictly necessary here)
+            li._menuHandlers = { onEnter, onLeave, onClick }
+        })
+
+        return () => {
+            // cleanup handlers
+            const cleanupItems = menu.querySelectorAll('ul > li')
+            cleanupItems.forEach((li) => {
+                const h = li._menuHandlers
+                if (h) {
+                    li.removeEventListener('mouseenter', h.onEnter)
+                    li.removeEventListener('mouseleave', h.onLeave)
+                    const link = li.querySelector('a')
+                    if (link) link.removeEventListener('click', h.onClick)
+                }
+            })
+        }
+    }, [])
     return (
         <>
             {/* header-start */}

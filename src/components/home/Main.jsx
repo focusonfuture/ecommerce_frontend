@@ -1,6 +1,76 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Main = () => {
+    useEffect(() => {
+        // Apply data-background attributes as inline background-image styles
+        try {
+            document.querySelectorAll('[data-background]').forEach((el) => {
+                const bg = el.getAttribute('data-background')
+                if (bg) {
+                    el.style.backgroundImage = `url(${bg})`
+                    el.style.backgroundSize = 'cover'
+                    el.style.backgroundPosition = 'center center'
+                }
+            })
+
+            // Add standard swiper pagination class to allow default styles
+            const pag = document.querySelector('.main-slider-paginations')
+            if (pag && !pag.classList.contains('swiper-pagination')) {
+                pag.classList.add('swiper-pagination')
+            }
+
+            // Initialize Swiper if the global is available (scripts from index.html)
+            const SwiperCtor = window.Swiper || (typeof require !== 'undefined' && require('swiper').default)
+            if (SwiperCtor) {
+                // Helper to avoid double-initialization
+                const initSwiperOnce = (selector, options) => {
+                    const el = document.querySelector(selector)
+                    if (!el) return null
+                    if (el.dataset.swiperInited) return null
+                    try {
+                        const inst = new SwiperCtor(selector, options)
+                        el.dataset.swiperInited = '1'
+                        return inst
+                    } catch (e) {
+                        return null
+                    }
+                }
+
+                // Main slider: autoplay enabled
+                initSwiperOnce('.slider__active', {
+                    loop: true,
+                    pagination: {
+                        el: '.main-slider-paginations',
+                        clickable: true,
+                    },
+                    autoplay: {
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    },
+                    effect: 'slide',
+                })
+
+                // Product slider (top deals)
+                initSwiperOnce('.product-slider', {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                    navigation: {
+                        nextEl: '.bs-button-next',
+                        prevEl: '.bs-button-prev',
+                    },
+                    breakpoints: {
+                        0: { slidesPerView: 1 },
+                        576: { slidesPerView: 2 },
+                        768: { slidesPerView: 3 },
+                        1200: { slidesPerView: 4 },
+                    },
+                })
+            }
+        } catch (err) {
+            // defensive: if DOM isn't ready or script not present, nothing fatal
+            // console.warn('Slider init failed', err)
+        }
+    }, [])
     return (
         <main>
             {/* slider-area-start */}
