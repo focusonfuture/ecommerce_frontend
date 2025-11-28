@@ -4,7 +4,7 @@ const PageBanner = ({ title }) => {
   return (
     <div
       className="page-banner-area page-banner-height-2"
-      data-background="assets/img/banner/page-banner-4.jpg"
+      data-background="/assets/img/banner/page-banner-4.jpg"
     >
       <div className="container">
         <div className="row">
@@ -22,7 +22,7 @@ const PageBanner = ({ title }) => {
                     </li>
                   </ul>
                 </nav>
-              </div>
+              </div>  
             </div>
           </div>
         </div>

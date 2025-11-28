@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* ============================= */
+/*     PRELOADER ANIMATION CSS   */
+/* ============================= */
+
+#loading {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#loading-center-absolute {
+  display: flex;
+  gap: 30px;
+}
+
+/* animate each product */
+.product {
+  width: 55px;
+  height: 55px;
+  animation: bounceLoader 1s infinite ease-in-out;
+}
+
+#mustard { animation-delay: 0s; }
+#meat    { animation-delay: 0.2s; }
+#soda    { animation-delay: 0.4s; }
+
+@keyframes bounceLoader {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-18px); }
+  100% { transform: translateY(0); }
+}
+
+/* fade-out */
+#loading.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.6s ease;
+}

@@ -2,19 +2,17 @@ import React from 'react'
 import Header from '../../components/layout/Header'
 import Footer from '../../components/layout/Footer'
 import Preloader from '../../components/layout/Preloader'
-import Main from '../../components/home/Main'
+import About from '../../components/about/About'
 
-
-
-const Home = () => {
+const AboutPage = () => {
   return (
     <>
       <Preloader />
       <Header />
-      <Main />
+      <About />
       <Footer />
     </>
   )
 }
 
-export default Home
+export default AboutPage

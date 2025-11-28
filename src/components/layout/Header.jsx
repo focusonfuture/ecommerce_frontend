@@ -1,71 +1,84 @@
 import React, { useEffect } from 'react'
+import { Link } from "react-router-dom";
+
 
 const Header = () => {
     useEffect(() => {
-        // Enhance menu dropdowns: hover on desktop, click toggle on mobile/touch
-        const mq = window.matchMedia('(min-width: 992px)')
+        // -------------------------------
+        // 1. MENU HOVER + MOBILE TOGGLE
+        // -------------------------------
+        const mq = window.matchMedia('(min-width: 992px)');
 
-        const menu = document.querySelector('.main-menu')
-        if (!menu) return
+        const menu = document.querySelector('.main-menu');
+        if (menu) {
+            const items = menu.querySelectorAll('ul > li');
 
-        const items = menu.querySelectorAll('ul > li')
+            const clearHover = (li) => li.classList.remove('open');
+            const setHover = (li) => li.classList.add('open');
 
-        const clearHover = (li) => li.classList.remove('open')
-        const setHover = (li) => li.classList.add('open')
+            // Remove old handlers
+            items.forEach((li) => {
+                const submenu = li.querySelector('ul, .mega-menu');
+                if (!submenu) return;
 
-        items.forEach((li) => {
-            const submenu = li.querySelector('ul, .mega-menu')
-            if (!submenu) return
+                const newLi = li.cloneNode(true);
+                li.parentNode.replaceChild(newLi, li);
+            });
 
-            // remove previously attached handlers by cloning node (defensive)
-            const newLi = li.cloneNode(true)
-            li.parentNode.replaceChild(newLi, li)
-        })
+            // Re-query after cloning
+            const items2 = menu.querySelectorAll('ul > li');
 
-        // requery after clone
-        const items2 = menu.querySelectorAll('ul > li')
-        items2.forEach((li) => {
-            const submenu = li.querySelector('ul, .mega-menu')
-            if (!submenu) return
+            items2.forEach((li) => {
+                const submenu = li.querySelector('ul, .mega-menu');
+                if (!submenu) return;
 
-            const link = li.querySelector('a')
+                const link = li.querySelector('a');
 
-            const onEnter = () => setHover(li)
-            const onLeave = () => clearHover(li)
-            const onClick = (e) => {
-                // on small screens toggle open class and submenu visibility
-                if (!mq.matches) {
-                    e.preventDefault()
-                    const isOpen = li.classList.toggle('open')
-                    if (submenu) submenu.style.display = isOpen ? 'block' : 'none'
-                }
-            }
+                const onEnter = () => setHover(li);
+                const onLeave = () => clearHover(li);
+                const onClick = (e) => {
+                    if (!mq.matches) {
+                        e.preventDefault();
+                        const isOpen = li.classList.toggle('open');
+                        if (submenu) submenu.style.display = isOpen ? 'block' : 'none';
+                    }
+                };
 
-            li.addEventListener('mouseenter', onEnter)
-            li.addEventListener('mouseleave', onLeave)
-            if (link) link.addEventListener('click', onClick)
+                li.addEventListener('mouseenter', onEnter);
+                li.addEventListener('mouseleave', onLeave);
+                if (link) link.addEventListener('click', onClick);
 
-            // ensure mobile starts hidden
-            if (!mq.matches && submenu) submenu.style.display = 'none'
+                if (!mq.matches && submenu) submenu.style.display = 'none';
 
-            // store handlers for potential cleanup (not strictly necessary here)
-            li._menuHandlers = { onEnter, onLeave, onClick }
-        })
+                li._menuHandlers = { onEnter, onLeave, onClick };
+            });
 
-        return () => {
-            // cleanup handlers
-            const cleanupItems = menu.querySelectorAll('ul > li')
-            cleanupItems.forEach((li) => {
-                const h = li._menuHandlers
-                if (h) {
-                    li.removeEventListener('mouseenter', h.onEnter)
-                    li.removeEventListener('mouseleave', h.onLeave)
-                    const link = li.querySelector('a')
-                    if (link) link.removeEventListener('click', h.onClick)
-                }
-            })
+            // Cleanup
+            return () => {
+                const cleanupItems = menu.querySelectorAll('ul > li');
+                cleanupItems.forEach((li) => {
+                    const h = li._menuHandlers;
+                    if (h) {
+                        li.removeEventListener('mouseenter', h.onEnter);
+                        li.removeEventListener('mouseleave', h.onLeave);
+                        const link = li.querySelector('a');
+                        if (link) link.removeEventListener('click', h.onClick);
+                    }
+                });
+            };
         }
-    }, [])
+    }, []);
+
+    // -------------------------------
+    // 2. NICE-SELECT INITIALIZATION
+    // -------------------------------
+    useEffect(() => {
+        setTimeout(() => {
+            if (window.$ && window.$.fn && window.$.fn.niceSelect) {
+                window.$('select').niceSelect();
+            }
+        }, 0);
+    }, []);
     return (
         <>
             {/* header-start */}
@@ -111,8 +124,7 @@ const Header = () => {
                                         <div className="ovic-menu-wrapper">
                                             <ul>
                                                 <li>
-                                                    <a href="about.html">About Us</a>
-                                                </li>
+ <Link to="/about">About Us</Link>                                                </li>
                                                 <li>
                                                     <a href="contact.html">Order Tracking</a>
                                                 </li>
@@ -138,7 +150,7 @@ const Header = () => {
                                     <div className="header__info">
                                         <div className="logo">
                                             <a href="index.html" className="logo-image">
-                                                <img src="assets/img/logo/logo1.svg" alt="logo" />
+                                                <img src="/assets/img/logo/logo1.svg" alt="logo" />
                                             </a>
                                         </div>
                                     </div>
@@ -219,7 +231,7 @@ const Header = () => {
                                                                 <div className="cart__inner d-flex">
                                                                     <div className="cart__thumb">
                                                                         <a href="product-details.html">
-                                                                            <img src="assets/img/cart/20.jpg" alt="" />
+                                                                            <img src="/assets/img/cart/20.jpg" alt="" />
                                                                         </a>
                                                                     </div>
                                                                     <div className="cart__details">
@@ -672,30 +684,16 @@ const Header = () => {
                                         <nav>
                                             <ul>
                                                 <li>
-                                                    <a href="index.html" className="active">
-                                                        Home <i className="far fa-angle-down" />
-                                                    </a>
+                                                    <Link to="/" className="active">Home</Link>
                                                     <ul className="megamenu-1">
                                                         <li>
                                                             <a href="index.html">Home Pages</a>
                                                             <ul className="mega-item">
                                                                 <li>
-                                                                    <a href="index.html" className="active">
-                                                                        Home One
+                                                                    <a href="index2.html" className="active">
+                                                                        Home Two
                                                                     </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="index-2.html">Home Two</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="index-3.html">Home Three</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Shop 3 Column</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Shop 4 Column</a>
-                                                                </li>
+                                                                </li>   
                                                             </ul>
                                                         </li>
                                                         <li>
@@ -779,7 +777,7 @@ const Header = () => {
                                                     </ul>
                                                 </li>
                                                 <li>
-                                                    <a href="about.html">About Us</a>
+                                                    <Link to="/about">About Us</Link>
                                                 </li>
                                                 <li className="has-mega">
                                                     <a href="shop.html">
@@ -914,7 +912,7 @@ const Header = () => {
                                                                     className="mega-image hover-effect"
                                                                     style={{
                                                                         backgroundImage:
-                                                                            "url(assets/img/bg/menu-item.jpg)"
+                                                                            "url(/assets/img/bg/menu-item.jpg)"
                                                                     }}
                                                                 >
                                                                     <ul>
@@ -1011,7 +1009,7 @@ const Header = () => {
                     <div className="offcanvas__content">
                         <div className="offcanvas__logo mb-40">
                             <a href="index.html">
-                                <img src="assets/img/logo/logo-white.png" alt="logo" />
+                                <img src="/assets/img/logo/logo-white.png" alt="logo" />
                             </a>
                         </div>
                         <div className="offcanvas__search mb-25">
