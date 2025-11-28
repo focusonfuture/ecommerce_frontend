@@ -198,15 +198,16 @@ const Header = () => {
                                                 </span>
                                             </Link>
                                             </div>
+                                        
                                         <div className="block-wishlist action">
-                                            <a className="icon-link" href="wishlist.html">
+                                            <Link className="icon-link" to="/whishlist">
                                                 <i className="flaticon-heart" />
                                                 <span className="count">0</span>
                                                 <span className="text">
                                                     <span className="sub">Favorite</span>
-                                                    My Wishlist{" "}
+                                                    My Wishlist
                                                 </span>
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="block-cart action">
                                             <a className="icon-link" href="cart.html">
