@@ -4,6 +4,7 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import About from "../pages/About/About";
+import ProductList from "../pages/ProductList/ProductList";
 
 
 
@@ -20,6 +21,7 @@ const AppRoutes = () => {
 
         {/* Product details route */}
         <Route path="/product/:slug" element={<ProductDetails />} />
+         <Route path="/products/productlist" element={<ProductList />} />
         
       </Routes>
     </BrowserRouter>

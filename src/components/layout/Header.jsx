@@ -190,14 +190,14 @@ const Header = () => {
                                 <div className="col-xl-4 col-lg-5 col-md-8 col-sm-8">
                                     <div className="header-action">
                                         <div className="block-userlink">
-                                            <a className="icon-link" href="my-account.html">
+                                            <Link className="icon-link" to="/login">
                                                 <i className="flaticon-user" />
                                                 <span className="text">
-                                                    <span className="sub">Login </span>
-                                                    My Account{" "}
+                                                <span className="sub">Login </span>
+                                                My Account
                                                 </span>
-                                            </a>
-                                        </div>
+                                            </Link>
+                                            </div>
                                         <div className="block-wishlist action">
                                             <a className="icon-link" href="wishlist.html">
                                                 <i className="flaticon-heart" />
@@ -685,96 +685,7 @@ const Header = () => {
                                             <ul>
                                                 <li>
                                                     <Link to="/" className="active">Home</Link>
-                                                    <ul className="megamenu-1">
-                                                        <li>
-                                                            <a href="index.html">Home Pages</a>
-                                                            <ul className="mega-item">
-                                                                <li>
-                                                                    <a href="index2.html" className="active">
-                                                                        Home Two
-                                                                    </a>
-                                                                </li>   
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">Product Pages</a>
-                                                            <ul className="mega-item">
-                                                                <li>
-                                                                    <a href="product-details.html">Product Details</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Product V2</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Product V3</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">
-                                                                        Varriable Product
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">
-                                                                        External Product
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">Other Pages</a>
-                                                            <ul className="mega-item">
-                                                                <li>
-                                                                    <a href="product-details.html">wishlist</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Shopping Cart</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Checkout</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Login</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Register</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">Phone &amp; Tablets</a>
-                                                            <ul className="mega-item">
-                                                                <li>
-                                                                    <a href="product-details.html">Catagory 1</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Catagory 2</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Catagory 3</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Catagory 4</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html">Phone &amp; Tablets</a>
-                                                            <ul className="mega-item">
-                                                                <li>
-                                                                    <a href="product-details.html">Catagory 1</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Catagory 2</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Catagory 3</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-details.html">Catagory 4</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
+                                                    
                                                 </li>
                                                 <li>
                                                     <Link to="/about">About Us</Link>
