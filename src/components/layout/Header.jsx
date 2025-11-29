@@ -124,9 +124,10 @@ const Header = () => {
                                         <div className="ovic-menu-wrapper">
                                             <ul>
                                                 <li>
- <Link to="/about">About Us</Link>                                                </li>
+                                                    <Link to="/about">About Us</Link>  
+                                                </li>
                                                 <li>
-                                                    <a href="contact.html">Order Tracking</a>
+                                                   <Link to="/order-tracking">Order Tracking</Link>  
                                                 </li>
                                                 <li>
                                                     <a href="contact.html">Contact Us</a>
@@ -149,7 +150,7 @@ const Header = () => {
                                 <div className="col-xl-3 col-lg-3 col-md-4 col-sm-4">
                                     <div className="header__info">
                                         <div className="logo">
-                                            <a href="index.html" className="logo-image">
+                                            <a href="#" className="logo-image">
                                                 <img src="/assets/img/logo/logo1.svg" alt="logo" />
                                             </a>
                                         </div>

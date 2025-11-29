@@ -8,6 +8,9 @@ import ProductListPage  from "../pages/ProductList/ProductListPage";
 import WhishlistPage from "../pages/Whishlist/WhishlistPage";
 import CartPage from "../pages/Cart/CartPage";
 import CheckoutPage from "../pages/Checkout/CheckoutPage";
+import OrderTrackingPage from "../pages/OrderTracking/OrderTrackingPage";
+import OrderTrackingResultPage from "../pages/OrderTracking/OrderTrackingResultPage";
+
 
 
 
@@ -42,6 +45,13 @@ const AppRoutes = () => {
 
               {/* Checkout route */}
                 <Route path="/checkout" element={<CheckoutPage />} />
+
+              {/* Order Tracking route */}
+                <Route path="/order-tracking" element={<OrderTrackingPage />} />
+
+              {/* Track Result */}
+                <Route path="/order-tracking/result" element={<OrderTrackingResultPage />} />
+
    
         
       </Routes>
