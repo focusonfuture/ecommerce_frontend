@@ -6,6 +6,9 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import About from "../pages/About/About";
 import ProductListPage  from "../pages/ProductList/ProductListPage";
 import WhishlistPage from "../pages/Whishlist/WhishlistPage";
+import CartPage from "../pages/Cart/CartPage";
+import CheckoutPage from "../pages/Checkout/CheckoutPage";
+
 
 
 
@@ -30,9 +33,16 @@ const AppRoutes = () => {
 
              {/* Product list route */}
                <Route path="/products/productlist" element={<ProductListPage />} />
+               
+             {/* Whishlist route */}
+                <Route path="/whishlist" element={<WhishlistPage />} />
 
-<Route path="/whishlist" element={<WhishlistPage />} />
+              {/* Cart route */}
+                <Route path="/cart" element={<CartPage />} />
 
+              {/* Checkout route */}
+                <Route path="/checkout" element={<CheckoutPage />} />
+   
         
       </Routes>
     </BrowserRouter>
