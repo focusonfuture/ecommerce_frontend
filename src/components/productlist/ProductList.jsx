@@ -1,54 +1,60 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
 const ProductList = () => {
-  // --- Data / Pagination state ---
-  const totalItems = 29;          // total results (same as your text before)
-  const perPage = 20;             // items per page
+
+  const navigate = useNavigate();
+
+  // 1️⃣ Pagination state
+  const totalItems = 29;
+  const perPage = 20;
   const [currentPage, setCurrentPage] = useState(1);
 
-  // --- Filter state ---
+  // 2️⃣ Filters
   const [price, setPrice] = useState([0, 500]);
 
-  // --- Derived values for pagination display ---
-  const totalPages = Math.max(1, Math.ceil(totalItems / perPage));
+  // 3️⃣ Derived pagination values
+  const totalPages = Math.ceil(totalItems / perPage);
   const startIndex = (currentPage - 1) * perPage + 1;
   const endIndex = Math.min(totalItems, currentPage * perPage);
 
-  // --- Page buttons to show (simple range with a sliding window) ---
+  // 4️⃣ Page number sliding window
   const pageButtons = useMemo(() => {
-    const visible = 5; // max visible page buttons
-    let start = Math.max(1, currentPage - Math.floor(visible / 2));
-    let end = start + visible - 1;
+    const count = 5;
+    let start = Math.max(1, currentPage - Math.floor(count / 2));
+    let end = start + count - 1;
+
     if (end > totalPages) {
       end = totalPages;
-      start = Math.max(1, end - visible + 1);
+      start = Math.max(1, end - count + 1);
     }
-    const arr = [];
-    for (let p = start; p <= end; p++) arr.push(p);
-    return arr;
+
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }, [currentPage, totalPages]);
 
-  const goToPage = (p) => {
-    if (p < 1 || p > totalPages) return;
-    setCurrentPage(p);
-    window.scrollTo({ top: 200, behavior: "smooth" }); // nice UX to scroll up
+  // 5️⃣ Page navigation
+  const goToPage = useCallback(
+    (p) => {
+      if (p < 1 || p > totalPages) return;
+      setCurrentPage(p);
+      window.scrollTo({ top: 200, behavior: "smooth" });
+    },
+    [totalPages]
+  );
+
+  // 6️⃣ Mobile filter open/close
+  const openFilters = () => {
+    document.querySelector(".mobile-filter-panel")?.classList.add("active");
+    document.querySelector(".filter-overlay")?.classList.add("show");
   };
 
-  // --- Mobile filter panel controls (DOM based but simple) ---
-  const openFilters = () => {
-    const panel = document.querySelector(".mobile-filter-panel");
-    const overlay = document.querySelector(".filter-overlay");
-    if (panel) panel.classList.add("active");
-    if (overlay) overlay.classList.add("show");
-  };
   const closeFilters = () => {
-    const panel = document.querySelector(".mobile-filter-panel");
-    const overlay = document.querySelector(".filter-overlay");
-    if (panel) panel.classList.remove("active");
-    if (overlay) overlay.classList.remove("show");
+    document.querySelector(".mobile-filter-panel")?.classList.remove("active");
+    document.querySelector(".filter-overlay")?.classList.remove("show");
   };
+
 
   return (
     <main>
@@ -257,25 +263,30 @@ const ProductList = () => {
                 </div>
               </div>
 
-              {/* PRODUCT GRID */}
-              <div className="tab-content">
+           <div className="tab-content">
 
-  {/* GRID VIEW */}
+  {/* ---------------- GRID VIEW ---------------- */}
   <div className="tab-pane fade show active" id="grid">
     <div className="row g-3">
+
       {Array.from({
         length: Math.min(perPage, totalItems - (currentPage - 1) * perPage)
       }).map((_, i) => {
         const idx = (currentPage - 1) * perPage + i;
+        const slug = `sample-product-${idx + 1}`;
+
         return (
           <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6" key={idx}>
             <div className="product__item product__item-d">
+
+              {/* IMAGE */}
               <div className="product__thumb fix">
                 <div className="product-image w-img">
-                  <a href="/product-details">
+                  <a onClick={() => navigate(`/product/${slug}`)}>
                     <img src="/assets/img/product/tp-2.jpg" alt="product" />
                   </a>
                 </div>
+
                 <div className="product-action">
                   <button className="icon-box icon-box-1"><i className="fal fa-eye" /></button>
                   <button className="icon-box icon-box-1"><i className="fal fa-heart" /></button>
@@ -283,31 +294,53 @@ const ProductList = () => {
                 </div>
               </div>
 
+              {/* CONTENT */}
               <div className="product__content-3">
-                <h6><a href="/product-details">Sample Product {idx + 1}</a></h6>
+                <h6>
+                  <a onClick={() => navigate(`/product/${slug}`)}>
+                    Sample Product {idx + 1}
+                  </a>
+                </h6>
+
                 <div className="rating mb-5">
                   <ul>
-                    {[...Array(5)].map((_, idx2) => (
-                      <li key={idx2}><i className="fal fa-star" /></li>
+                    {Array.from({ length: 5 }).map((_, i2) => (
+                      <li key={i2}><i className="fal fa-star" /></li>
                     ))}
                   </ul>
                   <span>(01 review)</span>
                 </div>
-                <div className="price mb-10"><span>$110 - $150</span></div>
+
+                <div className="price mb-10">
+                  <span>$110 - $150</span>
+                </div>
               </div>
 
-              <div className="product__add-cart-s text-center">
+              {/* BUTTONS */}
+             <div
+                className="product__add-cart-s text-center d-flex flex-column"
+                style={{ gap: "4px" }}
+                >
                 <button className="cart-btn w-100">Add to Cart</button>
-                <button className="wc-checkout w-100">Quick View</button>
-              </div>
+
+                <button
+                    className="wc-checkout w-100 quickview-yellow"
+                    onClick={() => navigate(`/product/${slug}`)}
+                >
+                    Quick View
+                </button>
+                </div>
+
+
             </div>
           </div>
         );
       })}
+
     </div>
   </div>
 
-  {/* LIST VIEW */}
+  {/* ---------------- LIST VIEW ---------------- */}
   <div className="tab-pane fade" id="list">
     <div className="product-list-wrapper d-flex flex-column gap-3">
 
@@ -315,13 +348,14 @@ const ProductList = () => {
         length: Math.min(perPage, totalItems - (currentPage - 1) * perPage)
       }).map((_, i) => {
         const idx = (currentPage - 1) * perPage + i;
+        const slug = `sample-product-${idx + 1}`;
 
         return (
           <div className="product-list-item d-flex p-3 border rounded" key={idx}>
 
             {/* IMAGE */}
             <div className="product-list-img me-3" style={{ width: 120 }}>
-              <a href="/product-details">
+              <a onClick={() => navigate(`/product/${slug}`)}>
                 <img
                   src="/assets/img/product/tp-2.jpg"
                   alt="product"
@@ -332,13 +366,16 @@ const ProductList = () => {
 
             {/* CONTENT */}
             <div className="product-list-content flex-grow-1">
+
               <h5 className="mb-2">
-                <a href="/product-details">Sample Product {idx + 1}</a>
+                <a onClick={() => navigate(`/product/${slug}`)}>
+                  Sample Product {idx + 1}
+                </a>
               </h5>
 
               <div className="rating mb-2">
                 <ul className="d-inline-flex">
-                  {[...Array(5)].map((_, idx2) => (
+                  {Array.from({ length: 5 }).map((_, idx2) => (
                     <li key={idx2}><i className="fal fa-star" /></li>
                   ))}
                 </ul>
@@ -346,18 +383,25 @@ const ProductList = () => {
               </div>
 
               <p className="text-muted mb-2">
-                A short description goes here. Perfect for list view layouts to inform users quickly.
+                A short description goes here. Perfect for list view layouts.
               </p>
 
               <div className="price mb-3">
                 <span style={{ fontSize: 18, fontWeight: 600 }}>$110 - $150</span>
               </div>
 
+              {/* BUTTONS */}
               <div className="d-flex gap-2">
                 <button className="btn-small cart-btn">Add to Cart</button>
-               <button className="btn-small wc-checkout quickview-yellow">Quick View</button>
 
-            </div>
+                <button
+                  className="btn-small wc-checkout quickview-yellow"
+                  onClick={() => navigate(`/product/${slug}`)}
+                >
+                  Quick View
+                </button>
+              </div>
+
             </div>
 
           </div>
@@ -368,6 +412,7 @@ const ProductList = () => {
   </div>
 
 </div>
+
 
 
               {/* PAGINATION */}
