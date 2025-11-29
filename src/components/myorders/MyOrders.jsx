@@ -11,10 +11,18 @@ const MyOrders = () => {
 
           {/* ORDER ITEM 1 */}
           <div className="order-card">
-            <div className="order-info">
-              <h5 className="order-id">Order #1001</h5>
-              <span className="order-status delivered">Delivered</span>
-              <p className="order-date">Placed on: Jan 5, 2025</p>
+            <div className="order-left">
+              <img
+                src="/assets/img/cart/shop-p-10.jpg"
+                className="order-thumb"
+                alt="Order Thumbnail"
+              />
+
+              <div className="order-info">
+                <h5 className="order-id">Order #1001</h5>
+                <span className="order-status delivered">Delivered</span>
+                <p className="order-date">Placed on: Jan 5, 2025</p>
+              </div>
             </div>
 
             <Link to="/my-orders/1001" className="tp-btn-h1 order-btn">
@@ -24,10 +32,18 @@ const MyOrders = () => {
 
           {/* ORDER ITEM 2 */}
           <div className="order-card">
-            <div className="order-info">
-              <h5 className="order-id">Order #1002</h5>
-              <span className="order-status shipped">Shipped</span>
-              <p className="order-date">Placed on: Jan 10, 2025</p>
+            <div className="order-left">
+              <img
+                src="/assets/img/cart/shop-p-11.jpg"
+                className="order-thumb"
+                alt="Order Thumbnail"
+              />
+
+              <div className="order-info">
+                <h5 className="order-id">Order #1002</h5>
+                <span className="order-status shipped">Shipped</span>
+                <p className="order-date">Placed on: Jan 10, 2025</p>
+              </div>
             </div>
 
             <Link to="/my-orders/1002" className="tp-btn-h1 order-btn">
@@ -52,12 +68,27 @@ const MyOrders = () => {
           border-radius: 10px;
           margin-bottom: 15px;
           transition: 0.3s ease;
+          background: #fff;
         }
 
         .order-card:hover {
           border-color: #ccc;
           background: #fafafa;
           transform: translateY(-2px);
+        }
+
+        .order-left {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+
+        .order-thumb {
+          width: 70px;
+          height: 70px;
+          border-radius: 8px;
+          object-fit: cover;
+          border: 1px solid #ddd;
         }
 
         .order-info h5 {
@@ -99,7 +130,7 @@ const MyOrders = () => {
           .order-card {
             flex-direction: column;
             align-items: flex-start;
-            gap: 10px;
+            gap: 12px;
           }
           .order-btn {
             width: 100%;
