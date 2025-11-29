@@ -83,6 +83,19 @@ const Header = () => {
         <>
             {/* header-start */}
             <header className="header d-blue-bg">
+                {/* MOBILE MENU BUTTON - TOP RIGHT (ONLY MOBILE) */}
+                   <button
+                    type="button"
+                    className="header-mobile-menu-icon d-lg-none"
+                    onClick={() => {
+                        document.querySelector(".offcanvas__area").classList.add("show");
+                        document.querySelector(".body-overlay").classList.add("show");
+                    }}
+                    >
+                    <i className="fas fa-bars"></i>
+                    </button>
+
+
                 <div className="header-top">
                     <div className="container">
                         <div className="header-inner">
@@ -194,7 +207,7 @@ const Header = () => {
                                             <Link className="icon-link" to="/login">
                                                 <i className="flaticon-user" />
                                                 <span className="text">
-                                                <span className="sub">Login </span>
+                                                <span className="sub">Login  / Register </span>
                                                 My Account
                                                 </span>
                                             </Link>
@@ -203,7 +216,7 @@ const Header = () => {
                                         <div className="block-wishlist action">
                                             <Link className="icon-link" to="/whishlist">
                                                 <i className="flaticon-heart" />
-                                                <span className="count">0</span>
+                                                <span className="count">2</span>
                                                 <span className="text">
                                                     <span className="sub">Favorite</span>
                                                     My Wishlist
@@ -269,6 +282,7 @@ const Header = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -751,32 +765,72 @@ const Header = () => {
             </header>
             {/* header-end */}
             {/* offcanvas area start */}
-            <div className="offcanvas__area">
-                <div className="offcanvas__wrapper">
-                    <div className="offcanvas__close">
-                        <button className="offcanvas__close-btn" id="offcanvas__close-btn">
-                            <i className="fal fa-times" />
-                        </button>
-                    </div>
-                    <div className="offcanvas__content">
-                        <div className="offcanvas__logo mb-40">
-                            <a href="index.html">
-                                <img src="/assets/img/logo/logo-white.png" alt="logo" />
-                            </a>
-                        </div>
-                        <div className="offcanvas__search mb-25">
-                            <form action="#">
-                                <input type="text" placeholder="What are you searching for?" />
-                                <button type="submit">
-                                    <i className="far fa-search" />
-                                </button>
-                            </form>
-                        </div>
-                        <div className="mobile-menu fix" />
-                        <div className="offcanvas__action"></div>
-                    </div>
-                </div>
+           {/* offcanvas area start */}
+<div className="offcanvas__area">
+    <div className="offcanvas__wrapper">
+
+        <div className="offcanvas__close">
+            <button
+                className="offcanvas__close-btn"
+                onClick={() => {
+                    document.querySelector(".offcanvas__area").classList.remove("show");
+                    document.querySelector(".body-overlay").classList.remove("show");
+                }}
+            >
+                <i className="fal fa-times" />
+            </button>
+        </div>
+
+        <div className="offcanvas__content">
+            <div className="offcanvas__logo mb-40">
+                <a href="index.html">
+                    <img src="/assets/img/logo/logo-white.png" alt="logo" />
+                </a>
             </div>
+
+            <div className="offcanvas__search mb-25">
+                <form action="#">
+                    <input type="text" placeholder="What are you searching for?" />
+                    <button type="submit">
+                        <i className="far fa-search" />
+                    </button>
+                </form>
+            </div>
+
+            <div className="mobile-menu fix">
+    <ul className="mobile-nav">
+
+        <li><Link to="/login">Login / Register</Link></li>
+        <li><Link to="/my-orders">My Orders</Link></li>
+        <li><Link to="/cart">Cart</Link></li>
+        <li><Link to="/whishlist">Wishlist</Link></li>
+
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About Us</Link></li>
+
+        <li><a href="#">Pages</a>
+            <ul className="submenu">
+                <li><Link to="/product/:slug">Product Details</Link></li>
+                <li><Link to="/checkout">Checkout</Link></li>
+                <li><Link to="/cart">Cart</Link></li>
+                <li><Link to="/whishlist">Wishlist</Link></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+
+
+            <div className="offcanvas__action"></div>
+        </div>
+
+    </div>
+</div>
+<div className="body-overlay"></div>
+{/* offcanvas area end */}
+
             {/* offcanvas area end */}
             <div className="body-overlay" />
             {/* offcanvas area end */}

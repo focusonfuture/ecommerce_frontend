@@ -135,7 +135,6 @@ code {
   align-items: center;
   gap: 6px;
 }
-
 .qty-box input {
   width: 40px;
   text-align: center;
@@ -144,7 +143,6 @@ code {
   border-radius: 5px;
   background: #fff;
 }
-
 .qty-btn {
   width: 28px;
   height: 28px;
@@ -181,27 +179,157 @@ code {
   background: #fafafa;
 }
 
-/* Row Divider */
+/* Table rows */
 .cart-item-row {
   border-bottom: 1px solid #eee;
 }
 
-/* Coupon area spacing */
+/* Coupon Area */
 .coupon-all {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 15px;
 }
-
-/* Better spacing for coupon input + button */
 .coupon input.input-text {
   margin-right: 10px;
 }
 
+/* REQUIRED FIELD RED */
 .checkout-area label .required,
 .checkout-area label span,
 .required {
-    color: red !important;
+  color: red !important;
+}
+
+/* ===============================
+   RESPONSIVE RULES START HERE
+   =============================== */
+
+/* --- Tablet Fix (991px and below) --- */
+@media (max-width: 991px) {
+  .cart-table {
+    font-size: 14px;
+  }
+
+  .cart-img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .coupon-all {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .coupon {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+  }
+}
+
+/* --- MOBILE (768px and below) --- */
+@media (max-width: 768px) {
+
+  /* Table becomes card list */
+  table.cart-table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  .cart-item-row {
+    background: #fff;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .cart-item-row td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border: none;
+  }
+
+  .cart-item-row td::before {
+    content: attr(data-title);
+    font-weight: 600;
+    color: #333;
+  }
+
+  /* Fix image full width block behavior */
+  .product-thumbnail,
+  .product-thumbnail img {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .cart-product-title {
+    font-size: 15px;
+  }
+
+  /* Quantity block centered */
+  .qty-box {
+    justify-content: flex-end;
+  }
+
+  /* Coupon Section */
+  .coupon-all {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .coupon {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .coupon .tp-btn-h1 {
+    width: 100%;
+  }
+
+  /* Update Cart btn full width */
+  .coupon-all > div:last-child button {
+    width: 100%;
+  }
+
+  /* Cart Totals full width */
+  .cart-page-total {
+    width: 100%;
+    margin-top: 25px;
+  }
+}
+
+/* --- VERY SMALL MOBILE (480px and below) --- */
+@media (max-width: 480px) {
+  .cart-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .qty-box input {
+    width: 30px;
+  }
+
+  .qty-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+  }
+
+  .cart-product-title {
+    font-size: 14px;
+  }
 }
 
 
@@ -393,3 +521,110 @@ code {
     font-size: 13px;
   }
 }
+.offcanvas__area {
+  position: fixed;
+  top: 0;
+  right: -300px;    /* hidden */
+  width: 300px;
+  height: 100vh;
+  background: #111;
+  z-index: 999999;
+  transition: right 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+}
+
+/*** When open ***/
+.offcanvas__area.show {
+  right: 0;
+}
+
+.body-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.body-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/*** Mobile hamburger icon ***/
+.header-mobile-menu-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #fff;
+  z-index: 9999999;
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .header-mobile-menu-icon {
+    display: block;
+  }
+}
+
+
+
+
+.mobile-filter-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  height: 100vh;
+  background: #fff;
+  overflow-y: auto;
+  z-index: 999999;
+  transition: right 0.3s ease;
+  padding: 20px;
+}
+
+.mobile-filter-panel.active {
+  right: 0;
+}
+
+.filter-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 99999;
+}
+
+.filter-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+}
+
+
