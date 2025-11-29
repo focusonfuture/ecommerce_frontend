@@ -8,8 +8,8 @@ import ProductListPage  from "../pages/ProductList/ProductListPage";
 import WhishlistPage from "../pages/Whishlist/WhishlistPage";
 import CartPage from "../pages/Cart/CartPage";
 import CheckoutPage from "../pages/Checkout/CheckoutPage";
-import OrderTrackingPage from "../pages/OrderTracking/OrderTrackingPage";
-import OrderTrackingResultPage from "../pages/OrderTracking/OrderTrackingResultPage";
+import MyOrdersPage from "../pages/MyOrders/MyOrdersPage";
+import MyOrdersDetailsPage from "../pages/MyOrders/MyOrdersDetailsPage";
 
 
 
@@ -21,23 +21,23 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
 
-            {/* Login & Register route */}
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              {/* Login & Register route */}
+               <Route path="/login" element={<Login />} />
+               <Route path="/register" element={<Register />} />
 
-             {/* Home route */}
+              {/* Home route */}
                <Route path="/" element={<Home />} />
 
-             {/* About route */}
+              {/* About route */}
                <Route path="/about" element={<About />} />
 
-             {/* Product details route */}
+              {/* Product details route */}
                <Route path="/product/:slug" element={<ProductDetails />} />
 
-             {/* Product list route */}
+               {/* Product list route */}
                <Route path="/products/productlist" element={<ProductListPage />} />
                
-             {/* Whishlist route */}
+              {/* Whishlist route */}
                 <Route path="/whishlist" element={<WhishlistPage />} />
 
               {/* Cart route */}
@@ -45,12 +45,12 @@ const AppRoutes = () => {
 
               {/* Checkout route */}
                 <Route path="/checkout" element={<CheckoutPage />} />
+              
+              {/* My Orders route */}
+                <Route path="/my-orders" element={<MyOrdersPage />} />
 
-              {/* Order Tracking route */}
-                <Route path="/order-tracking" element={<OrderTrackingPage />} />
-
-              {/* Track Result */}
-                <Route path="/order-tracking/result" element={<OrderTrackingResultPage />} />
+              {/* My Orders Details route */}
+                <Route path="/my-orders/:id" element={<MyOrdersDetailsPage />} />
 
    
         

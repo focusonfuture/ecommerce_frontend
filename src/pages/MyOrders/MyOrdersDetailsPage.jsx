@@ -2,17 +2,17 @@ import React from "react";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import Preloader from "../../components/layout/Preloader";
-import OrderTracking from "../../components/ordertracking/OrderTracking";
+import MyOrdersDetails from "../../components/orders/MyOrdersDetails";
 
-const OrderTrackingPage = () => {
+const MyOrdersDetailsPage  = () => {
   return (
     <>
-    <Preloader />
+      <Preloader />
       <Header />
-      <OrderTracking />
+      <MyOrdersDetails  />
       <Footer />
     </>
   );
 };
 
-export default OrderTrackingPage;
+export default MyOrdersDetailsPage ;

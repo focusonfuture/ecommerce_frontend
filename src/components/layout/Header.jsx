@@ -127,7 +127,7 @@ const Header = () => {
                                                     <Link to="/about">About Us</Link>  
                                                 </li>
                                                 <li>
-                                                   <Link to="/order-tracking">Order Tracking</Link>  
+                                                   <Link to="/my-orders">My Orders</Link>  
                                                 </li>
                                                 <li>
                                                     <a href="contact.html">Contact Us</a>
@@ -703,27 +703,29 @@ const Header = () => {
                                                     </ul>
                                                 </li>  */}
                                                 <li>
-                                                    <a href="about.html">
+                                                    <a href="#">
                                                         Pages <i className="far fa-angle-down" />
                                                     </a>
                                                     <ul className="submenu">
                                                         <li>
-                                                            <a href="my-account.html">My Account</a>
+                                                           <Link to="/Login">My Account</Link>
                                                         </li>
-                                                        <li>
-                                                            <a href="product-details.html">Product Details</a>
+                                                        <li> 
+                                                             <Link to="/product/:slug">Product Details</Link>
                                                         </li>
                                                         <li>
                                                             <a href="faq.html">FAQs pages</a>
+
                                                         </li>
                                                         <li>
-                                                            <a href="cart.html">Cart</a>
+                                                             <Link to="/cart">Cart</Link>
                                                         </li>
                                                         <li>
-                                                            <a href="wishlist.html">Wishlist</a>
+                                                            <Link to="/whishlist">Wishlist</Link>
+                                                            
                                                         </li>
                                                         <li>
-                                                            <a href="checkout.html">Checkout</a>
+                                                            <Link to="/checkout">Checkout</Link>
                                                         </li>
                                                         <li>
                                                             <a href="contact.html">Contact Us</a>
