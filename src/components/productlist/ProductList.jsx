@@ -259,51 +259,116 @@ const ProductList = () => {
 
               {/* PRODUCT GRID */}
               <div className="tab-content">
-                <div className="tab-pane fade show active" id="grid">
-                  <div className="row g-3">
-                    {/* Render only perPage items as placeholders */}
-                    {Array.from({ length: Math.min(perPage, totalItems - (currentPage - 1) * perPage) }).map((_, i) => {
-                      const idx = (currentPage - 1) * perPage + i;
-                      return (
-                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6" key={idx}>
-                          <div className="product__item product__item-d">
-                            <div className="product__thumb fix">
-                              <div className="product-image w-img">
-                                <a href="/product-details">
-                                  <img src="/assets/img/product/tp-2.jpg" alt="product" />
-                                </a>
-                              </div>
-                              <div className="product-action">
-                                <button className="icon-box icon-box-1"><i className="fal fa-eye" /></button>
-                                <button className="icon-box icon-box-1"><i className="fal fa-heart" /></button>
-                                <button className="icon-box icon-box-1"><i className="fal fa-layer-group" /></button>
-                              </div>
-                            </div>
 
-                            <div className="product__content-3">
-                              <h6><a href="/product-details">Sample Product {idx + 1}</a></h6>
-                              <div className="rating mb-5">
-                                <ul>
-                                  {[...Array(5)].map((_, idx2) => (
-                                    <li key={idx2}><i className="fal fa-star" /></li>
-                                  ))}
-                                </ul>
-                                <span>(01 review)</span>
-                              </div>
-                              <div className="price mb-10"><span>$110 - $150</span></div>
-                            </div>
-
-                            <div className="product__add-cart-s text-center">
-                              <button className="cart-btn w-100">Add to Cart</button>
-                              <button className="wc-checkout w-100">Quick View</button>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+  {/* GRID VIEW */}
+  <div className="tab-pane fade show active" id="grid">
+    <div className="row g-3">
+      {Array.from({
+        length: Math.min(perPage, totalItems - (currentPage - 1) * perPage)
+      }).map((_, i) => {
+        const idx = (currentPage - 1) * perPage + i;
+        return (
+          <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6" key={idx}>
+            <div className="product__item product__item-d">
+              <div className="product__thumb fix">
+                <div className="product-image w-img">
+                  <a href="/product-details">
+                    <img src="/assets/img/product/tp-2.jpg" alt="product" />
+                  </a>
+                </div>
+                <div className="product-action">
+                  <button className="icon-box icon-box-1"><i className="fal fa-eye" /></button>
+                  <button className="icon-box icon-box-1"><i className="fal fa-heart" /></button>
+                  <button className="icon-box icon-box-1"><i className="fal fa-layer-group" /></button>
                 </div>
               </div>
+
+              <div className="product__content-3">
+                <h6><a href="/product-details">Sample Product {idx + 1}</a></h6>
+                <div className="rating mb-5">
+                  <ul>
+                    {[...Array(5)].map((_, idx2) => (
+                      <li key={idx2}><i className="fal fa-star" /></li>
+                    ))}
+                  </ul>
+                  <span>(01 review)</span>
+                </div>
+                <div className="price mb-10"><span>$110 - $150</span></div>
+              </div>
+
+              <div className="product__add-cart-s text-center">
+                <button className="cart-btn w-100">Add to Cart</button>
+                <button className="wc-checkout w-100">Quick View</button>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+  {/* LIST VIEW */}
+  <div className="tab-pane fade" id="list">
+    <div className="product-list-wrapper d-flex flex-column gap-3">
+
+      {Array.from({
+        length: Math.min(perPage, totalItems - (currentPage - 1) * perPage)
+      }).map((_, i) => {
+        const idx = (currentPage - 1) * perPage + i;
+
+        return (
+          <div className="product-list-item d-flex p-3 border rounded" key={idx}>
+
+            {/* IMAGE */}
+            <div className="product-list-img me-3" style={{ width: 120 }}>
+              <a href="/product-details">
+                <img
+                  src="/assets/img/product/tp-2.jpg"
+                  alt="product"
+                  className="img-fluid rounded"
+                />
+              </a>
+            </div>
+
+            {/* CONTENT */}
+            <div className="product-list-content flex-grow-1">
+              <h5 className="mb-2">
+                <a href="/product-details">Sample Product {idx + 1}</a>
+              </h5>
+
+              <div className="rating mb-2">
+                <ul className="d-inline-flex">
+                  {[...Array(5)].map((_, idx2) => (
+                    <li key={idx2}><i className="fal fa-star" /></li>
+                  ))}
+                </ul>
+                <span className="ms-2">(01 review)</span>
+              </div>
+
+              <p className="text-muted mb-2">
+                A short description goes here. Perfect for list view layouts to inform users quickly.
+              </p>
+
+              <div className="price mb-3">
+                <span style={{ fontSize: 18, fontWeight: 600 }}>$110 - $150</span>
+              </div>
+
+              <div className="d-flex gap-2">
+                <button className="btn-small cart-btn">Add to Cart</button>
+               <button className="btn-small wc-checkout quickview-yellow">Quick View</button>
+
+            </div>
+            </div>
+
+          </div>
+        );
+      })}
+
+    </div>
+  </div>
+
+</div>
+
 
               {/* PAGINATION */}
               <div className="tp-pagination text-center">
