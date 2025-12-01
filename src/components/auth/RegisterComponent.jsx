@@ -1,7 +1,27 @@
 import React from "react";
 import PageBanner from "../common/PageBanner";
+import { GoogleLogin } from "@react-oauth/google";
 
 const RegisterComponent = () => {
+  const handleGoogleSuccess = (credentialResponse) => {
+    const id_token = credentialResponse.credential;
+
+    fetch("http://your-django-domain.com/api/google-login/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: id_token }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Django Google Register/Login:", data);
+      })
+      .catch((err) => console.error("Error:", err));
+  };
+
+  const handleGoogleError = () => {
+    console.error("Google Login Failed");
+  };
+
   return (
     <main>
       <PageBanner title="My account" />
@@ -25,6 +45,22 @@ const RegisterComponent = () => {
 
                   <button className="tp-in-btn w-100 mt-3">Register</button>
                 </form>
+
+                {/* Google Sign In Section */}
+                <div className="google-login-wrapper text-center mt-4">
+                  <div className="google-divider">
+                    <span>OR</span>
+                  </div>
+
+                  <div className="google-btn-box mt-3">
+                    <GoogleLogin
+                      onSuccess={handleGoogleSuccess}
+                      onError={handleGoogleError}
+                    />
+                  </div>
+
+                 
+                </div>
 
                 <p className="text-center mt-3">
                   Already have an account? <a href="/login">Login</a>

@@ -1,7 +1,31 @@
 import React from "react";
 import PageBanner from "../common/PageBanner";
+import { GoogleLogin } from "@react-oauth/google";
 
 const LoginComponent = () => {
+  
+  const handleGoogleSuccess = (credentialResponse) => {
+    const id_token = credentialResponse.credential;
+
+    // Send to Django backend
+    fetch("http://your-django-domain.com/api/google-login/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: id_token }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Django Login Result:", data);
+        // Save JWT / session if backend returns it
+        // localStorage.setItem("token", data.token);
+      })
+      .catch((err) => console.error("Error:", err));
+  };
+
+  const handleGoogleError = () => {
+    console.error("Google Login Failed");
+  };
+
   return (
     <main>
       <PageBanner title="My account" />
@@ -14,10 +38,14 @@ const LoginComponent = () => {
                 <h5>Login</h5>
 
                 <form>
-                  <label>Username or email address <span>*</span></label>
+                  <label>
+                    Username or email address <span>*</span>
+                  </label>
                   <input type="text" placeholder="Enter Username" />
 
-                  <label>Password <span>*</span></label>
+                  <label>
+                    Password <span>*</span>
+                  </label>
                   <input type="password" placeholder="Enter password" />
 
                   <div className="login-action mb-10 fix">
@@ -33,8 +61,23 @@ const LoginComponent = () => {
                   <button className="tp-in-btn w-100">Login</button>
                 </form>
 
+                {/* Google Login Button */}
+                <div className="google-login-wrapper text-center mt-4">
+                  <div className="google-divider">
+                    <span>OR</span>
+                  </div>
+
+                  <div className="google-btn-box mt-3">
+                    <GoogleLogin
+                      onSuccess={handleGoogleSuccess}
+                      onError={handleGoogleError}
+                    />
+                  </div>
+
+                 
+                </div>
                 <p className="text-center mt-3">
-                  Don’t have an account? <a href="/register">Register</a>
+                  Don't have an account? <a href="/register">Register</a>
                 </p>
 
               </div>

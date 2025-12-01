@@ -801,24 +801,13 @@ const Header = () => {
     <ul className="mobile-nav">
 
         <li><Link to="/login">Login / Register</Link></li>
-        <li><Link to="/my-orders">My Orders</Link></li>
-        <li><Link to="/cart">Cart</Link></li>
-        <li><Link to="/whishlist">Wishlist</Link></li>
-
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">About Us</Link></li>
-
-        <li><a href="#">Pages</a>
-            <ul className="submenu">
-                <li><Link to="/product/:slug">Product Details</Link></li>
-                <li><Link to="/checkout">Checkout</Link></li>
-                <li><Link to="/cart">Cart</Link></li>
-                <li><Link to="/whishlist">Wishlist</Link></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-        </li>
-
+        <li><Link to="/cart">Cart</Link></li>
+        <li><Link to="/whishlist">Wishlist</Link></li>
+        <li><Link to="/my-orders">My Orders</Link></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
     </ul>
 </div>
 
