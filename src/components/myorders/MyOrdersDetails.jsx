@@ -17,15 +17,17 @@ const MyOrdersDetails = () => {
   return (
     <section className="orderdetails-area pt-120 pb-120">
       <div className="container">
-
         <h2 className="mb-4 fw-bold">Order Details</h2>
 
         <div className="order-details-box shadow-sm bg-white p-4 rounded">
-
           {/* ORDER INFO */}
           <div className="mb-3">
-            <p><strong>Order ID:</strong> {id}</p>
-            <p><strong>Status:</strong> {steps[currentStep].label}</p>
+            <p>
+              <strong>Order ID:</strong> {id}
+            </p>
+            <p>
+              <strong>Status:</strong> {steps[currentStep].label}
+            </p>
           </div>
 
           <hr />
@@ -34,7 +36,6 @@ const MyOrdersDetails = () => {
           <h4 className="fw-bold mb-3">Items</h4>
 
           <div className="order-items-list">
-
             {/* ITEM 1 */}
             <div className="order-item-card">
               <img
@@ -55,9 +56,14 @@ const MyOrdersDetails = () => {
                   Price: <strong>$130.00</strong>
                 </p>
 
-                <p className="item-qty">Quantity: <strong>1</strong></p>
+                <p className="item-qty">
+                  Quantity: <strong>1</strong>
+                </p>
 
-                <Link to="/product/blue-jacket-winter-edition" className="item-link">
+                <Link
+                  to="/product/blue-jacket-winter-edition"
+                  className="item-link"
+                >
                   View Product →
                 </Link>
               </div>
@@ -87,9 +93,14 @@ const MyOrdersDetails = () => {
                   Price: <strong>$120.50</strong>
                 </p>
 
-                <p className="item-qty">Quantity: <strong>2</strong></p>
+                <p className="item-qty">
+                  Quantity: <strong>2</strong>
+                </p>
 
-                <Link to="/product/sneakers-premium-edition" className="item-link">
+                <Link
+                  to="/product/sneakers-premium-edition"
+                  className="item-link"
+                >
                   View Product →
                 </Link>
               </div>
@@ -98,7 +109,6 @@ const MyOrdersDetails = () => {
                 <strong>$241.00</strong>
               </div>
             </div>
-
           </div>
 
           <hr />
@@ -107,11 +117,12 @@ const MyOrdersDetails = () => {
           <h4 className="fw-bold mb-4">Tracking Status</h4>
 
           <div className="tracking-container">
-
             <div className="progress-line">
               <div
                 className="progress-fill"
-                style={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
+                style={{
+                  width: `${(currentStep / (steps.length - 1)) * 100}%`,
+                }}
               ></div>
             </div>
 
@@ -132,13 +143,9 @@ const MyOrdersDetails = () => {
                 );
               })}
             </div>
-
           </div>
-
         </div>
       </div>
-
-    
     </section>
   );
 };

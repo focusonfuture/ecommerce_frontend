@@ -34,13 +34,19 @@ const RegisterComponent = () => {
                 <h5>Register</h5>
 
                 <form>
-                  <label>Username <span>*</span></label>
+                  <label>
+                    Username <span>*</span>
+                  </label>
                   <input type="text" placeholder="Enter Username" />
 
-                  <label>Email <span>*</span></label>
+                  <label>
+                    Email <span>*</span>
+                  </label>
                   <input type="email" placeholder="Enter email" />
 
-                  <label>Password <span>*</span></label>
+                  <label>
+                    Password <span>*</span>
+                  </label>
                   <input type="password" placeholder="Enter password" />
 
                   <button className="tp-in-btn w-100 mt-3">Register</button>
@@ -58,14 +64,11 @@ const RegisterComponent = () => {
                       onError={handleGoogleError}
                     />
                   </div>
-
-                 
                 </div>
 
                 <p className="text-center mt-3">
                   Already have an account? <a href="/login">Login</a>
                 </p>
-
               </div>
             </div>
           </div>

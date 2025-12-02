@@ -3,7 +3,6 @@ import PageBanner from "../common/PageBanner";
 import { GoogleLogin } from "@react-oauth/google";
 
 const LoginComponent = () => {
-  
   const handleGoogleSuccess = (credentialResponse) => {
     const id_token = credentialResponse.credential;
 
@@ -73,13 +72,10 @@ const LoginComponent = () => {
                       onError={handleGoogleError}
                     />
                   </div>
-
-                 
                 </div>
                 <p className="text-center mt-3">
                   Don't have an account? <a href="/register">Register</a>
                 </p>
-
               </div>
             </div>
           </div>

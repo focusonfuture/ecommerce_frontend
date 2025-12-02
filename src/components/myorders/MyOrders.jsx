@@ -8,7 +8,6 @@ const MyOrders = () => {
         <h2 className="mb-4 fw-bold">My Orders</h2>
 
         <div className="orders-list shadow-sm bg-white p-4 rounded">
-
           {/* ORDER ITEM 1 */}
           <div className="order-card">
             <div className="order-left">
@@ -50,7 +49,6 @@ const MyOrders = () => {
               View Details
             </Link>
           </div>
-
         </div>
       </div>
 

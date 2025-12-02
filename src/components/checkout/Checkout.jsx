@@ -6,7 +6,6 @@ const Checkout = () => {
 
   return (
     <main>
-
       {/* page-banner-area-start */}
       <div
         className="page-banner-area page-banner-height-2"
@@ -22,7 +21,9 @@ const Checkout = () => {
                   <nav className="breadcrumb-trail breadcrumbs">
                     <ul className="breadcrumb-menu">
                       <li className="breadcrumb-trail">
-                        <Link to="/"><span>Home</span></Link>
+                        <Link to="/">
+                          <span>Home</span>
+                        </Link>
                       </li>
                       <li className="trail-item">
                         <span>Checkout</span>
@@ -30,7 +31,6 @@ const Checkout = () => {
                     </ul>
                   </nav>
                 </div>
-
               </div>
             </div>
           </div>
@@ -41,9 +41,7 @@ const Checkout = () => {
       {/* coupon-area-start */}
       <section className="coupon-area pt-120 pb-30">
         <div className="container">
-
           <div className="row">
-
             {/* LOGIN ACCORDION */}
             <div className="col-md-6">
               <div className="coupon-accordion">
@@ -59,17 +57,23 @@ const Checkout = () => {
 
                     <form action="#">
                       <p className="form-row-first">
-                        <label>Username or email <span>*</span></label>
+                        <label>
+                          Username or email <span>*</span>
+                        </label>
                         <input type="text" />
                       </p>
 
                       <p className="form-row-last">
-                        <label>Password <span>*</span></label>
+                        <label>
+                          Password <span>*</span>
+                        </label>
                         <input type="text" />
                       </p>
 
                       <p className="form-row">
-                        <button type="submit" className="tp-btn-h1">Login</button>
+                        <button type="submit" className="tp-btn-h1">
+                          Login
+                        </button>
                         <label>
                           <input type="checkbox" /> Remember me
                         </label>
@@ -79,17 +83,14 @@ const Checkout = () => {
                         <a href="#">Lost your password?</a>
                       </p>
                     </form>
-
                   </div>
                 </div>
-
               </div>
             </div>
 
             {/* COUPON ACCORDION */}
             <div className="col-md-6">
               <div className="coupon-accordion">
-
                 <h3>
                   Have a coupon? <span>Click here to enter your code</span>
                 </h3>
@@ -106,12 +107,9 @@ const Checkout = () => {
                     </form>
                   </div>
                 </div>
-
               </div>
             </div>
-
           </div>
-
         </div>
       </section>
       {/* coupon-area-end */}
@@ -121,19 +119,18 @@ const Checkout = () => {
         <div className="container">
           <form action="#">
             <div className="row">
-
               {/* LEFT — BILLING DETAILS */}
               <div className="col-lg-6">
                 <div className="checkbox-form">
-
                   <h3>Billing Details</h3>
 
                   <div className="row">
-
                     {/* Country */}
                     <div className="col-md-12">
                       <div className="country-select">
-                        <label>Country <span>*</span></label>
+                        <label>
+                          Country <span>*</span>
+                        </label>
                         <select>
                           <option>Bangladesh</option>
                           <option>Algeria</option>
@@ -150,14 +147,18 @@ const Checkout = () => {
                     {/* First/Last Name */}
                     <div className="col-md-6">
                       <div className="checkout-form-list">
-                        <label>First Name <span>*</span></label>
+                        <label>
+                          First Name <span>*</span>
+                        </label>
                         <input type="text" />
                       </div>
                     </div>
 
                     <div className="col-md-6">
                       <div className="checkout-form-list">
-                        <label>Last Name <span>*</span></label>
+                        <label>
+                          Last Name <span>*</span>
+                        </label>
                         <input type="text" />
                       </div>
                     </div>
@@ -173,7 +174,9 @@ const Checkout = () => {
                     {/* Address */}
                     <div className="col-md-12">
                       <div className="checkout-form-list">
-                        <label>Address <span>*</span></label>
+                        <label>
+                          Address <span>*</span>
+                        </label>
                         <input type="text" placeholder="Street address" />
                       </div>
                     </div>
@@ -190,7 +193,9 @@ const Checkout = () => {
                     {/* Town / City */}
                     <div className="col-md-12">
                       <div className="checkout-form-list">
-                        <label>Town / City <span>*</span></label>
+                        <label>
+                          Town / City <span>*</span>
+                        </label>
                         <input type="text" />
                       </div>
                     </div>
@@ -198,14 +203,18 @@ const Checkout = () => {
                     {/* State / Zip */}
                     <div className="col-md-6">
                       <div className="checkout-form-list">
-                        <label>State / County <span>*</span></label>
+                        <label>
+                          State / County <span>*</span>
+                        </label>
                         <input type="text" />
                       </div>
                     </div>
 
                     <div className="col-md-6">
                       <div className="checkout-form-list">
-                        <label>Postcode / Zip <span>*</span></label>
+                        <label>
+                          Postcode / Zip <span>*</span>
+                        </label>
                         <input type="text" />
                       </div>
                     </div>
@@ -213,14 +222,18 @@ const Checkout = () => {
                     {/* Email / Phone */}
                     <div className="col-md-6">
                       <div className="checkout-form-list">
-                        <label>Email <span>*</span></label>
+                        <label>
+                          Email <span>*</span>
+                        </label>
                         <input type="email" />
                       </div>
                     </div>
 
                     <div className="col-md-6">
                       <div className="checkout-form-list">
-                        <label>Phone <span>*</span></label>
+                        <label>
+                          Phone <span>*</span>
+                        </label>
                         <input type="text" />
                       </div>
                     </div>
@@ -236,16 +249,16 @@ const Checkout = () => {
                         <p>
                           Create an account by entering the information below.
                         </p>
-                        <label>Password <span>*</span></label>
+                        <label>
+                          Password <span>*</span>
+                        </label>
                         <input type="password" />
                       </div>
                     </div>
-
                   </div>
 
                   {/* Ship to different address */}
                   <div className="different-address">
-
                     <div className="ship-different-title">
                       <h3>
                         <label>Ship to a different address?</label>
@@ -268,11 +281,12 @@ const Checkout = () => {
                       }}
                     >
                       <div className="row">
-
                         {/* SAME FIELDS AS BILLING */}
                         <div className="col-md-12">
                           <div className="country-select">
-                            <label>Country <span>*</span></label>
+                            <label>
+                              Country <span>*</span>
+                            </label>
                             <select>
                               <option>Bangladesh</option>
                               <option>Algeria</option>
@@ -288,14 +302,18 @@ const Checkout = () => {
 
                         <div className="col-md-6">
                           <div className="checkout-form-list">
-                            <label>First Name <span>*</span></label>
+                            <label>
+                              First Name <span>*</span>
+                            </label>
                             <input type="text" />
                           </div>
                         </div>
 
                         <div className="col-md-6">
                           <div className="checkout-form-list">
-                            <label>Last Name <span>*</span></label>
+                            <label>
+                              Last Name <span>*</span>
+                            </label>
                             <input type="text" />
                           </div>
                         </div>
@@ -309,7 +327,9 @@ const Checkout = () => {
 
                         <div className="col-md-12">
                           <div className="checkout-form-list">
-                            <label>Address <span>*</span></label>
+                            <label>
+                              Address <span>*</span>
+                            </label>
                             <input type="text" placeholder="Street address" />
                           </div>
                         </div>
@@ -325,39 +345,48 @@ const Checkout = () => {
 
                         <div className="col-md-12">
                           <div className="checkout-form-list">
-                            <label>Town / City <span>*</span></label>
+                            <label>
+                              Town / City <span>*</span>
+                            </label>
                             <input type="text" />
                           </div>
                         </div>
 
                         <div className="col-md-6">
                           <div className="checkout-form-list">
-                            <label>State / County <span>*</span></label>
+                            <label>
+                              State / County <span>*</span>
+                            </label>
                             <input type="text" />
                           </div>
                         </div>
 
                         <div className="col-md-6">
                           <div className="checkout-form-list">
-                            <label>Postcode / Zip <span>*</span></label>
+                            <label>
+                              Postcode / Zip <span>*</span>
+                            </label>
                             <input type="text" />
                           </div>
                         </div>
 
                         <div className="col-md-6">
                           <div className="checkout-form-list">
-                            <label>Email Address <span>*</span></label>
+                            <label>
+                              Email Address <span>*</span>
+                            </label>
                             <input type="email" />
                           </div>
                         </div>
 
                         <div className="col-md-6">
                           <div className="checkout-form-list">
-                            <label>Phone <span>*</span></label>
+                            <label>
+                              Phone <span>*</span>
+                            </label>
                             <input type="text" />
                           </div>
                         </div>
-
                       </div>
                     </div>
 
@@ -371,15 +400,12 @@ const Checkout = () => {
                         ></textarea>
                       </div>
                     </div>
-
                   </div>
-
                 </div>
               </div>
 
               {/* RIGHT — ORDER SUMMARY */}
               <div className="col-lg-6">
-
                 <div className="your-order mb-30">
                   <h3>Your order</h3>
 
@@ -395,7 +421,8 @@ const Checkout = () => {
                       <tbody>
                         <tr className="cart_item">
                           <td className="product-name">
-                            Vestibulum suscipit <strong className="product-quantity">× 1</strong>
+                            Vestibulum suscipit{" "}
+                            <strong className="product-quantity">× 1</strong>
                           </td>
                           <td className="product-total">
                             <span className="amount">$165.00</span>
@@ -404,7 +431,8 @@ const Checkout = () => {
 
                         <tr className="cart_item">
                           <td className="product-name">
-                            Vestibulum dictum magna <strong className="product-quantity">× 1</strong>
+                            Vestibulum dictum magna{" "}
+                            <strong className="product-quantity">× 1</strong>
                           </td>
                           <td className="product-total">
                             <span className="amount">$50.00</span>
@@ -415,7 +443,9 @@ const Checkout = () => {
                       <tfoot>
                         <tr className="cart-subtotal">
                           <th>Cart Subtotal</th>
-                          <td><span className="amount">$215.00</span></td>
+                          <td>
+                            <span className="amount">$215.00</span>
+                          </td>
                         </tr>
 
                         <tr className="shipping">
@@ -425,7 +455,8 @@ const Checkout = () => {
                               <li>
                                 <input type="radio" name="shipping" />
                                 <label>
-                                  Flat Rate: <span className="amount">$7.00</span>
+                                  Flat Rate:{" "}
+                                  <span className="amount">$7.00</span>
                                 </label>
                               </li>
                               <li>
@@ -438,14 +469,17 @@ const Checkout = () => {
 
                         <tr className="order-total">
                           <th>Order Total</th>
-                          <td><strong><span className="amount">$215.00</span></strong></td>
+                          <td>
+                            <strong>
+                              <span className="amount">$215.00</span>
+                            </strong>
+                          </td>
                         </tr>
                       </tfoot>
                     </table>
                   </div>
 
                   <div className="payment-method">
-
                     <div className="accordion" id="checkoutAccordion">
                       <div className="accordion-item">
                         <h2 className="accordion-header" id="checkoutOne">
@@ -467,7 +501,10 @@ const Checkout = () => {
                         >
                           <div className="accordion-body">
                             <p>
-                             Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.
+                              Make your payment directly into our bank account.
+                              Please use your Order ID as the payment reference.
+                              Your order won’t be shipped until the funds have
+                              cleared in our account.
                             </p>
                           </div>
                         </div>
@@ -491,7 +528,11 @@ const Checkout = () => {
                           data-bs-parent="#checkoutAccordion"
                         >
                           <div className="accordion-body">
-                            <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                            <p>
+                              Please send your cheque to Store Name, Store
+                              Street, Store Town, Store State / County, Store
+                              Postcode.
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -515,7 +556,8 @@ const Checkout = () => {
                         >
                           <div className="accordion-body">
                             <p>
-                              Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.
+                              Pay via PayPal; you can pay with your credit card
+                              if you don’t have a PayPal account.
                             </p>
                           </div>
                         </div>
@@ -524,22 +566,18 @@ const Checkout = () => {
 
                     {/* Place Order */}
                     <div className="order-button-payment mt-20">
-                      <button type="submit" className="tp-btn-h1">Place order</button>
+                      <button type="submit" className="tp-btn-h1">
+                        Place order
+                      </button>
                     </div>
-
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
           </form>
         </div>
       </section>
       {/* checkout-area-end */}
-
     </main>
   );
 };

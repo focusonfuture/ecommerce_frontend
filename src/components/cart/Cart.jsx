@@ -6,11 +6,9 @@ const Cart = () => {
   return (
     <section className="cart-area pt-120 pb-120">
       <div className="container">
-
         {/* CART TABLE */}
         <div className="table-content table-responsive shadow-sm p-3 bg-white rounded">
           <table className="table cart-table align-middle">
-
             <thead className="cart-header">
               <tr>
                 <th>Image</th>
@@ -23,7 +21,6 @@ const Cart = () => {
             </thead>
 
             <tbody>
-
               {/* ITEM 1 */}
               <tr className="cart-item-row">
                 <td className="product-thumbnail">
@@ -37,7 +34,10 @@ const Cart = () => {
                 </td>
 
                 <td className="product-name">
-                  <Link to="/product/jacket-light" className="cart-product-title">
+                  <Link
+                    to="/product/jacket-light"
+                    className="cart-product-title"
+                  >
                     Jacket Light
                   </Link>
                 </td>
@@ -74,7 +74,10 @@ const Cart = () => {
                 </td>
 
                 <td className="product-name">
-                  <Link to="/product/jacket-pink" className="cart-product-title">
+                  <Link
+                    to="/product/jacket-pink"
+                    className="cart-product-title"
+                  >
                     Jacket Pink
                   </Link>
                 </td>
@@ -97,9 +100,7 @@ const Cart = () => {
                   </button>
                 </td>
               </tr>
-
             </tbody>
-
           </table>
         </div>
 
@@ -107,7 +108,6 @@ const Cart = () => {
         <div className="row mt-4">
           <div className="col-12">
             <div className="coupon-all d-flex justify-content-between align-items-center">
-
               <div className="coupon d-flex gap-2">
                 <input
                   className="input-text text-center "
@@ -120,7 +120,6 @@ const Cart = () => {
               <div>
                 <button className="tp-btn-h1">Update Cart</button>
               </div>
-
             </div>
           </div>
         </div>
@@ -129,7 +128,6 @@ const Cart = () => {
         <div className="row justify-content-end mt-5">
           <div className="col-md-5">
             <div className="cart-page-total shadow-sm p-4 bg-white rounded">
-
               <h2 className="mb-4">Cart Totals</h2>
 
               <ul className="mb-4">
@@ -141,14 +139,15 @@ const Cart = () => {
                 </li>
               </ul>
 
-              <Link to="/checkout" className="tp-btn-h1 w-100 text-center d-block">
+              <Link
+                to="/checkout"
+                className="tp-btn-h1 w-100 text-center d-block"
+              >
                 Proceed to Checkout
               </Link>
-
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
