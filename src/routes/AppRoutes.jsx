@@ -12,10 +12,6 @@ import MyOrdersPage from "../pages/MyOrders/MyOrdersPage";
 import MyOrdersDetailsPage from "../pages/MyOrders/MyOrdersDetailsPage";
 
 
-
-
-
-
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -34,7 +30,7 @@ const AppRoutes = () => {
               {/* Product details route */}
                <Route path="/product/:slug" element={<ProductDetails />} />
 
-               {/* Product list route */}
+              {/* Product list route */}
                <Route path="/products/productlist" element={<ProductListPage />} />
                
               {/* Whishlist route */}

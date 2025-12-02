@@ -73,6 +73,7 @@ const Main = () => {
     }, [])
 
 
+//  PRODUCT DATA
     const products = [
   {
     id: 1,
@@ -115,6 +116,7 @@ const Main = () => {
 ];
 
 
+//  CATEGORIES DATA
 const categories = [
   {
     id: 1,
@@ -155,7 +157,7 @@ const categories = [
 ];
 
 
-
+//  FEATURE PRODUCTS DATA
 const featureProducts = [
   {
     id: 1,
@@ -232,163 +234,163 @@ const rightFeatures = [
         <main>
             {/* slider-area-start */}
            <div className="slider-area light-bg-s pt-60">
-    <div className="container custom-conatiner">
-        <div className="row">
+                 <div className="container custom-conatiner">
+                     <div className="row">
             {/* LEFT SLIDER */}
-            <div className="col-xl-7">
-                <div className="swiper-container slider__active pb-30">
-                    <div className="slider-wrapper swiper-wrapper">
+                    <div className="col-xl-7">
+                        <div className="swiper-container slider__active pb-30">
+                            <div className="slider-wrapper swiper-wrapper">
 
-                        {/* Slide 1 */}
-                        <div
-                            className="single-slider swiper-slide b-radius-2 slider-height-2 d-flex align-items-center"
-                            data-background="assets/img/slider/02-slide-1.jpg"
-                        >
-                            <div className="slider-content slider-content-2">
-                                <h2 data-animation="fadeInLeft" data-delay="1.7s" className="pt-15 slider-title pb-5">
-                                    Gaming Headset<br /> Brilliant Lighting Effect
-                                </h2>
-                                <p className="pr-20 slider_text" data-animation="fadeInLeft" data-delay="1.9s">
-                                    Discount 40% On Products & Free Shipping
-                                </p>
-                                <div className="slider-bottom-btn mt-65">
-                                    <a
-                                        data-animation="fadeInUp"
-                                        data-delay="1.15s"
-                                        href="shop.html"
-                                        className="st-btn-border b-radius-2"
-                                    >
-                                        Discover now
-                                    </a>
+                                {/* Slide 1 */}
+                                <div
+                                    className="single-slider swiper-slide b-radius-2 slider-height-2 d-flex align-items-center"
+                                    data-background="assets/img/slider/02-slide-1.jpg"
+                                >
+                                    <div className="slider-content slider-content-2">
+                                        <h2 data-animation="fadeInLeft" data-delay="1.7s" className="pt-15 slider-title pb-5">
+                                            Gaming Headset<br /> Brilliant Lighting Effect
+                                        </h2>
+                                        <p className="pr-20 slider_text" data-animation="fadeInLeft" data-delay="1.9s">
+                                            Discount 40% On Products & Free Shipping
+                                        </p>
+                                        <div className="slider-bottom-btn mt-65">
+                                            <a
+                                                data-animation="fadeInUp"
+                                                data-delay="1.15s"
+                                                href="shop.html"
+                                                className="st-btn-border b-radius-2"
+                                            >
+                                                Discover now
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                {/* Slide 2 */}
+                                <div
+                                    className="single-slider swiper-slide b-radius-2 slider-height-2 d-flex align-items-center"
+                                    data-background="assets/img/slider/02-slide-2.jpg"
+                                >
+                                    <div className="slider-content slider-content-2">
+                                        <h2 data-animation="fadeInLeft" data-delay="1.5s" className="pt-15 slider-title pb-5">
+                                            SALE 20% OFF<br /> SAMSUNG GALAXY BUDS
+                                        </h2>
+                                        <p className="pr-20 slider_text" data-animation="fadeInLeft" data-delay="1.7s">
+                                            Discount 30% On Products & Free Shipping
+                                        </p>
+                                        <div className="slider-bottom-btn mt-65">
+                                            <a
+                                                data-animation="fadeInUp"
+                                                data-delay="1.9s"
+                                                href="shop.html"
+                                                className="st-btn-border b-radius-2"
+                                            >
+                                                Discover now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Slide 3 */}
+                                <div
+                                    className="single-slider swiper-slide b-radius-2 slider-height-2 d-flex align-items-center"
+                                    data-background="assets/img/slider/02-slide-3.jpg"
+                                >
+                                    <div className="slider-content slider-content-2">
+                                        <h2 data-animation="fadeInLeft" data-delay="1.5s" className="pt-15 slider-title pb-5">
+                                            Sport Edition<br /> Red Special Edition
+                                        </h2>
+                                        <p className="pr-20 slider_text" data-animation="fadeInLeft" data-delay="1.8s">
+                                            Wireless Connection With TV, Computer, Laptop...
+                                        </p>
+                                        <div className="slider-bottom-btn mt-65">
+                                            <a
+                                                data-animation="fadeInUp"
+                                                data-delay="1.10s"
+                                                href="shop.html"
+                                                className="st-btn-border b-radius-2"
+                                            >
+                                                Discover now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="main-slider-paginations"></div>
                             </div>
                         </div>
-
-                        {/* Slide 2 */}
-                        <div
-                            className="single-slider swiper-slide b-radius-2 slider-height-2 d-flex align-items-center"
-                            data-background="assets/img/slider/02-slide-2.jpg"
-                        >
-                            <div className="slider-content slider-content-2">
-                                <h2 data-animation="fadeInLeft" data-delay="1.5s" className="pt-15 slider-title pb-5">
-                                    SALE 20% OFF<br /> SAMSUNG GALAXY BUDS
-                                </h2>
-                                <p className="pr-20 slider_text" data-animation="fadeInLeft" data-delay="1.7s">
-                                    Discount 30% On Products & Free Shipping
-                                </p>
-                                <div className="slider-bottom-btn mt-65">
-                                    <a
-                                        data-animation="fadeInUp"
-                                        data-delay="1.9s"
-                                        href="shop.html"
-                                        className="st-btn-border b-radius-2"
-                                    >
-                                        Discover now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Slide 3 */}
-                        <div
-                            className="single-slider swiper-slide b-radius-2 slider-height-2 d-flex align-items-center"
-                            data-background="assets/img/slider/02-slide-3.jpg"
-                        >
-                            <div className="slider-content slider-content-2">
-                                <h2 data-animation="fadeInLeft" data-delay="1.5s" className="pt-15 slider-title pb-5">
-                                    Sport Edition<br /> Red Special Edition
-                                </h2>
-                                <p className="pr-20 slider_text" data-animation="fadeInLeft" data-delay="1.8s">
-                                    Wireless Connection With TV, Computer, Laptop...
-                                </p>
-                                <div className="slider-bottom-btn mt-65">
-                                    <a
-                                        data-animation="fadeInUp"
-                                        data-delay="1.10s"
-                                        href="shop.html"
-                                        className="st-btn-border b-radius-2"
-                                    >
-                                        Discover now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="main-slider-paginations"></div>
                     </div>
+
+                    {/* RIGHT SIDE BANNERS */}
+                    <div className="col-xl-5">
+                        <div className="row">
+
+                            {/* Banner 1 */}
+                            <div className="col-xl-6 col-lg-6 col-md-6">
+                                <div className="banner__item p-relative w-img mb-30">
+                                    <div className="banner__img b-radius-2">
+                                        <a href="product-details.html">
+                                            <img src="assets/img/banner/banner-10.jpg" alt="" />
+                                        </a>
+                                    </div>
+                                    <div className="banner__content banner__content-2">
+                                        <h6><a href="product-details.html">Canyon <br /> Star Raider</a></h6>
+                                        <p>Headphone & Audio</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Banner 2 */}
+                            <div className="col-xl-6 col-lg-6 col-md-6">
+                                <div className="banner__item p-relative w-img mb-30">
+                                    <div className="banner__img b-radius-2">
+                                        <a href="product-details.html">
+                                            <img src="assets/img/banner/banner-11.jpg" alt="" />
+                                        </a>
+                                    </div>
+                                    <div className="banner__content banner__content-2">
+                                        <h6><a href="product-details.html">Phone <br /> Galaxy S20</a></h6>
+                                        <p>Cellphone & Tablets</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Banner 3 */}
+                            <div className="col-xl-6 col-lg-6 col-md-6">
+                                <div className="banner__item p-relative w-img mb-30">
+                                    <div className="banner__img b-radius-2">
+                                        <a href="product-details.html">
+                                            <img src="assets/img/banner/banner-13.jpg" alt="" />
+                                        </a>
+                                    </div>
+                                    <div className="banner__content banner__content-2">
+                                        <h6><a href="product-details.html">Galaxy <br /> Buds Plus</a></h6>
+                                        <p>Headphone & Audio</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Banner 4 */}
+                            <div className="col-xl-6 col-lg-6 col_md_6">
+                                <div className="banner__item p-relative w-img mb-30">
+                                    <div className="banner__img b-radius-2">
+                                        <a href="product-details.html">
+                                            <img src="assets/img/banner/banner-12.jpg" alt="" />
+                                        </a>
+                                    </div>
+                                    <div className="banner__content banner__content-2">
+                                        <h6><a href="product-details.html">Chair <br /> Swoon Lounge</a></h6>
+                                        <p>Headphone & Audio</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            {/* RIGHT SIDE BANNERS */}
-            <div className="col-xl-5">
-                <div className="row">
-
-                    {/* Banner 1 */}
-                    <div className="col-xl-6 col-lg-6 col-md-6">
-                        <div className="banner__item p-relative w-img mb-30">
-                            <div className="banner__img b-radius-2">
-                                <a href="product-details.html">
-                                    <img src="assets/img/banner/banner-10.jpg" alt="" />
-                                </a>
-                            </div>
-                            <div className="banner__content banner__content-2">
-                                <h6><a href="product-details.html">Canyon <br /> Star Raider</a></h6>
-                                <p>Headphone & Audio</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Banner 2 */}
-                    <div className="col-xl-6 col-lg-6 col-md-6">
-                        <div className="banner__item p-relative w-img mb-30">
-                            <div className="banner__img b-radius-2">
-                                <a href="product-details.html">
-                                    <img src="assets/img/banner/banner-11.jpg" alt="" />
-                                </a>
-                            </div>
-                            <div className="banner__content banner__content-2">
-                                <h6><a href="product-details.html">Phone <br /> Galaxy S20</a></h6>
-                                <p>Cellphone & Tablets</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Banner 3 */}
-                    <div className="col-xl-6 col-lg-6 col-md-6">
-                        <div className="banner__item p-relative w-img mb-30">
-                            <div className="banner__img b-radius-2">
-                                <a href="product-details.html">
-                                    <img src="assets/img/banner/banner-13.jpg" alt="" />
-                                </a>
-                            </div>
-                            <div className="banner__content banner__content-2">
-                                <h6><a href="product-details.html">Galaxy <br /> Buds Plus</a></h6>
-                                <p>Headphone & Audio</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Banner 4 */}
-                    <div className="col-xl-6 col-lg-6 col_md_6">
-                        <div className="banner__item p-relative w-img mb-30">
-                            <div className="banner__img b-radius-2">
-                                <a href="product-details.html">
-                                    <img src="assets/img/banner/banner-12.jpg" alt="" />
-                                </a>
-                            </div>
-                            <div className="banner__content banner__content-2">
-                                <h6><a href="product-details.html">Chair <br /> Swoon Lounge</a></h6>
-                                <p>Headphone & Audio</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
-    </div>
-</div>
             {/* slider-area-end */}
 
 

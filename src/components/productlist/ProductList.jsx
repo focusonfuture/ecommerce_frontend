@@ -7,20 +7,20 @@ const ProductList = () => {
 
   const navigate = useNavigate();
 
-  // 1️⃣ Pagination state
+  //  Pagination state
   const totalItems = 29;
   const perPage = 20;
   const [currentPage, setCurrentPage] = useState(1);
 
-  // 2️⃣ Filters
+  //  Filters
   const [price, setPrice] = useState([0, 500]);
 
-  // 3️⃣ Derived pagination values
+  //  Derived pagination values
   const totalPages = Math.ceil(totalItems / perPage);
   const startIndex = (currentPage - 1) * perPage + 1;
   const endIndex = Math.min(totalItems, currentPage * perPage);
 
-  // 4️⃣ Page number sliding window
+  // Page number sliding window
   const pageButtons = useMemo(() => {
     const count = 5;
     let start = Math.max(1, currentPage - Math.floor(count / 2));
@@ -34,7 +34,7 @@ const ProductList = () => {
     return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }, [currentPage, totalPages]);
 
-  // 5️⃣ Page navigation
+  //  Page navigation
   const goToPage = useCallback(
     (p) => {
       if (p < 1 || p > totalPages) return;
@@ -44,7 +44,7 @@ const ProductList = () => {
     [totalPages]
   );
 
-  // 6️⃣ Mobile filter open/close
+  //  Mobile filter open/close
   const openFilters = () => {
     document.querySelector(".mobile-filter-panel")?.classList.add("active");
     document.querySelector(".filter-overlay")?.classList.add("show");
