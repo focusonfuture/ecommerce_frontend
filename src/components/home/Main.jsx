@@ -71,6 +71,163 @@ const Main = () => {
             // console.warn('Slider init failed', err)
         }
     }, [])
+
+
+    const products = [
+  {
+    id: 1,
+    name: "Epple iPad Pro 10.5-inch Cellular 64G",
+    price: "$105-$110",
+    image: "assets/img/product/tp-1.jpg",
+    discount: "-15%",
+  },
+  {
+    id: 2,
+    name: "Men Size Yellow Basketball Jerseys",
+    price: "$105-$150",
+    image: "assets/img/product/tp-2.jpg",
+  },
+  {
+    id: 3,
+    name: "Xbox Wireless Game Controller Pink",
+    price: "$200-$280",
+    image: "assets/img/product/tp-3.jpg",
+    discount: "-9%",
+  },
+  {
+    id: 4,
+    name: "APPO R11s 64GB Dual 20MP Cameras",
+    price: "$150.00-$270.00",
+    image: "assets/img/product/tp-7.jpg",
+  },
+  {
+    id: 5,
+    name: "G951s Pink Stereo Gaming Headset",
+    price: "$120.00-$210.00",
+    image: "assets/img/product/tp-10.jpg",
+  },
+  {
+    id: 6,
+    name: "Epple iPhone 11 Pro Max 64GB Gold",
+    price: "$120.00-$140.00",
+    image: "assets/img/product/tp-9.jpg",
+  },
+];
+
+
+const categories = [
+  {
+    id: 1,
+    name: "Decor & Furniture",
+    image: "assets/img/categorie/cat-1.jpg",
+    count: 7,
+  },
+  {
+    id: 2,
+    name: "Smart Phones",
+    image: "assets/img/categorie/cat-2.jpg",
+    count: 12,
+  },
+  {
+    id: 3,
+    name: "Fashion & Clothing",
+    image: "assets/img/categorie/cat-3.jpg",
+    count: 5,
+  },
+  {
+    id: 4,
+    name: "Home Kitchen",
+    image: "assets/img/categorie/cat-4.jpg",
+    count: 9,
+  },
+  {
+    id: 5,
+    name: "Camera & Photos",
+    image: "assets/img/categorie/cat-5.jpg",
+    count: 7,
+  },
+  {
+    id: 6,
+    name: "Speaker & Audio",
+    image: "assets/img/categorie/cat-6.jpg",
+    count: 15,
+  },
+];
+
+
+
+const featureProducts = [
+  {
+    id: 1,
+    image: "assets/img/features-product/fpb-1.jpg",
+    name: "APPO R11s 64GB Dual 20MP Cameras",
+    price: "$307.00",
+    oldPrice: "$110",
+    discount: "-15%",
+    progress: 20,
+    sold: "370/1225",
+  },
+  {
+    id: 2,
+    image: "assets/img/features-product/fpb-2.jpg",
+    name: "Redmi Note 10 128GB International Model",
+    price: "$280.00",
+    oldPrice: "$314",
+    discount: null,
+    progress: 80,
+    sold: "1000/1200",
+  },
+];
+
+
+// LEFT BIG PRODUCT
+const leftFeature = {
+  id: 1,
+  image: "assets/img/features-product/fpsm-1.jpg",
+  name: "Samsang Galaxy A70 128GB Dual-SIM",
+  price: "$307.00",
+  oldPrice: "$110",
+  discount: "-15%",
+};
+
+// RIGHT SMALL PRODUCTS (GRID 2x2)
+const rightFeatures = [
+  {
+    id: 1,
+    image: "assets/img/features-product/fp-1.jpg",
+    name: "Epple Watch SE Gold Aluminum",
+    price: "$307.00",
+    oldPrice: "$110",
+    discount: "-15%",
+  },
+  {
+    id: 2,
+    image: "assets/img/features-product/fp-2.jpg",
+    name: "G951s Pink Stereo Gaming Headset",
+    price: "$210.00",
+    oldPrice: "$110",
+    discount: "-5%",
+  },
+  {
+    id: 3,
+    image: "assets/img/features-product/fp-3.jpg",
+    name: "Solo3 Wireless On-Ear Headphones",
+    price: "$160.00",
+    oldPrice: "$110",
+    discount: "-25%",
+  },
+  {
+    id: 4,
+    image: "assets/img/features-product/fp-4.jpg",
+    name: "Men’s Short-Sleeve Pocket Oxford Shirt",
+    price: "$280.00",
+    oldPrice: "$110",
+    discount: null,
+  },
+];
+
+
+
     return (
         <main>
             {/* slider-area-start */}
@@ -231,349 +388,103 @@ const Main = () => {
 
         </div>
     </div>
-            </div>
+</div>
             {/* slider-area-end */}
 
 
             {/* trending-product-area-start */}
             <section className="trending-product-area light-bg-s pt-25 pb-15">
-    <div className="container custom-conatiner">
-        <div className="row">
-            <div className="col-xl-12">
-                <div className="section__head d-flex justify-content-between mb-30">
-                    <div className="section__title section__title-2">
-                        <h5 className="st-titile">Hot Trending Products</h5>
+                <div className="container custom-conatiner">
+                    <div className="row">
+                        <div className="col-xl-12">
+                            <div className="section__head d-flex justify-content-between mb-30">
+                                <div className="section__title section__title-2">
+                                    <h5 className="st-titile">Hot Trending Products</h5>
+                                </div>
+                                <div className="button-wrap button-wrap-2">
+                                    <a href="product.html">
+                                        See All Product <i className="fal fa-chevron-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="button-wrap button-wrap-2">
-                        <a href="product.html">
-                            See All Product <i className="fal fa-chevron-right"></i>
+            <div className="row">
+            {products.map((item) => (
+                <div
+                className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2"
+                key={item.id}
+                >
+                <div className="product__item product__item-2 b-radius-2 mb-20">
+                    <div className="product__thumb fix">
+                    <div className="product-image w-img">
+                        <a href="product-details.html">
+                        <img src={item.image} alt={item.name} />
                         </a>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <div className="row">
-            {/* PRODUCT 1 */}
-            <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-                <div className="product__item product__item-2 b-radius-2 mb-20">
-                    <div className="product__thumb fix">
-                        <div className="product-image w-img">
-                            <a href="product-details.html">
-                                <img src="assets/img/product/tp-1.jpg" alt="product" />
-                            </a>
-                        </div>
+                    {item.discount && (
                         <div className="product__offer">
-                            <span className="discount">-15%</span>
+                        <span className="discount">{item.discount}</span>
                         </div>
-                        <div className="product-action product-action-2">
-                            <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                <i className="fal fa-eye"></i>
-                                <i className="fal fa-eye"></i>
-                            </a>
-                            <a href="#" className="icon-box icon-box-1">
-                                <i className="fal fa-heart"></i>
-                                <i className="fal fa-heart"></i>
-                            </a>
-                            <a href="#" className="icon-box icon-box-1">
-                                <i className="fal fa-layer-group"></i>
-                                <i className="fal fa-layer-group"></i>
-                            </a>
-                        </div>
+                    )}
+
+                    <div className="product-action product-action-2">
+                        <a
+                        href="#"
+                        className="icon-box icon-box-1"
+                        data-bs-toggle="modal"
+                        data-bs-target="#productModalId"
+                        >
+                        <i className="fal fa-eye"></i>
+                        <i className="fal fa-eye"></i>
+                        </a>
+                        <a href="#" className="icon-box icon-box-1">
+                        <i className="fal fa-heart"></i>
+                        <i className="fal fa-heart"></i>
+                        </a>
+                        <a href="#" className="icon-box icon-box-1">
+                        <i className="fal fa-layer-group"></i>
+                        <i className="fal fa-layer-group"></i>
+                        </a>
+                    </div>
                     </div>
 
                     <div className="product__content product__content-2">
-                        <h6><a href="product-details.html">Epple iPad Pro 10.5-inch Cellular 64G</a></h6>
-                        <div className="rating mb-5 mt-10">
-                            <ul>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                            </ul>
-                            <span>(01 review)</span>
-                        </div>
-                        <div className="price"><span>$105-$110</span></div>
+                    <h6>
+                        <a href="product-details.html">{item.name}</a>
+                    </h6>
+                    <div className="rating mb-5 mt-10">
+                        <ul>
+                        {[1, 2, 3, 4, 5].map((n) => (
+                            <li key={n}>
+                            <a href="#">
+                                <i className="fal fa-star"></i>
+                            </a>
+                            </li>
+                        ))}
+                        </ul>
+                        <span>(01 review)</span>
+                    </div>
+                    <div className="price">
+                        <span>{item.price}</span>
+                    </div>
                     </div>
 
                     <div className="product__add-cart text-center">
-                        <button
-                            type="button"
-                            className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100"
-                        >
-                            Add to Cart
-                        </button>
+                    <button
+                        type="button"
+                        className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100"
+                    >
+                        Add to Cart
+                    </button>
                     </div>
                 </div>
-            </div>
-
-            {/* PRODUCT 2 */}
-            <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-                <div className="product__item product__item-2 b-radius-2 mb-20">
-                    <div className="product__thumb fix">
-                        <div className="product-image w-img">
-                            <a href="product-details.html">
-                                <img src="assets/img/product/tp-2.jpg" alt="product" />
-                            </a>
-                        </div>
-
-                        <div className="product-action product-action-2">
-                            <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                <i className="fal fa-eye"></i>
-                                <i className="fal fa-eye"></i>
-                            </a>
-                            <a href="#" className="icon-box icon-box-1">
-                                <i className="fal fa-heart"></i>
-                                <i className="fal fa-heart"></i>
-                            </a>
-                            <a href="#" className="icon-box icon-box-1">
-                                <i className="fal fa-layer-group"></i>
-                                <i className="fal fa-layer-group"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div className="product__content product__content-2">
-                        <h6><a href="product-details.html">Men Size Yellow Basketball Jerseys</a></h6>
-                        <div className="rating mb-5 mt-10">
-                            <ul>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                            </ul>
-                            <span>(01 review)</span>
-                        </div>
-                        <div className="price"><span>$105-$150</span></div>
-                    </div>
-
-                    <div className="product__add-cart text-center">
-                        <button
-                            type="button"
-                            className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100"
-                        >
-                            Add to Cart
-                        </button>
-                    </div>
                 </div>
+            ))}
             </div>
 
-            {/* PRODUCT 3 */}
-            <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-                <div className="product__item product__item-2 b-radius-2 mb-20">
-                    <div className="product__thumb fix">
-                        <div className="product-image w-img">
-                            <a href="product-details.html">
-                                <img src="assets/img/product/tp-3.jpg" alt="product" />
-                            </a>
-                        </div>
-
-                        <div className="product__offer">
-                            <span className="discount">-9%</span>
-                        </div>
-
-                        <div className="product-action product-action-2">
-                            <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                <i className="fal fa-eye"></i>
-                                <i className="fal fa-eye"></i>
-                            </a>
-                            <a href="#" className="icon-box icon-box-1">
-                                <i className="fal fa-heart"></i>
-                                <i className="fal fa-heart"></i>
-                            </a>
-                            <a href="#" className="icon-box icon-box-1">
-                                <i className="fal fa-layer-group"></i>
-                                <i className="fal fa-layer-group"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div className="product__content product__content-2">
-                        <h6><a href="product-details.html">Xbox Wireless Game Controller Pink</a></h6>
-                        <div className="rating mb-5 mt-10">
-                            <ul>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                            </ul>
-                            <span>(01 review)</span>
-                        </div>
-                        <div className="price"><span>$200-$280</span></div>
-                    </div>
-
-                    <div className="product__add-cart text-center">
-                        <button
-                            type="button"
-                            className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100"
-                        >
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* PRODUCT 4 */}
-            <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-                <div className="product__item product__item-2 b-radius-2 mb-20">
-                    <div className="product__thumb fix">
-                        <div className="product-image w-img">
-                            <a href="product-details.html">
-                                <img src="assets/img/product/tp-7.jpg" alt="product" />
-                            </a>
-                        </div>
-
-                        <div className="product-action product-action-2">
-                            <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                <i className="fal fa-eye"></i>
-                                <i className="fal fa-eye"></i>
-                            </a>
-                            <a href="#" className="icon-box icon-box-1">
-                                <i className="fal fa-heart"></i>
-                                <i className="fal fa-heart"></i>
-                            </a>
-                            <a href="#" className="icon-box icon-box-1">
-                                <i className="fal fa-layer-group"></i>
-                                <i className="fal fa-layer-group"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div className="product__content product__content-2">
-                        <h6><a href="product-details.html">APPO R11s 64GB Dual 20MP Cameras</a></h6>
-                        <div className="rating mb-5 mt-10">
-                            <ul>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                            </ul>
-                            <span>(01 review)</span>
-                        </div>
-                        <div className="price"><span>$150.00-$270.00</span></div>
-                    </div>
-
-                    <div className="product__add-cart text-center">
-                        <button
-                            type="button"
-                            className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100"
-                        >
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* PRODUCT 5 */}
-            <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-                <div className="product__item product__item-2 b-radius-2 mb-20">
-                    <div className="product__thumb fix">
-                        <div className="product-image w-img">
-                            <a href="product-details.html">
-                                <img src="assets/img/product/tp-10.jpg" alt="product" />
-                            </a>
-                        </div>
-
-                        <div className="product-action product-action-2">
-                            <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                <i className="fal fa-eye"></i>
-                                <i className="fal fa-eye"></i>
-                            </a>
-                            <a href="#" className="icon-box icon-box-1">
-                                <i className="fal fa-heart"></i>
-                                <i className="fal fa-heart"></i>
-                            </a>
-                            <a href="#" className="icon-box icon-box-1">
-                                <i className="fal fa-layer-group"></i>
-                                <i className="fal fa-layer-group"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div className="product__content product__content-2">
-                        <h6><a href="product-details.html">G951s Pink Stereo Gaming Headset</a></h6>
-                        <div className="rating mb-5 mt-10">
-                            <ul>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                            </ul>
-                            <span>(01 review)</span>
-                        </div>
-                        <div className="price"><span>$120.00-$210.00</span></div>
-                    </div>
-
-                    <div className="product__add-cart text-center">
-                        <button
-                            type="button"
-                            className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100"
-                        >
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* PRODUCT 6 */}
-            <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-                <div className="product__item product__item-2 b-radius-2 mb-20">
-                    <div className="product__thumb fix">
-                        <div className="product-image w-img">
-                            <a href="product-details.html">
-                                <img src="assets/img/product/tp-9.jpg" alt="product" />
-                            </a>
-                        </div>
-
-                        <div className="product-action product-action-2">
-                            <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                <i className="fal fa-eye"></i>
-                                <i className="fal fa-eye"></i>
-                            </a>
-                            <a href="#" className="icon-box icon-box-1">
-                                <i className="fal fa-heart"></i>
-                                <i className="fal fa-heart"></i>
-                            </a>
-                            <a href="#" className="icon-box icon-box-1">
-                                <i className="fal fa-layer-group"></i>
-                                <i className="fal fa-layer-group"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div className="product__content product__content-2">
-                        <h6><a href="product-details.html">Epple iPhone 11 Pro Max 64GB Gold</a></h6>
-                        <div className="rating mb-5 mt-10">
-                            <ul>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                <li><a href="#"><i className="fal fa-star"></i></a></li>
-                            </ul>
-                            <span>(01 review)</span>
-                        </div>
-                        <div className="price"><span>$120.00-$140.00</span></div>
-                    </div>
-
-                    <div className="product__add-cart text-center">
-                        <button
-                            type="button"
-                            className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100"
-                        >
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
+         </div>
             </section>
             {/*  trending-product-area-end */}
 
@@ -596,98 +507,26 @@ const Main = () => {
                     </div>
 
                     <div className="row">
-
-                        {/* Category 1 */}
-                        <div className="col-xl-2 col-lg-3 col-md-4">
-                            <div className="categories__item p-relative w-img mb-30">
-                                <div className="categories__img b-radius-2">
-                                    <a href="product-details.html">
-                                        <img src="assets/img/categorie/cat-1.jpg" alt="" />
-                                    </a>
-                                </div>
-                                <div className="categories__content">
-                                    <h6><a href="product-details.html">Decor & Furniture</a></h6>
-                                    <p>(7 Products)</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Category 2 */}
-                        <div className="col-xl-2 col-lg-3 col-md-4">
-                            <div className="categories__item p-relative w-img mb-30">
-                                <div className="categories__img b-radius-2">
-                                    <a href="product-details.html">
-                                        <img src="assets/img/categorie/cat-2.jpg" alt="" />
-                                    </a>
-                                </div>
-                                <div className="categories__content">
-                                    <h6><a href="product-details.html">Smart Phones</a></h6>
-                                    <p>(12 Products)</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Category 3 */}
-                        <div className="col-xl-2 col-lg-3 col-md-4">
-                            <div className="categories__item p-relative w-img mb-30">
-                                <div className="categories__img b-radius-2">
-                                    <a href="product-details.html">
-                                        <img src="assets/img/categorie/cat-3.jpg" alt="" />
-                                    </a>
-                                </div>
-                                <div className="categories__content">
-                                    <h6><a href="product-details.html">Fashion & Clothing</a></h6>
-                                    <p>(5 Products)</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Category 4 */}
-                        <div className="col-xl-2 col-lg-3 col-md-4">
-                            <div className="categories__item p-relative w-img mb-30">
-                                <div className="categories__img b-radius-2">
-                                    <a href="product-details.html">
-                                        <img src="assets/img/categorie/cat-4.jpg" alt="" />
-                                    </a>
-                                </div>
-                                <div className="categories__content">
-                                    <h6><a href="product-details.html">Home Kitchen</a></h6>
-                                    <p>(9 Products)</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Category 5 */}
-                        <div className="col-xl-2 col-lg-3 col-md-4">
-                            <div className="categories__item p-relative w-img mb-30">
-                                <div className="categories__img b-radius-2">
-                                    <a href="product-details.html">
-                                        <img src="assets/img/categorie/cat-5.jpg" alt="" />
-                                    </a>
-                                </div>
-                                <div className="categories__content">
-                                    <h6><a href="product-details.html">Camera & Photos</a></h6>
-                                    <p>(7 Products)</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Category 6 */}
-                        <div className="col-xl-2 col-lg-3 col-md-4">
-                            <div className="categories__item p-relative w-img mb-30">
-                                <div className="categories__img b-radius-2">
-                                    <a href="product-details.html">
-                                        <img src="assets/img/categorie/cat-6.jpg" alt="" />
-                                    </a>
-                                </div>
-                                <div className="categories__content">
-                                    <h6><a href="product-details.html">Speaker & Audio</a></h6>
-                                    <p>(15 Products)</p>
-                                </div>
-                            </div>
-                        </div>
-
+            {categories.map((cat) => (
+                <div className="col-xl-2 col-lg-3 col-md-4" key={cat.id}>
+                <div className="categories__item p-relative w-img mb-30">
+                    <div className="categories__img b-radius-2">
+                    <a href="product-details.html">
+                        <img src={cat.image} alt={cat.name} />
+                    </a>
                     </div>
+
+                    <div className="categories__content">
+                    <h6>
+                        <a href="product-details.html">{cat.name}</a>
+                    </h6>
+                    <p>({cat.count} Products)</p>
+                    </div>
+                </div>
+                </div>
+            ))}
+            </div>
+
                 </div>
             </section>
             {/* banner__area-end */}
@@ -725,180 +564,122 @@ const Main = () => {
                     </div>
 
                     <div className="row">
+                    {featureProducts.map((item) => (
+                        <div className="col-xl-6 col-lg-12" key={item.id}>
+                        <div className="single-features-item single-features-item-d single-features-item-d-2 b-radius-2 mb-20">
+                            <div className="row g-0 align-items-center">
 
-                        {/* LEFT ITEM */}
-                        <div className="col-xl-6 col-lg-12">
-                            <div className="single-features-item single-features-item-d single-features-item-d-2 b-radius-2 mb-20">
-                                <div className="row g-0 align-items-center">
+                            {/* IMAGE */}
+                            <div className="col-lg-6">
+                                <div className="features-thum">
+                                <div className="features-product-image w-img">
+                                    <a href="product-details.html">
+                                    <img src={item.image} alt={item.name} />
+                                    </a>
+                                </div>
 
-                                    <div className="col-lg-6">
-                                        <div className="features-thum">
-                                            <div className="features-product-image w-img">
-                                                <a href="product-details.html">
-                                                    <img src="assets/img/features-product/fpb-1.jpg" alt="" />
-                                                </a>
-                                            </div>
-
-                                            <div className="product__offer">
-                                                <span className="discount">-15%</span>
-                                            </div>
-
-                                            <div className="product-action product-action-2">
-                                                <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                                    <i className="fal fa-eye"></i>
-                                                    <i className="fal fa-eye"></i>
-                                                </a>
-                                                <a href="#" className="icon-box icon-box-1">
-                                                    <i className="fal fa-layer-group"></i>
-                                                    <i className="fal fa-layer-group"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+                                {/* Discount */}
+                                {item.discount && (
+                                    <div className="product__offer">
+                                    <span className="discount">{item.discount}</span>
                                     </div>
+                                )}
 
-                                    <div className="col-lg-6">
-                                        <div className="product__content product__content-d product__content-d-2">
-                                            <h6>
-                                                <a href="product-details.html">APPO R11s 64GB Dual 20MP Cameras</a>
-                                            </h6>
+                                <div className="product-action product-action-2">
+                                    <a
+                                    href="#"
+                                    className="icon-box icon-box-1"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#productModalId"
+                                    >
+                                    <i className="fal fa-eye"></i>
+                                    <i className="fal fa-eye"></i>
+                                    </a>
+                                    <a href="#" className="icon-box icon-box-1">
+                                    <i className="fal fa-layer-group"></i>
+                                    <i className="fal fa-layer-group"></i>
+                                    </a>
+                                </div>
+                                </div>
+                            </div>
 
-                                            <div className="rating mb-5">
-                                                <ul className="rating-d">
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                </ul>
-                                                <span>(01 review)</span>
-                                            </div>
+                            {/* CONTENT */}
+                            <div className="col-lg-6">
+                                <div className="product__content product__content-d product__content-d-2">
+                                <h6>
+                                    <a href="product-details.html">{item.name}</a>
+                                </h6>
 
-                                            <div className="price mb-10">
-                                                <span>$307.00 <del>$110</del></span>
-                                            </div>
+                                <div className="rating mb-5">
+                                    <ul className="rating-d">
+                                    {[1,2,3,4,5].map((n) => (
+                                        <li key={n}>
+                                        <a href="#"><i className="fal fa-star"></i></a>
+                                        </li>
+                                    ))}
+                                    </ul>
+                                    <span>(01 review)</span>
+                                </div>
 
-                                            <div className="features-des mb-20">
-                                                <ul>
-                                                    <li><a href="product-details.html"><i className="fas fa-circle"></i> Bass and Stereo Sound.</a></li>
-                                                    <li><a href="product-details.html"><i className="fas fa-circle"></i> Display with 3088 x 1440 pixels resolution.</a></li>
-                                                    <li><a href="product-details.html"><i className="fas fa-circle"></i> Memory, Storage & SIM: 12GB RAM, 256GB.</a></li>
-                                                    <li><a href="product-details.html"><i className="fas fa-circle"></i> Android v10.0 Operating system.</a></li>
-                                                </ul>
-                                            </div>
+                                <div className="price mb-10">
+                                    <span>
+                                    {item.price}{" "}
+                                    <del>{item.oldPrice}</del>
+                                    </span>
+                                </div>
 
-                                            <div className="progress mb-5">
-                                                <div
-                                                    className="progress-bar bg-danger"
-                                                    role="progressbar"
-                                                    style={{ width: "20%" }}
-                                                    aria-valuenow="100"
-                                                    aria-valuemin="0"
-                                                    aria-valuemax="100"
-                                                ></div>
-                                            </div>
+                                <div className="features-des mb-20">
+                                    <ul>
+                                    <li>
+                                        <a href="product-details.html">
+                                        <i className="fas fa-circle"></i> Bass and Stereo Sound.
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="product-details.html">
+                                        <i className="fas fa-circle"></i> Display with 3088 x 1440 pixels resolution.
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="product-details.html">
+                                        <i className="fas fa-circle"></i> Memory, Storage & SIM: 12GB RAM, 256GB.
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="product-details.html">
+                                        <i className="fas fa-circle"></i> Android v10.0 Operating system.
+                                        </a>
+                                    </li>
+                                    </ul>
+                                </div>
 
-                                            <div className="progress-rate mb-15">
-                                                <span>Sold:370/1225</span>
-                                            </div>
+                                <div className="progress mb-5">
+                                    <div
+                                    className="progress-bar bg-danger"
+                                    role="progressbar"
+                                    style={{ width: `${item.progress}%` }}
+                                    ></div>
+                                </div>
 
-                                            <div className="cart-option">
-                                                <a href="cart.html" className="cart-btn-4 w-100">
-                                                    Add to Cart
-                                                </a>
-                                            </div>
+                                <div className="progress-rate mb-15">
+                                    <span>Sold:{item.sold}</span>
+                                </div>
 
-                                        </div>
-                                    </div>
+                                <div className="cart-option">
+                                    <a href="cart.html" className="cart-btn-4 w-100">
+                                    Add to Cart
+                                    </a>
+                                </div>
 
                                 </div>
                             </div>
-                        </div>
 
-                        {/* RIGHT ITEM */}
-                        <div className="col-xl-6 col-lg-12">
-                            <div className="single-features-item single-features-item-d single-features-item-d-2 b-radius-2 mb-20">
-                                <div className="row g-0 align-items-center">
-
-                                    <div className="col-lg-6">
-                                        <div className="features-thum">
-                                            <div className="features-product-image w-img">
-                                                <a href="product-details.html">
-                                                    <img src="assets/img/features-product/fpb-2.jpg" alt="" />
-                                                </a>
-                                            </div>
-
-                                            <div className="product-action product-action-2">
-                                                <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                                    <i className="fal fa-eye"></i>
-                                                    <i className="fal fa-eye"></i>
-                                                </a>
-                                                <a href="#" className="icon-box icon-box-1">
-                                                    <i className="fal fa-layer-group"></i>
-                                                    <i className="fal fa-layer-group"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-lg-6">
-                                        <div className="product__content product__content-d product__content-d-2">
-                                            <h6>
-                                                <a href="product-details.html">Redmi Note 10 128GB International Model</a>
-                                            </h6>
-
-                                            <div className="rating mb-5">
-                                                <ul className="rating-d">
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                </ul>
-                                                <span>(01 review)</span>
-                                            </div>
-
-                                            <div className="price mb-10">
-                                                <span>$280.00 <del>$314</del></span>
-                                            </div>
-
-                                            <div className="features-des mb-20">
-                                                <ul>
-                                                    <li><a href="product-details.html"><i className="fas fa-circle"></i> Bass and Stereo Sound.</a></li>
-                                                    <li><a href="product-details.html"><i className="fas fa-circle"></i> Display with 3088 x 1440 pixels resolution.</a></li>
-                                                    <li><a href="product-details.html"><i className="fas fa-circle"></i> Memory, Storage & SIM: 12GB RAM, 256GB.</a></li>
-                                                    <li><a href="product-details.html"><i className="fas fa-circle"></i> Android v10.0 Operating system.</a></li>
-                                                </ul>
-                                            </div>
-
-                                            <div className="progress mb-5">
-                                                <div
-                                                    className="progress-bar bg-danger"
-                                                    role="progressbar"
-                                                    style={{ width: "80%" }}
-                                                    aria-valuenow="100"
-                                                    aria-valuemin="0"
-                                                    aria-valuemax="100"
-                                                ></div>
-                                            </div>
-
-                                            <div className="progress-rate mb-15">
-                                                <span>Sold:1000/1200</span>
-                                            </div>
-
-                                            <div className="cart-option">
-                                                <a href="cart.html" className="cart-btn-4 w-100">
-                                                    Add to Cart
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
                             </div>
                         </div>
-
+                        </div>
+                    ))}
                     </div>
+
                 </div>
             </section>
             {/* topsell__area-end */}
@@ -989,272 +770,134 @@ const Main = () => {
 
                     <div className="row">
 
-                        {/* LEFT BIG PRODUCT */}
-                        <div className="col-xl-6 col-lg-12">
-                            <div className="single-features-item single-features-item-d b-radius-2 mb-20">
-                                <div className="row g-0 align-items-center">
-                                    <div className="col-md-6">
-                                        <div className="features-thum">
-                                            <div className="features-product-image w-img">
-                                                <a href="product-details.html">
-                                                    <img src="assets/img/features-product/fpsm-1.jpg" alt="" />
-                                                </a>
-                                            </div>
-                                            <div className="product__offer">
-                                                <span className="discount">-15%</span>
-                                            </div>
-                                            <div className="product-action product-action-2">
-                                                <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                                    <i className="fal fa-eye"></i>
-                                                    <i className="fal fa-eye"></i>
-                                                </a>
-                                                <a href="#" className="icon-box icon-box-1">
-                                                    <i className="fal fa-heart"></i>
-                                                    <i className="fal fa-heart"></i>
-                                                </a>
-                                                <a href="#" className="icon-box icon-box-1">
-                                                    <i className="fal fa-layer-group"></i>
-                                                    <i className="fal fa-layer-group"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+  {/* LEFT SIDE — BIG PRODUCT */}
+  <div className="col-xl-6 col-lg-12">
+    <div className="single-features-item single-features-item-d b-radius-2 mb-20">
+      <div className="row g-0 align-items-center">
 
-                                    <div className="col-md-6">
-                                        <div className="product__content product__content-d product__content-d-2">
-                                            <h6>
-                                                <a href="product-details.html">
-                                                    Samsang Galaxy A70 128GB Dual-SIM
-                                                </a>
-                                            </h6>
+        <div className="col-md-6">
+          <div className="features-thum">
+            <div className="features-product-image w-img">
+              <a href="product-details.html">
+                <img src={leftFeature.image} alt={leftFeature.name} />
+              </a>
+            </div>
 
-                                            <div className="rating mb-5">
-                                                <ul className="rating-d">
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                </ul>
-                                                <span>(01 review)</span>
-                                            </div>
+            {leftFeature.discount && (
+              <div className="product__offer">
+                <span className="discount">{leftFeature.discount}</span>
+              </div>
+            )}
 
-                                            <div className="price d-price mb-10">
-                                                <span>$307.00 <del>$110</del></span>
-                                            </div>
+            <div className="product-action product-action-2">
+              <a href="#" className="icon-box icon-box-1">
+                <i className="fal fa-eye"></i><i className="fal fa-eye"></i>
+              </a>
+              <a href="#" className="icon-box icon-box-1">
+                <i className="fal fa-heart"></i><i className="fal fa-heart"></i>
+              </a>
+              <a href="#" className="icon-box icon-box-1">
+                <i className="fal fa-layer-group"></i><i className="fal fa-layer-group"></i>
+              </a>
+            </div>
 
-                                            <div className="features-des mb-25">
-                                                <ul>
-                                                    <li><a href="product-details.html"><i className="fas fa-circle"></i> Bass and Stereo Sound.</a></li>
-                                                    <li><a href="product-details.html"><i className="fas fa-circle"></i> Display 3088 x 1440 resolution.</a></li>
-                                                    <li><a href="product-details.html"><i className="fas fa-circle"></i> 12GB RAM, 256GB Storage.</a></li>
-                                                    <li><a href="product-details.html"><i className="fas fa-circle"></i> Android v10 OS.</a></li>
-                                                </ul>
-                                            </div>
+          </div>
+        </div>
 
-                                            <div className="cart-option">
-                                                <a href="cart.html" className="cart-btn-4 w-100 mr-10">Add to Cart</a>
-                                                <a href="cart.html" className="transperant-btn-2">
-                                                    <i className="fal fa-heart"></i>
-                                                </a>
-                                            </div>
+        <div className="col-md-6">
+          <div className="product__content product__content-d product__content-d-2">
+            <h6><a href="product-details.html">{leftFeature.name}</a></h6>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div className="rating mb-5">
+              <ul className="rating-d">
+                {[1,2,3,4,5].map(n => (
+                  <li key={n}><a href="#"><i className="fal fa-star"></i></a></li>
+                ))}
+              </ul>
+              <span>(01 review)</span>
+            </div>
 
-                        {/* RIGHT GRID PRODUCTS */}
-                        <div className="col-xl-6 col-lg-12">
+            <div className="price d-price mb-10">
+              <span>{leftFeature.price} <del>{leftFeature.oldPrice}</del></span>
+            </div>
 
-                            {/* ROW 1 */}
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <div className="single-features-item b-radius-2 mb-20">
-                                        <div className="row g-0 align-items-center">
-                                            <div className="col-6">
-                                                <div className="features-thum">
-                                                    <div className="features-product-image w-img">
-                                                        <a href="product-details.html">
-                                                            <img src="assets/img/features-product/fp-1.jpg" alt="" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="product__offer">
-                                                        <span className="discount">-15%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+            <div className="features-des mb-25">
+              <ul>
+                <li><a href="#"><i className="fas fa-circle"></i> Bass and Stereo Sound.</a></li>
+                <li><a href="#"><i className="fas fa-circle"></i> Display 3088 x 1440 resolution.</a></li>
+                <li><a href="#"><i className="fas fa-circle"></i> 12GB RAM, 256GB Storage.</a></li>
+                <li><a href="#"><i className="fas fa-circle"></i> Android v10 OS.</a></li>
+              </ul>
+            </div>
 
-                                            <div className="col-6">
-                                                <div className="product__content product__content-d product__content-d-2">
-                                                    <h6>
-                                                        <a href="product-details.html">
-                                                            Epple Watch SE Gold Aluminum
-                                                        </a>
-                                                    </h6>
+            <div className="cart-option">
+              <a href="#" className="cart-btn-4 w-100 mr-10">Add to Cart</a>
+              <a href="#" className="transperant-btn-2">
+                <i className="fal fa-heart"></i>
+              </a>
+            </div>
 
-                                                    <div className="rating mb-5">
-                                                        <ul>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                        </ul>
-                                                        <span>(01 review)</span>
-                                                    </div>
+          </div>
+        </div>
 
-                                                    <div className="price d-price">
-                                                        <span>$307.00 <del>$110</del></span>
-                                                    </div>
-                                                </div>
-                                            </div>
+      </div>
+    </div>
+  </div>
 
-                                        </div>
-                                    </div>
-                                </div>
+  {/* RIGHT SIDE — GRID PRODUCTS */}
+  <div className="col-xl-6 col-lg-12">
+    <div className="row">
 
-                                <div className="col-md-6">
-                                    <div className="single-features-item b-radius-2 mb-20">
-                                        <div className="row g-0 align-items-center">
-                                            <div className="col-6">
-                                                <div className="features-thum">
-                                                    <div className="features-product-image w-img">
-                                                        <a href="product-details.html">
-                                                            <img src="assets/img/features-product/fp-2.jpg" alt="" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="product__offer">
-                                                        <span className="discount">-5%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+      {rightFeatures.map((item) => (
+        <div className="col-md-6" key={item.id}>
+          <div className="single-features-item b-radius-2 mb-20">
+            <div className="row g-0 align-items-center">
 
-                                            <div className="col-6">
-                                                <div className="product__content product__content-d product__content-d-2">
-                                                    <h6>
-                                                        <a href="product-details.html">
-                                                            G951s Pink Stereo Gaming Headset
-                                                        </a>
-                                                    </h6>
+              <div className="col-6">
+                <div className="features-thum">
+                  <div className="features-product-image w-img">
+                    <a href="product-details.html">
+                      <img src={item.image} alt={item.name} />
+                    </a>
+                  </div>
 
-                                                    <div className="rating mb-5">
-                                                        <ul>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                        </ul>
-                                                        <span>(01 review)</span>
-                                                    </div>
-
-                                                    <div className="price d-price">
-                                                        <span>$210.00 <del>$110</del></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* ROW 2 */}
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <div className="single-features-item b-radius-2 mb-20">
-                                        <div className="row g-0 align-items-center">
-                                            <div className="col-6">
-                                                <div className="features-thum">
-                                                    <div className="features-product-image w-img">
-                                                        <a href="product-details.html">
-                                                            <img src="assets/img/features-product/fp-3.jpg" alt="" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="product__offer">
-                                                        <span className="discount">-25%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-6">
-                                                <div className="product__content product__content-d product__content-d-2">
-                                                    <h6>
-                                                        <a href="product-details.html">
-                                                            Solo3 Wireless On-Ear Headphones
-                                                        </a>
-                                                    </h6>
-
-                                                    <div className="rating mb-5">
-                                                        <ul>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                        </ul>
-                                                        <span>(01 review)</span>
-                                                    </div>
-
-                                                    <div className="price">
-                                                        <span>$160.00 <del>$110</del></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-6">
-                                    <div className="single-features-item b-radius-2 mb-20">
-                                        <div className="row g-0 align-items-center">
-                                            <div className="col-6">
-                                                <div className="features-thum">
-                                                    <div className="features-product-image w-img">
-                                                        <a href="product-details.html">
-                                                            <img src="assets/img/features-product/fp-4.jpg" alt="" />
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-6">
-                                                <div className="product__content product__content-d product__content-d-2">
-                                                    <h6>
-                                                        <a href="product-details.html">
-                                                            Men’s Short-Sleeve Pocket Oxford Shirt
-                                                        </a>
-                                                    </h6>
-
-                                                    <div className="rating mb-5">
-                                                        <ul>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                                        </ul>
-                                                        <span>(01 review)</span>
-                                                    </div>
-
-                                                    <div className="price">
-                                                        <span>$280.00 <del>$110</del></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
+                  {item.discount && (
+                    <div className="product__offer">
+                      <span className="discount">{item.discount}</span>
                     </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="col-6">
+                <div className="product__content product__content-d product__content-d-2">
+                  <h6><a href="product-details.html">{item.name}</a></h6>
+
+                  <div className="rating mb-5">
+                    <ul>
+                      {[1,2,3,4,5].map(n => (
+                        <li key={n}><a href="#"><i className="fal fa-star"></i></a></li>
+                      ))}
+                    </ul>
+                    <span>(01 review)</span>
+                  </div>
+
+                  <div className="price d-price">
+                    <span>{item.price} <del>{item.oldPrice}</del></span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </div>
+
+</div>
+
 
                 </div>
             </section>
@@ -1302,307 +945,75 @@ const Main = () => {
 
                     <div className="row">
 
-                        {/* PRODUCT 1 */}
-                        <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-                            <div className="product__item product__item-2 b-radius-2 mb-20">
-                                <div className="product__thumb fix">
-                                    <div className="product-image w-img">
-                                        <a href="product-details.html">
-                                            <img src="assets/img/product/tp-1.jpg" alt="product" />
-                                        </a>
-                                    </div>
-                                    <div className="product__offer">
-                                        <span className="discount">-15%</span>
-                                    </div>
-                                    <div className="product-action product-action-2">
-                                        <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                            <i className="fal fa-eye"></i><i className="fal fa-eye"></i>
-                                        </a>
-                                        <a href="#" className="icon-box icon-box-1">
-                                            <i className="fal fa-heart"></i><i className="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" className="icon-box icon-box-1">
-                                            <i className="fal fa-layer-group"></i><i className="fal fa-layer-group"></i>
-                                        </a>
-                                    </div>
-                                </div>
+  {products.map((item) => (
+    <div
+      className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2"
+      key={item.id}
+    >
+      <div className="product__item product__item-2 b-radius-2 mb-20">
 
-                                <div className="product__content product__content-2">
-                                    <h6><a href="product-details.html">Epple iPad Pro 10.5-inch Cellular 64G</a></h6>
+        {/* IMAGE */}
+        <div className="product__thumb fix">
+          <div className="product-image w-img">
+            <a href="product-details.html">
+              <img src={item.image} alt={item.name} />
+            </a>
+          </div>
 
-                                    <div className="rating mb-5 mt-10">
-                                        <ul>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                        </ul>
-                                        <span>(01 review)</span>
-                                    </div>
+          {/* Discount */}
+          {item.discount && (
+            <div className="product__offer">
+              <span className="discount">{item.discount}</span>
+            </div>
+          )}
 
-                                    <div className="price">
-                                        <span>$105-$110</span>
-                                    </div>
-                                </div>
+          <div className="product-action product-action-2">
+            <a href="#" className="icon-box icon-box-1">
+              <i className="fal fa-eye"></i><i className="fal fa-eye"></i>
+            </a>
+            <a href="#" className="icon-box icon-box-1">
+              <i className="fal fa-heart"></i><i className="fal fa-heart"></i>
+            </a>
+            <a href="#" className="icon-box icon-box-1">
+              <i className="fal fa-layer-group"></i><i className="fal fa-layer-group"></i>
+            </a>
+          </div>
+        </div>
 
-                                <div className="product__add-cart text-center">
-                                    <button type="button" className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+        {/* CONTENT */}
+        <div className="product__content product__content-2">
+          <h6><a href="product-details.html">{item.name}</a></h6>
 
-                        {/* PRODUCT 2 */}
-                        <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-                            <div className="product__item product__item-2 b-radius-2 mb-20">
-                                <div className="product__thumb fix">
-                                    <div className="product-image w-img">
-                                        <a href="product-details.html">
-                                            <img src="assets/img/product/tp-2.jpg" alt="product" />
-                                        </a>
-                                    </div>
-                                    <div className="product-action product-action-2">
-                                        <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                            <i className="fal fa-eye"></i><i className="fal fa-eye"></i>
-                                        </a>
-                                        <a href="#" className="icon-box icon-box-1">
-                                            <i className="fal fa-heart"></i><i className="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" className="icon-box icon-box-1">
-                                            <i className="fal fa-layer-group"></i><i className="fal fa-layer-group"></i>
-                                        </a>
-                                    </div>
-                                </div>
+          <div className="rating mb-5 mt-10">
+            <ul>
+              {[1,2,3,4,5].map((star) => (
+                <li key={star}><a href="#"><i className="fal fa-star"></i></a></li>
+              ))}
+            </ul>
+            <span>(01 review)</span>
+          </div>
 
-                                <div className="product__content product__content-2">
-                                    <h6><a href="product-details.html">Men Size Yellow Basketball Jerseys</a></h6>
+          <div className="price">
+            <span>{item.price}</span>
+          </div>
+        </div>
 
-                                    <div className="rating mb-5 mt-10">
-                                        <ul>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                        </ul>
-                                        <span>(01 review)</span>
-                                    </div>
+        {/* ADD TO CART */}
+        <div className="product__add-cart text-center">
+          <button
+            type="button"
+            className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100"
+          >
+            Add to Cart
+          </button>
+        </div>
 
-                                    <div className="price">
-                                        <span>$105-$150</span>
-                                    </div>
-                                </div>
+      </div>
+    </div>
+  ))}
 
-                                <div className="product__add-cart text-center">
-                                    <button type="button" className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+</div>
 
-                        {/* PRODUCT 3 */}
-                        <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-                            <div className="product__item product__item-2 b-radius-2 mb-20">
-                                <div className="product__thumb fix">
-                                    <div className="product-image w-img">
-                                        <a href="product-details.html">
-                                            <img src="assets/img/product/tp-3.jpg" alt="product" />
-                                        </a>
-                                    </div>
-                                    <div className="product__offer">
-                                        <span className="discount">-9%</span>
-                                    </div>
-                                    <div className="product-action product-action-2">
-                                        <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                            <i className="fal fa-eye"></i><i className="fal fa-eye"></i>
-                                        </a>
-                                        <a href="#" className="icon-box icon-box-1">
-                                            <i className="fal fa-heart"></i><i className="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" className="icon-box icon-box-1">
-                                            <i className="fal fa-layer-group"></i><i className="fal fa-layer-group"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="product__content product__content-2">
-                                    <h6><a href="product-details.html">Xbox Wireless Game Controller Pink</a></h6>
-
-                                    <div className="rating mb-5 mt-10">
-                                        <ul>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                        </ul>
-                                        <span>(01 review)</span>
-                                    </div>
-
-                                    <div className="price">
-                                        <span>$200-$280</span>
-                                    </div>
-                                </div>
-
-                                <div className="product__add-cart text-center">
-                                    <button type="button" className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* PRODUCT 4 */}
-                        <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-                            <div className="product__item product__item-2 b-radius-2 mb-20">
-                                <div className="product__thumb fix">
-                                    <div className="product-image w-img">
-                                        <a href="product-details.html">
-                                            <img src="assets/img/product/tp-7.jpg" alt="product" />
-                                        </a>
-                                    </div>
-                                    <div className="product-action product-action-2">
-                                        <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                            <i className="fal fa-eye"></i><i className="fal fa-eye"></i>
-                                        </a>
-                                        <a href="#" className="icon-box icon-box-1">
-                                            <i className="fal fa-heart"></i><i className="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" className="icon-box icon-box-1">
-                                            <i className="fal fa-layer-group"></i><i className="fal fa-layer-group"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="product__content product__content-2">
-                                    <h6><a href="product-details.html">APPO R11s 64GB Dual 20MP Cameras</a></h6>
-
-                                    <div className="rating mb-5 mt-10">
-                                        <ul>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                        </ul>
-                                        <span>(01 review)</span>
-                                    </div>
-
-                                    <div className="price">
-                                        <span>$150.00-$270.00</span>
-                                    </div>
-                                </div>
-
-                                <div className="product__add-cart text-center">
-                                    <button type="button" className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* PRODUCT 5 */}
-                        <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-                            <div className="product__item product__item-2 b-radius-2 mb-20">
-                                <div className="product__thumb fix">
-                                    <div className="product-image w-img">
-                                        <a href="product-details.html">
-                                            <img src="assets/img/product/tp-10.jpg" alt="product" />
-                                        </a>
-                                    </div>
-                                    <div className="product-action product-action-2">
-                                        <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                            <i className="fal fa-eye"></i><i className="fal fa-eye"></i>
-                                        </a>
-                                        <a href="#" className="icon-box icon-box-1">
-                                            <i className="fal fa-heart"></i><i className="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" className="icon-box icon-box-1">
-                                            <i className="fal fa-layer-group"></i><i className="fal fa-layer-group"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="product__content product__content-2">
-                                    <h6><a href="product-details.html">G951s Pink Stereo Gaming Headset</a></h6>
-
-                                    <div className="rating mb-5 mt-10">
-                                        <ul>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                        </ul>
-                                        <span>(01 review)</span>
-                                    </div>
-
-                                    <div className="price">
-                                        <span>$120.00-$210.00</span>
-                                    </div>
-                                </div>
-
-                                <div className="product__add-cart text-center">
-                                    <button type="button" className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* PRODUCT 6 */}
-                        <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-                            <div className="product__item product__item-2 b-radius-2 mb-20">
-                                <div className="product__thumb fix">
-                                    <div className="product-image w-img">
-                                        <a href="product-details.html">
-                                            <img src="assets/img/product/tp-9.jpg" alt="product" />
-                                        </a>
-                                    </div>
-                                    <div className="product-action product-action-2">
-                                        <a href="#" className="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                            <i className="fal fa-eye"></i><i className="fal fa-eye"></i>
-                                        </a>
-                                        <a href="#" className="icon-box icon-box-1">
-                                            <i className="fal fa-heart"></i><i className="fal fa-heart"></i>
-                                        </a>
-                                        <a href="#" className="icon-box icon-box-1">
-                                            <i className="fal fa-layer-group"></i><i className="fal fa-layer-group"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="product__content product__content-2">
-                                    <h6><a href="product-details.html">Epple iPhone 11 Pro Max 64GB Gold</a></h6>
-
-                                    <div className="rating mb-5 mt-10">
-                                        <ul>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                            <li><a href="#"><i className="fal fa-star"></i></a></li>
-                                        </ul>
-                                        <span>(01 review)</span>
-                                    </div>
-
-                                    <div className="price">
-                                        <span>$120.00-$140.00</span>
-                                    </div>
-                                </div>
-
-                                <div className="product__add-cart text-center">
-                                    <button type="button" className="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </section>
             {/* recomand-product-area-end */}

@@ -267,7 +267,7 @@ const ProductList = () => {
 
   {/* ---------------- GRID VIEW ---------------- */}
   <div className="tab-pane fade show active" id="grid">
-    <div className="row g-3">
+    <div className="row g-3"> 
 
       {Array.from({
         length: Math.min(perPage, totalItems - (currentPage - 1) * perPage)
