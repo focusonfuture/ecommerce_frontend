@@ -1,6 +1,10 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Slider from "rc-slider";
+import { useToast } from "../toast/Toast";
+
+
+
 import "rc-slider/assets/index.css";
 
 const ProductList = () => {
@@ -53,6 +57,10 @@ const ProductList = () => {
     document.querySelector(".mobile-filter-panel")?.classList.remove("active");
     document.querySelector(".filter-overlay")?.classList.remove("show");
   };
+
+
+  const { showToast } = useToast();
+
 
   return (
     <main>
@@ -363,21 +371,24 @@ const ProductList = () => {
                             </div>
 
                             {/* BUTTONS */}
-                            <div
-                              className="product__add-cart-s text-center d-flex flex-column"
-                              style={{ gap: "4px" }}
-                            >
-                              <button className="cart-btn w-100">
-                                Add to Cart
-                              </button>
+                          <button
+                          className="cart-btn w-100"
+                          onClick={() => {
+                            showToast("✔ Product added to cart");
+                            navigate("/cart");
+                          }}
+                        >
+                          Add to Cart
+                        </button>
 
-                              <button
-                                className="wc-checkout w-100 quickview-yellow"
-                                onClick={() => navigate(`/product/${slug}`)}
-                              >
-                                Quick View
-                              </button>
-                            </div>
+
+                          <button
+                            className="wc-checkout w-100 quickview-yellow"
+                            onClick={() => navigate(`/product/${slug}`)}
+                          >
+                            Quick View
+                          </button>
+
                           </div>
                         </div>
                       );

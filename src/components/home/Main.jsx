@@ -439,7 +439,7 @@ const Main = () => {
                 </div>
                 <div className="button-wrap button-wrap-2">
                   <a href="product.html">
-                    See All Product <i className="fal fa-chevron-right"></i>
+                    See All Products <i className="fal fa-chevron-right"></i>
                   </a>
                 </div>
               </div>

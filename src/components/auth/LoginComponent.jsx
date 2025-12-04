@@ -1,5 +1,4 @@
 import React from "react";
-import PageBanner from "../common/PageBanner";
 import { GoogleLogin } from "@react-oauth/google";
 
 const LoginComponent = () => {
@@ -27,7 +26,7 @@ const LoginComponent = () => {
 
   return (
     <main>
-      <PageBanner title="My account" />
+   
 
       <div className="account-area mt-70 mb-70">
         <div className="container">

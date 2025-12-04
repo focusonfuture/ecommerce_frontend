@@ -766,3 +766,46 @@ header.header {
 
 
 
+.basic-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.basic-pagination li {
+  list-style: none;
+}
+
+.basic-pagination li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+/* Active number */
+.basic-pagination li a.active {
+  background: #fcbe00;
+  color: #fff;
+  border-color: #fcbe00;
+}
+
+/* Hover effect */
+.basic-pagination li a:hover {
+  background: #fcbe00;
+  color: #fff;
+  border-color: #fcbe00;
+}
+
+/* Arrow icon styling */
+.basic-pagination li a i {
+  font-size: 14px;
+}

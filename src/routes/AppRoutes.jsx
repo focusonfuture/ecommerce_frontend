@@ -10,6 +10,12 @@ import CartPage from "../pages/Cart/CartPage";
 import CheckoutPage from "../pages/Checkout/CheckoutPage";
 import MyOrdersPage from "../pages/MyOrders/MyOrdersPage";
 import MyOrdersDetailsPage from "../pages/MyOrders/MyOrdersDetailsPage";
+import BlogPage from "../pages/Blog/BlogPage";
+import BlogDetailedPage from "../pages/Blog/BlogDetailedPage";
+import ContactPage from "../pages/Contact/ContactPage";
+
+
+
 
 
 const AppRoutes = () => {
@@ -48,6 +54,13 @@ const AppRoutes = () => {
               {/* My Orders Details route */}
                 <Route path="/my-orders/:id" element={<MyOrdersDetailsPage />} />
 
+              {/* Blog route */}
+                <Route path="/blog" element={<BlogPage />} />
+
+              {/* Blog Detailed route */}
+                <Route path="/blog/:id" element={<BlogDetailedPage />} />
+
+                <Route path="/contact" element={<ContactPage />} />
    
         
       </Routes>

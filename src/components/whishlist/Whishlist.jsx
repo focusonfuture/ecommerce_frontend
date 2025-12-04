@@ -4,36 +4,7 @@ import { Link } from "react-router-dom";
 const Whishlist = () => {
   return (
     <main>
-      {/* Banner */}
-      <div
-        className="page-banner-area page-banner-height-2"
-        data-background="/assets/img/banner/page-banner-4.jpg"
-      >
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-12">
-              <div className="page-banner-content text-center">
-                <h4 className="breadcrumb-title">My Wishlist</h4>
-
-                <div className="breadcrumb-two">
-                  <nav className="breadcrumb-trail breadcrumbs">
-                    <ul className="breadcrumb-menu">
-                      <li>
-                        <Link to="/">
-                          <span>Home</span>
-                        </Link>
-                      </li>
-                      <li className="trail-item active">
-                        <span>Wishlist</span>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+     
 
       {/* Wishlist Section */}
       <section className="cart-area pb-120 pt-120">

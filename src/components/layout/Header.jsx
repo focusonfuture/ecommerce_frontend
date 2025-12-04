@@ -142,7 +142,7 @@ const Header = () => {
                           <Link to="/my-orders">My Orders</Link>
                         </li>
                         <li>
-                          <a href="contact.html">Contact Us</a>
+                          <Link to="/contact">Contact Us</Link>
                         </li>
                         <li>
                           <a href="faq.html">FAQs</a>
@@ -223,7 +223,7 @@ const Header = () => {
                       </Link>
                     </div>
                     <div className="block-cart action">
-                      <a className="icon-link" href="cart.html">
+                      <a className="icon-link" href="#">
                         <i className="flaticon-shopping-bag" />
                         <span className="count">1</span>
                         <span className="text">
@@ -777,6 +777,9 @@ const Header = () => {
                         <li>
                           <Link to="/about">About Us</Link>
                         </li>
+                        <li>
+                          <Link to="/blog">Blog</Link>
+                        </li>
 
                         {/* <li>
                                                     <a href="blog.html">
@@ -791,37 +794,6 @@ const Header = () => {
                                                         </li>
                                                     </ul>
                                                 </li>  */}
-                        <li>
-                          <a href="#">
-                            Pages <i className="far fa-angle-down" />
-                          </a>
-                          <ul className="submenu">
-                            <li>
-                              <Link to="/Login">My Account</Link>
-                            </li>
-                            <li>
-                              <Link to="/product/:slug">Product Details</Link>
-                            </li>
-                            <li>
-                              <a href="faq.html">FAQs pages</a>
-                            </li>
-                            <li>
-                              <Link to="/cart">Cart</Link>
-                            </li>
-                            <li>
-                              <Link to="/whishlist">Wishlist</Link>
-                            </li>
-                            <li>
-                              <Link to="/checkout">Checkout</Link>
-                            </li>
-                            <li>
-                              <a href="contact.html">Contact Us</a>
-                            </li>
-                            <li>
-                              <a href="404.html">404 Error</a>
-                            </li>
-                          </ul>
-                        </li>
                       </ul>
                     </nav>
                   </div>
