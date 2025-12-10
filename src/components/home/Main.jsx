@@ -347,7 +347,7 @@ const Main = () => {
             <div className="col-xl-5">
               <div className="row">
                 {/* Banner 1 */}
-                <div className="col-xl-6 col-lg-6 col-md-6">
+                <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                   <div className="banner__item p-relative w-img mb-30">
                     <div className="banner__img b-radius-2">
                       <a href="product-details.html">
@@ -366,7 +366,7 @@ const Main = () => {
                 </div>
 
                 {/* Banner 2 */}
-                <div className="col-xl-6 col-lg-6 col-md-6">
+                <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                   <div className="banner__item p-relative w-img mb-30">
                     <div className="banner__img b-radius-2">
                       <a href="product-details.html">
@@ -385,7 +385,7 @@ const Main = () => {
                 </div>
 
                 {/* Banner 3 */}
-                <div className="col-xl-6 col-lg-6 col-md-6">
+                <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                   <div className="banner__item p-relative w-img mb-30">
                     <div className="banner__img b-radius-2">
                       <a href="product-details.html">
@@ -403,8 +403,8 @@ const Main = () => {
                   </div>
                 </div>
 
-                {/* Banner 4 */}
-                <div className="col-xl-6 col-lg-6 col_md_6">
+                {/* Banner 4 (FIXED col-md-6 typo) */}
+                <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                   <div className="banner__item p-relative w-img mb-30">
                     <div className="banner__img b-radius-2">
                       <a href="product-details.html">
@@ -417,7 +417,7 @@ const Main = () => {
                           Chair <br /> Swoon Lounge
                         </a>
                       </h6>
-                      <p>Headphone & Audio</p>
+                      <p>Home Furniture</p>
                     </div>
                   </div>
                 </div>
@@ -448,7 +448,7 @@ const Main = () => {
           <div className="row">
             {products.map((item) => (
               <div
-                className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2"
+                className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2"
                 key={item.id}
               >
                 <div className="product__item product__item-2 b-radius-2 mb-20">
@@ -543,7 +543,10 @@ const Main = () => {
 
           <div className="row">
             {categories.map((cat) => (
-              <div className="col-xl-2 col-lg-3 col-md-4" key={cat.id}>
+              <div
+                className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2"
+                key={cat.id}
+              >
                 <div className="categories__item p-relative w-img mb-30">
                   <div className="categories__img b-radius-2">
                     <a href="product-details.html">
@@ -977,26 +980,29 @@ const Main = () => {
       {/* featured-end */}
 
       {/* moveing-text-area-start */}
-      <section className="moveing-text-area">
-        <div className="container">
-          <div className="ovic-running">
-            <div className="wrap">
-              <div className="inner">
-                <p className="item">
-                  Free UK Delivery - Return Over $100.00 ( Excluding Homeware )
-                  | Free UK Collect From Store
-                </p>
-                <p className="item">
-                  Design Week / 15% Off the website / Code: AYOSALE-2020
-                </p>
-                <p className="item">
-                  Always iconic. Now organic. Introducing the $20 Organic Tee.
-                </p>
-              </div>
-            </div>
+      <section className="moving-text-area">
+        <div className="moving-wrapper">
+          <div className="moving-track">
+            <span>
+              Free UK Delivery - Return Over $100.00 ( Excluding Homeware ) |
+              Free UK Collect From Store
+            </span>
+            <span>Design Week / 15% Off the website / Code: AYOSALE-2020</span>
+            <span>
+              Always iconic. Now organic. Introducing the $20 Organic Tee.
+            </span>
+            <span>
+              Free UK Delivery - Return Over $100.00 ( Excluding Homeware ) |
+              Free UK Collect From Store
+            </span>
+            <span>Design Week / 15% Off the website / Code: AYOSALE-2020</span>
+            <span>
+              Always iconic. Now organic. Introducing the $20 Organic Tee.
+            </span>
           </div>
         </div>
       </section>
+
       {/* moveing-text-area-end */}
 
       {/* recomand-product-area-start */}
@@ -1020,7 +1026,7 @@ const Main = () => {
           <div className="row">
             {products.map((item) => (
               <div
-                className="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2"
+                className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2"
                 key={item.id}
               >
                 <div className="product__item product__item-2 b-radius-2 mb-20">
@@ -1097,49 +1103,25 @@ const Main = () => {
       {/* recomand-product-area-end */}
 
       {/* brand-area-start */}
-      <section className="brand-area light-bg-s pb-60">
+      <section className="brand-area clean-brand-area pb-60 pt-40">
         <div className="container custom-conatiner">
-          <div className="brand-slider brand-slider-2 swiper-container pt-35 pb-30">
-            <div className="swiper-wrapper">
-              <div className="brand-item w-img swiper-slide">
-                <a href="#">
-                  <img src="assets/img/brand/brand-1.jpg" alt="brand" />
-                </a>
+          <div className="brand-track">
+            {[
+              "brand-1.jpg",
+              "brand-2.jpg",
+              "brand-3.jpg",
+              "brand-4.jpg",
+              "brand-5.jpg",
+              "brand-6.jpg",
+            ].map((img, index) => (
+              <div className="brand-card" key={index}>
+                <img src={`assets/img/brand/${img}`} alt="brand" />
               </div>
-
-              <div className="brand-item w-img swiper-slide">
-                <a href="#">
-                  <img src="assets/img/brand/brand-2.jpg" alt="brand" />
-                </a>
-              </div>
-
-              <div className="brand-item w-img swiper-slide">
-                <a href="#">
-                  <img src="assets/img/brand/brand-3.jpg" alt="brand" />
-                </a>
-              </div>
-
-              <div className="brand-item w-img swiper-slide">
-                <a href="#">
-                  <img src="assets/img/brand/brand-4.jpg" alt="brand" />
-                </a>
-              </div>
-
-              <div className="brand-item w-img swiper-slide">
-                <a href="#">
-                  <img src="assets/img/brand/brand-5.jpg" alt="brand" />
-                </a>
-              </div>
-
-              <div className="brand-item w-img swiper-slide">
-                <a href="#">
-                  <img src="assets/img/brand/brand-6.jpg" alt="brand" />
-                </a>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
+
       {/* brand-area-end */}
 
       {/*features-2__area-start */}
@@ -1216,3 +1198,6 @@ const Main = () => {
 };
 
 export default Main;
+
+
+/* This is the homw page full here it completed.... */

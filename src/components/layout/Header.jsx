@@ -1,7 +1,18 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { isLoggedIn, logout } from "../../utils/auth";
+
 
 const Header = () => {
+
+   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
+
   useEffect(() => {
     // -------------------------------
     // 1. MENU HOVER + MOBILE TOGGLE
@@ -202,14 +213,30 @@ const Header = () => {
                 </div>
                 <div className="col-xl-4 col-lg-5 col-md-8 col-sm-8">
                   <div className="header-action">
+                    
+                     {/*  USER LOGIN / LOGOUT SWITCH */}
                     <div className="block-userlink">
-                      <Link className="icon-link" to="/login">
-                        <i className="flaticon-user" />
-                        <span className="text">
-                          <span className="sub">Login / Register </span>
-                          My Account
-                        </span>
-                      </Link>
+                      {!isLoggedIn() ? (
+                        <Link className="icon-link" to="/login">
+                          <i className="flaticon-user" />
+                          <span className="text">
+                            <span className="sub">Sign Up</span>
+                            My Account
+                          </span>
+                        </Link>
+                      ) : (
+                        <button
+                          className="icon-link"
+                          onClick={handleLogout}
+                          style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
+                        >
+                          <i className="flaticon-user" />
+                          <span className="text">
+                            <span className="sub">Sign Out</span>
+                            My Account
+                          </span>
+                        </button>
+                      )}
                     </div>
 
                     <div className="block-wishlist action">

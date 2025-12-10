@@ -1,29 +1,47 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Slider from "rc-slider";
-import { useToast } from "../toast/Toast";
-
-
-
 import "rc-slider/assets/index.css";
+import productService from "../../services/productService";
+import { useToast } from "../toast/Toast";
 
 const ProductList = () => {
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
-  //  Pagination state
-  const totalItems = 29;
+  // ─────────────────────────────────────────────
+  // BACKEND PRODUCT DATA STATES
+  // ─────────────────────────────────────────────
+  
+  const [products, setProducts] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
   const perPage = 20;
+
   const [currentPage, setCurrentPage] = useState(1);
 
-  //  Filters
-  const [price, setPrice] = useState([0, 500]);
+  // load products from backend
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await productService.getProducts(currentPage);
 
-  //  Derived pagination values
+        setProducts(data.products);
+        setTotalItems(data.totalItems);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    };
+
+    loadProducts();
+  }, [currentPage]);
+
+  // ─────────────────────────────────────────────
+  // PAGINATION CALCULATIONS
+  // ─────────────────────────────────────────────
   const totalPages = Math.ceil(totalItems / perPage);
   const startIndex = (currentPage - 1) * perPage + 1;
   const endIndex = Math.min(totalItems, currentPage * perPage);
 
-  // Page number sliding window
   const pageButtons = useMemo(() => {
     const count = 5;
     let start = Math.max(1, currentPage - Math.floor(count / 2));
@@ -37,7 +55,6 @@ const ProductList = () => {
     return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }, [currentPage, totalPages]);
 
-  //  Page navigation
   const goToPage = useCallback(
     (p) => {
       if (p < 1 || p > totalPages) return;
@@ -47,7 +64,9 @@ const ProductList = () => {
     [totalPages]
   );
 
-  //  Mobile filter open/close
+  // ─────────────────────────────────────────────
+  // MOBILE FILTER PANEL
+  // ─────────────────────────────────────────────
   const openFilters = () => {
     document.querySelector(".mobile-filter-panel")?.classList.add("active");
     document.querySelector(".filter-overlay")?.classList.add("show");
@@ -58,8 +77,14 @@ const ProductList = () => {
     document.querySelector(".filter-overlay")?.classList.remove("show");
   };
 
+  // ─────────────────────────────────────────────
+  // PRICE FILTER STATE
+  // ─────────────────────────────────────────────
+  const [price, setPrice] = useState([0, 500]);
 
-  const { showToast } = useToast();
+  // ─────────────────────────────────────────────
+  // UI START
+  // ─────────────────────────────────────────────
 
 
   return (
@@ -307,29 +332,17 @@ const ProductList = () => {
                 {/* ---------------- GRID VIEW ---------------- */}
                 <div className="tab-pane fade show active" id="grid">
                   <div className="row g-3">
-                    {Array.from({
-                      length: Math.min(
-                        perPage,
-                        totalItems - (currentPage - 1) * perPage
-                      ),
-                    }).map((_, i) => {
-                      const idx = (currentPage - 1) * perPage + i;
-                      const slug = `sample-product-${idx + 1}`;
-
-                      return (
+                    {products.map((item) => (
                         <div
                           className="col-xl-3 col-lg-4 col-md-6 col-sm-6"
-                          key={idx}
+                          key={item.id}
                         >
                           <div className="product__item product__item-d">
-                            {/* IMAGE */}
+
                             <div className="product__thumb fix">
                               <div className="product-image w-img">
-                                <a onClick={() => navigate(`/product/${slug}`)}>
-                                  <img
-                                    src="/assets/img/product/tp-2.jpg"
-                                    alt="product"
-                                  />
+                                <a onClick={() => navigate(`/product/${item.slug}`)}>
+                                  <img src={item.image} alt={item.name} />
                                 </a>
                               </div>
 
@@ -340,140 +353,111 @@ const ProductList = () => {
                                 <button className="icon-box icon-box-1">
                                   <i className="fal fa-heart" />
                                 </button>
-                                <button className="icon-box icon-box-1">
-                                  <i className="fal fa-layer-group" />
-                                </button>
                               </div>
                             </div>
 
-                            {/* CONTENT */}
                             <div className="product__content-3">
                               <h6>
-                                <a onClick={() => navigate(`/product/${slug}`)}>
-                                  Sample Product {idx + 1}
+                                <a onClick={() => navigate(`/product/${item.slug}`)}>
+                                  {item.name}
                                 </a>
                               </h6>
 
                               <div className="rating mb-5">
                                 <ul>
-                                  {Array.from({ length: 5 }).map((_, i2) => (
-                                    <li key={i2}>
-                                      <i className="fal fa-star" />
+                                  {[1,2,3,4,5].map((i) => (
+                                    <li key={i}>
+                                      <i className={i <= item.rating ? "fas fa-star" : "fal fa-star"} />
                                     </li>
                                   ))}
                                 </ul>
-                                <span>(01 review)</span>
+                                <span>({item.reviews} review)</span>
                               </div>
 
                               <div className="price mb-10">
-                                <span>$110 - $150</span>
+                                <span>${item.price_min} - ${item.price_max}</span>
                               </div>
                             </div>
 
-                            {/* BUTTONS */}
-                          <button
-                          className="cart-btn w-100"
-                          onClick={() => {
-                            showToast("✔ Product added to cart");
-                            navigate("/cart");
-                          }}
-                        >
-                          Add to Cart
-                        </button>
+                            <button
+                              className="cart-btn w-100"
+                              onClick={() => {
+                                showToast("✔ Product added to cart");
+                                navigate("/cart");
+                              }}
+                            >
+                              Add to Cart
+                            </button>
 
-
-                          <button
-                            className="wc-checkout w-100 quickview-yellow"
-                            onClick={() => navigate(`/product/${slug}`)}
-                          >
-                            Quick View
-                          </button>
+                            <button
+                              className="wc-checkout w-100 quickview-yellow"
+                              onClick={() => navigate(`/product/${item.slug}`)}
+                            >
+                              Quick View
+                            </button>
 
                           </div>
                         </div>
-                      );
-                    })}
+                      ))}
+
                   </div>
                 </div>
 
                 {/* ---------------- LIST VIEW ---------------- */}
                 <div className="tab-pane fade" id="list">
                   <div className="product-list-wrapper d-flex flex-column gap-3">
-                    {Array.from({
-                      length: Math.min(
-                        perPage,
-                        totalItems - (currentPage - 1) * perPage
-                      ),
-                    }).map((_, i) => {
-                      const idx = (currentPage - 1) * perPage + i;
-                      const slug = `sample-product-${idx + 1}`;
-
-                      return (
-                        <div
-                          className="product-list-item d-flex p-3 border rounded"
-                          key={idx}
-                        >
-                          {/* IMAGE */}
-                          <div
-                            className="product-list-img me-3"
-                            style={{ width: 120 }}
-                          >
-                            <a onClick={() => navigate(`/product/${slug}`)}>
-                              <img
-                                src="/assets/img/product/tp-2.jpg"
-                                alt="product"
-                                className="img-fluid rounded"
-                              />
+                    {products.map((item) => (
+                        <div className="product-list-item d-flex p-3 border rounded" key={item.id}>
+                          
+                          <div className="product-list-img me-3" style={{ width: 120 }}>
+                            <a onClick={() => navigate(`/product/${item.slug}`)}>
+                              <img src={item.image} alt={item.name} className="img-fluid rounded" />
                             </a>
                           </div>
 
-                          {/* CONTENT */}
                           <div className="product-list-content flex-grow-1">
                             <h5 className="mb-2">
-                              <a onClick={() => navigate(`/product/${slug}`)}>
-                                Sample Product {idx + 1}
+                              <a onClick={() => navigate(`/product/${item.slug}`)}>
+                                {item.name}
                               </a>
                             </h5>
 
                             <div className="rating mb-2">
                               <ul className="d-inline-flex">
-                                {Array.from({ length: 5 }).map((_, idx2) => (
-                                  <li key={idx2}>
-                                    <i className="fal fa-star" />
+                                {[1,2,3,4,5].map((i) => (
+                                  <li key={i}>
+                                    <i className={i <= item.rating ? "fas fa-star" : "fal fa-star"} />
                                   </li>
                                 ))}
                               </ul>
-                              <span className="ms-2">(01 review)</span>
+                              <span className="ms-2">({item.reviews} review)</span>
                             </div>
 
                             <p className="text-muted mb-2">
-                              A short description goes here. Perfect for list
-                              view layouts.
+                              Short description…
                             </p>
 
                             <div className="price mb-3">
                               <span style={{ fontSize: 18, fontWeight: 600 }}>
-                                $110 - $150
+                                ${item.price_min} - ${item.price_max}
                               </span>
                             </div>
 
-                            {/* BUTTONS */}
                             <div className="d-flex gap-2">
-                              <button className="btn-small cart-btn">
-                                Add to Cart
-                              </button>
+                              <button className="btn-small cart-btn">Add to Cart</button>
 
                               <button
                                 className="btn-small wc-checkout quickview-yellow"
-                                onClick={() => navigate(`/product/${slug}`)}
+                                onClick={() => navigate(`/product/${item.slug}`)}
                               >
                                 Quick View
                               </button>
                             </div>
                           </div>
+
                         </div>
-                      );
-                    })}
+                      ))}
+
                   </div>
                 </div>
               </div>
