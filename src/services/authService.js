@@ -2,17 +2,29 @@ import api from "./api";
 
 const authService = {
   async login(email, password) {
-    const res = await api.post("/api/login/", { email, password });
-    return res.data;
+    const res = await api.post("/login/", {
+      email,       
+      password,
+    });
+
+    return {
+      token: res.data.access,
+      refresh: res.data.refresh,
+      user: { email },
+    };
   },
 
-  async register(username, email, password) {
-    const res = await api.post("/api/register/", { username, email, password });
-    return res.data;
-  },
+  async register({ username, email, password, phone, firstName, lastName }) {
+    const res = await api.post("/register/", {
+      username,
+      email,
+      password,
+      password2: password,
+      first_name: firstName,
+      last_name: lastName,
+      phone,
+    });
 
-  async googleLogin(idToken) {
-    const res = await api.post("/api/google-login/", { token: idToken });
     return res.data;
   },
 
@@ -28,7 +40,7 @@ const authService = {
 
   isLoggedIn() {
     return !!localStorage.getItem("token");
-  }
+  },
 };
 
 export default authService;

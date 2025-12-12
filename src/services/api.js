@@ -1,13 +1,12 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "http://127.0.0.1:8000", 
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// Automatically attach token to requests
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -16,17 +15,15 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Global error handling
 api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      console.log("Unauthorized — token invalid, logging out...");
+  (res) => res,
+  (err) => {
+    if (err.response?.status === 401) {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       window.location.href = "/login";
     }
-    return Promise.reject(error);
+    return Promise.reject(err);
   }
 );
 

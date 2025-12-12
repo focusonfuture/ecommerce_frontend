@@ -1,62 +1,58 @@
 import React, { useState } from "react";
-import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import authService from "../../services/authService";
+import RegisterSuccessPopup from "../../components/popups/RegisterSuccessPopup";
 
 const RegisterComponent = () => {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail]       = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError]       = useState("");
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    phone: "",
+    first_name: "",
+    last_name: "",
+    password: "",
+    password2: "",
+  });
 
-  // Handle normal register
+  const [error, setError] = useState("");
+
+  // popup
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [popupName, setPopupName] = useState("");
+
+  const onChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
 
-    try {
-      console.log("➡ Sending register request...");
-
-      const data = await authService.register(username, email, password);
-
-      console.log("✅ REGISTER SUCCESS:", data);
-
-      // Save session (optional)
-      authService.saveSession(data.token, data.user);
-
-      console.log("📌 Token Saved:", localStorage.getItem("token"));
-      console.log("📌 User Saved:", localStorage.getItem("user"));
-
-      // AFTER REGISTER → GO TO LOGIN PAGE
-      navigate("/login");
-
-    } catch (err) {
-      console.error("❌ REGISTER ERROR:", err);
-      setError("Registration failed");
+    if (form.password !== form.password2) {
+      setError("Passwords do not match");
+      return;
     }
-  };
 
-  // Handle google register/login
-  const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      console.log("➡ Google token received");
+      await authService.register({
+        username: form.username,
+        email: form.email,
+        phone: form.phone,
+        firstName: form.first_name,
+        lastName: form.last_name,
+        password: form.password,
+      });
 
-      const id_token = credentialResponse.credential;
+      // Set popup name (email or username)
+      setPopupName(form.username || form.email);
 
-      const data = await authService.googleLogin(id_token);
-
-      console.log("✅ GOOGLE REGISTER SUCCESS:", data);
-
-      authService.saveSession(data.token, data.user);
-
-      // After Google register → go to login
-      navigate("/login");
+      // Show success popup
+      setPopupVisible(true);
 
     } catch (err) {
-      console.error("❌ GOOGLE REGISTER ERROR:", err);
-      setError("Google login failed");
+      console.error("Register error:", err);
+      setError("Registration failed. Please check your details.");
     }
   };
 
@@ -70,36 +66,74 @@ const RegisterComponent = () => {
                 <h5>Register</h5>
 
                 <form onSubmit={handleRegister}>
-                  <label>
-                    Username <span>*</span>
-                  </label>
+                  
+                  <label>Username *</label>
                   <input
                     type="text"
+                    name="username"
                     placeholder="Enter Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    value={form.username}
+                    onChange={onChange}
                     required
                   />
 
-                  <label>
-                    Email <span>*</span>
-                  </label>
+                  <label>Email *</label>
                   <input
                     type="email"
+                    name="email"
                     placeholder="Enter email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={form.email}
+                    onChange={onChange}
                     required
                   />
 
-                  <label>
-                    Password <span>*</span>
-                  </label>
+                  <label>Phone *</label>
+                  <input
+                    type="text"
+                    name="phone"
+                    placeholder="Enter phone number"
+                    value={form.phone}
+                    onChange={onChange}
+                    required
+                  />
+
+                  <label>First Name *</label>
+                  <input
+                    type="text"
+                    name="first_name"
+                    placeholder="Enter first name"
+                    value={form.first_name}
+                    onChange={onChange}
+                    required
+                  />
+
+                  <label>Last Name *</label>
+                  <input
+                    type="text"
+                    name="last_name"
+                    placeholder="Enter last name"
+                    value={form.last_name}
+                    onChange={onChange}
+                    required
+                  />
+
+                  <label>Password *</label>
                   <input
                     type="password"
+                    name="password"
                     placeholder="Enter password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={form.password}
+                    onChange={onChange}
+                    required
+                  />
+
+                  <label>Confirm Password *</label>
+                  <input
+                    type="password"
+                    name="password2"
+                    placeholder="Re-enter password"
+                    value={form.password2}
+                    onChange={onChange}
                     required
                   />
 
@@ -112,27 +146,26 @@ const RegisterComponent = () => {
                   </button>
                 </form>
 
-                <div className="google-login-wrapper text-center mt-4">
-                  <div className="google-divider">
-                    <span>OR</span>
-                  </div>
-
-                  <div className="google-btn-box mt-3">
-                    <GoogleLogin
-                      onSuccess={handleGoogleSuccess}
-                      onError={() => setError("Google login failed")}
-                    />
-                  </div>
-                </div>
-
                 <p className="text-center mt-3">
                   Already have an account? <a href="/login">Login</a>
                 </p>
+
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* SUCCESS POPUP */}
+      <RegisterSuccessPopup
+        visible={popupVisible}
+        username={popupName}
+        onClose={() => {
+          setPopupVisible(false);
+          navigate("/login"); 
+        }}
+        autoCloseMs={2000}
+      />
     </main>
   );
 };
