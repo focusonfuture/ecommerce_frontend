@@ -13,6 +13,9 @@ import MyOrdersDetailsPage from "../pages/MyOrders/MyOrdersDetailsPage";
 import BlogPage from "../pages/Blog/BlogPage";
 import BlogDetailedPage from "../pages/Blog/BlogDetailedPage";
 import ContactPage from "../pages/Contact/ContactPage";
+import GalleryPage from "../pages/Gallery/GalleryPage";
+import TermsPage from "../pages/Terms/TermsPage";
+import PrivacyPolicyPage from "../pages/Privacy/PrivacyPolicyPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 const AppRoutes = () => {
@@ -30,6 +33,9 @@ const AppRoutes = () => {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:id" element={<BlogDetailedPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
 
         {/* Protected Routes */}
         <Route

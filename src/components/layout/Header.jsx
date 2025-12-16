@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { isLoggedIn, logout } from "../../utils/auth";
 
 
+
 const Header = () => {
 
    const navigate = useNavigate();
+   
 
   const handleLogout = () => {
     logout();
@@ -147,7 +149,18 @@ const Header = () => {
                     <div className="ovic-menu-wrapper">
                       <ul>
                         <li>
-                          <Link to="/about">About Us</Link>
+                          
+                          <ul className="submenu">
+                            <li>
+                              <Link to="/about">About Us</Link>
+                            </li>
+                            <li>
+                              <Link to="/terms">Terms & Conditions</Link>
+                            </li>
+                            <li>
+                              <Link to="/privacy-policy">Privacy Policy</Link>
+                            </li>
+                          </ul>
                         </li>
                         <li>
                           <Link to="/my-orders">My Orders</Link>
@@ -807,6 +820,9 @@ const Header = () => {
                         <li>
                           <Link to="/blog">Blog</Link>
                         </li>
+                        <li>
+                          <Link to="/gallery">Gallery</Link>
+                        </li>
 
                         {/* <li>
                                                     <a href="blog.html">
@@ -884,6 +900,9 @@ const Header = () => {
                   <Link to="/about">About Us</Link>
                 </li>
                 <li>
+                  <Link to="/gallery">Gallery</Link>
+                </li>
+                <li>
                   <Link to="/cart">Cart</Link>
                 </li>
                 <li>
@@ -891,6 +910,12 @@ const Header = () => {
                 </li>
                 <li>
                   <Link to="/my-orders">My Orders</Link>
+                </li>
+                <li>
+                  <Link to="/terms">Terms & Conditions</Link>
+                </li>
+                <li>
+                  <Link to="/privacy-policy">Privacy Policy</Link>
                 </li>
                 <li>
                   <a href="faq.html">FAQ</a>
