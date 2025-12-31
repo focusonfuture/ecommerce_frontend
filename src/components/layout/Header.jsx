@@ -162,6 +162,7 @@ const Header = () => {
                             </li>
                           </ul>
                         </li>
+                        
                         <li>
                           <Link to="/my-orders">My Orders</Link>
                         </li>
@@ -822,6 +823,12 @@ const Header = () => {
                         </li>
                         <li>
                           <Link to="/gallery">Gallery</Link>
+                        </li>
+                        <li>
+                          <Link to="/blog">Shop</Link>
+                        </li>
+                        <li>
+                          <Link to="/profile">Profile</Link>
                         </li>
 
                         {/* <li>
