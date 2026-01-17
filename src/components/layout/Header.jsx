@@ -1,19 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { isLoggedIn, logout } from "../../utils/auth";
-
-
+import categoryService from "../../services/categoryService";
 
 const Header = () => {
-
-   const navigate = useNavigate();
-   
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
-
 
   useEffect(() => {
     // -------------------------------
@@ -91,6 +87,22 @@ const Header = () => {
       }
     }, 0);
   }, []);
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await categoryService.getMenuCategories();
+        setCategories(data);
+      } catch (err) {
+        console.error("Category load failed", err);
+      }
+    };
+
+    loadCategories();
+  }, []);
+
   return (
     <>
       {/* header-start */}
@@ -149,7 +161,6 @@ const Header = () => {
                     <div className="ovic-menu-wrapper">
                       <ul>
                         <li>
-                          
                           <ul className="submenu">
                             <li>
                               <Link to="/about">About Us</Link>
@@ -162,7 +173,7 @@ const Header = () => {
                             </li>
                           </ul>
                         </li>
-                        
+
                         <li>
                           <Link to="/my-orders">My Orders</Link>
                         </li>
@@ -227,8 +238,7 @@ const Header = () => {
                 </div>
                 <div className="col-xl-4 col-lg-5 col-md-8 col-sm-8">
                   <div className="header-action">
-                    
-                     {/*  USER LOGIN / LOGOUT SWITCH */}
+                    {/*  USER LOGIN / LOGOUT SWITCH */}
                     <div className="block-userlink">
                       {!isLoggedIn() ? (
                         <Link className="icon-link" to="/login">
@@ -242,7 +252,12 @@ const Header = () => {
                         <button
                           className="icon-link"
                           onClick={handleLogout}
-                          style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
+                          style={{
+                            background: "none",
+                            border: "none",
+                            padding: 0,
+                            cursor: "pointer",
+                          }}
                         >
                           <i className="flaticon-user" />
                           <span className="text">
@@ -825,25 +840,36 @@ const Header = () => {
                           <Link to="/gallery">Gallery</Link>
                         </li>
                         <li>
-                          <Link to="/blog">Shop</Link>
+                          <a href="#">
+                            Category <i className="far fa-angle-down"></i>
+                          </a>
+
+                          <ul className="megamenu-1">
+                            {categories.map((cat) => (
+                              <li key={cat.id}>
+                                <Link to={`/category/${cat.slug}`}>
+                                  {cat.name}
+                                </Link>
+
+                                {cat.children && cat.children.length > 0 && (
+                                  <ul className="mega-item">
+                                    {cat.children.map((child) => (
+                                      <li key={child.id}>
+                                        <Link to={`/category/${child.slug}`}>
+                                          {child.name}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
                         </li>
+
                         <li>
                           <Link to="/profile">Profile</Link>
                         </li>
-
-                        {/* <li>
-                                                    <a href="blog.html">
-                                                        Blog <i className="far fa-angle-down" />
-                                                    </a>
-                                                    <ul className="submenu">
-                                                        <li>
-                                                            <a href="blog.html">Blog</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="blog-details.html">Blog Details</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>  */}
                       </ul>
                     </nav>
                   </div>

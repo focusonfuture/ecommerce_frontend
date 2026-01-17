@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/animate-icon.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1768644742774,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1768644742774,
+            "name": "Commit-0",
+            "content": "import { motion } from \"framer-motion\";\r\n\r\nexport function AnimateIcon({\r\n  children,\r\n  animateOnHover = false,\r\n  animateOnTap = false,\r\n}) {\r\n  return (\r\n    <motion.span\r\n      whileHover={animateOnHover ? { scale: 1.15, rotate: -10 } : undefined}\r\n      whileTap={animateOnTap ? { scale: 0.9 } : undefined}\r\n      style={{ display: \"inline-flex\" }}\r\n    >\r\n      {children}\r\n    </motion.span>\r\n  );\r\n}\r\n"
+        }
+    ]
+}

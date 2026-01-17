@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/services/categoryService.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1768647003497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1768647003497,
+            "name": "Commit-0",
+            "content": "import api from \"./api\";\r\n\r\nconst categoryService = {\r\n  async getMenuCategories() {\r\n    const res = await api.get(\"/categories/\");\r\n    \r\n    // Only categories allowed in menu\r\n    return res.data.filter(cat => cat.show_in_menu);\r\n  },\r\n};\r\n\r\nexport default categoryService;\r\n"
+        }
+    ]
+}

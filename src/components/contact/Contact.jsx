@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 
+import { AnimateIcon } from "../ui/AnimateIcon";
+import { Send } from "../ui/icons/Send";
+
+
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -26,7 +31,7 @@ const Contact = () => {
     <main>
       {/* Hero Section */}
       <div style={{
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: 'linear-gradient(135deg, #f8d358 0%, #e09744 100%)',
         padding: '100px 20px',
         textAlign: 'center',
         color: 'white'
@@ -51,21 +56,21 @@ const Contact = () => {
                 title: 'Call Us',
                 info: '+1 (123) 456-7890',
                 subinfo: 'Mon-Fri 9am-6pm',
-                color: '#667eea'
+                color: '#f1bd0f'
               },
               {
                 icon: '✉️',
                 title: 'Email Us',
                 info: 'support@teashop.com',
                 subinfo: 'Online support',
-                color: '#764ba2'
+                color: '#f1bd0f'
               },
               {
                 icon: '📍',
                 title: 'Visit Us',
                 info: '26 Rue Pelleport',
                 subinfo: 'Paris, France',
-                color: '#f093fb'
+                color: '#f1bd0f'
               }
             ].map((item, i) => (
               <div key={i} style={{
@@ -101,7 +106,7 @@ const Contact = () => {
                 <p style={{ fontSize: '1.1rem', color: item.color, fontWeight: '600', marginBottom: '5px' }}>
                   {item.info}
                 </p>
-                <p style={{ fontSize: '0.9rem', color: '#718096' }}>
+                <p style={{ fontSize: '0.9rem', color: '#f1bd0f' }}>
                   {item.subinfo}
                 </p>
               </div>
@@ -126,7 +131,7 @@ const Contact = () => {
                 <h2 style={{ fontSize: '2.5rem', fontWeight: '700', marginBottom: '15px', color: '#2d3748' }}>
                   Send a Message
                 </h2>
-                <p style={{ color: '#718096', marginBottom: '40px', fontSize: '1.05rem' }}>
+                <p style={{ color: '#f1bd0f', marginBottom: '40px', fontSize: '1.05rem' }}>
                   Fill out the form below and we'll get back to you within 24 hours.
                 </p>
 
@@ -299,31 +304,30 @@ const Contact = () => {
 
                   {/* Submit Button */}
                   <button
-                    onClick={handleSubmit}
-                    style={{
-                      width: '100%',
-                      padding: '18px',
-                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '12px',
-                      fontSize: '1.1rem',
-                      fontWeight: '600',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease',
-                      boxShadow: '0 10px 25px rgba(102, 126, 234, 0.3)'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.transform = 'translateY(-2px)';
-                      e.target.style.boxShadow = '0 15px 35px rgba(102, 126, 234, 0.4)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.transform = 'translateY(0)';
-                      e.target.style.boxShadow = '0 10px 25px rgba(102, 126, 234, 0.3)';
-                    }}
-                  >
-                    Send Message 🚀
-                  </button>
+  onClick={handleSubmit}
+  style={{
+    width: "100%",
+    padding: "18px",
+    background: "linear-gradient(135deg, #ffd000 0%, #ff9900 100%)",
+    color: "white",
+    border: "none",
+    borderRadius: "12px",
+    fontSize: "1.1rem",
+    fontWeight: "600",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "10px",
+  }}
+>
+  <span>Send Message</span>
+
+  <AnimateIcon animateOnHover>
+    <Send size={22} />
+  </AnimateIcon>
+</button>
+
                 </div>
               </div>
             </div>
@@ -394,7 +398,7 @@ const Contact = () => {
             <div className="col-xl-12">
               <div style={{ textAlign: 'center' }}>
                 <span style={{
-                  color: '#667eea',
+                  color: '#ffc400',
                   fontSize: '0.9rem',
                   fontWeight: '700',
                   letterSpacing: '2px',
@@ -416,28 +420,11 @@ const Contact = () => {
             {[
               {
                 img: "assets/img/location/location-1.jpg",
-                title: "Paris Store",
-                address: "26 Rue Pelleport, Saint-Antoine",
-                city: "Paris, France"
+                title: "Abcd",
+                address: "abcd",
+                city: "Cochin, Kerala"
               },
-              {
-                img: "assets/img/location/location-2.jpg",
-                title: "London Store",
-                address: "150 Stanley Rd, Spitalfields",
-                city: "London, UK"
-              },
-              {
-                img: "assets/img/location/location-3.jpg",
-                title: "New York Store",
-                address: "1357 Prospect Ave, Brooklyn",
-                city: "New York, US"
-              },
-              {
-                img: "assets/img/location/location-4.jpg",
-                title: "Madrid Store",
-                address: "86 Georgia Rd, Calle del Correo",
-                city: "Madrid, Spain"
-              }
+              
             ].map((loc, i) => (
               <div className="col-xl-3 col-lg-3 col-md-6" key={i}>
                 <div style={{

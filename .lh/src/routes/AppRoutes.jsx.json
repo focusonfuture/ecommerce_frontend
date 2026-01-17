@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/routes/AppRoutes.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1768639869803,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1768639869803,
+            "name": "Commit-0",
+            "content": "import { BrowserRouter, Routes, Route } from \"react-router-dom\";\r\nimport Home from \"../pages/Home/Home\";\r\nimport Login from \"../pages/Auth/Login\";\r\nimport Register from \"../pages/Auth/Register\";\r\nimport ProductDetails from \"../pages/ProductDetails/ProductDetails\";\r\nimport About from \"../pages/About/About\";\r\nimport ProductListPage from \"../pages/ProductList/ProductListPage\";\r\nimport WhishlistPage from \"../pages/Whishlist/WhishlistPage\";\r\nimport CartPage from \"../pages/Cart/CartPage\";\r\nimport CheckoutPage from \"../pages/Checkout/CheckoutPage\";\r\nimport MyOrdersPage from \"../pages/MyOrders/MyOrdersPage\";\r\nimport MyOrdersDetailsPage from \"../pages/MyOrders/MyOrdersDetailsPage\";\r\nimport BlogPage from \"../pages/Blog/BlogPage\";\r\nimport BlogDetailedPage from \"../pages/Blog/BlogDetailedPage\";\r\nimport ContactPage from \"../pages/Contact/ContactPage\";\r\nimport GalleryPage from \"../pages/Gallery/GalleryPage\";\r\nimport TermsPage from \"../pages/Terms/TermsPage\";\r\nimport PrivacyPolicyPage from \"../pages/productsPrivacy/PrivacyPolicyPage\";\r\nimport ProtectedRoute from \"../components/ProtectedRoute\";\r\nimport ProfilePage from \"../pages/Profile/ProfilePage\";\r\n\r\nconst AppRoutes = () => {\r\n  return (\r\n    <BrowserRouter>\r\n      <Routes>\r\n        {/* Public Routes */}\r\n        <Route path=\"/login\" element={<Login />} />\r\n        <Route path=\"/register\" element={<Register />} />\r\n        <Route path=\"/\" element={<Home />} />\r\n        <Route path=\"/about\" element={<About />} />\r\n        <Route path=\"/product/:slug\" element={<ProductDetails />} />\r\n        <Route path=\"//productlist\" element={<ProductListPage />} />\r\n        <Route path=\"/blog\" element={<BlogPage />} />\r\n        <Route path=\"/blog/:id\" element={<BlogDetailedPage />} />\r\n        <Route path=\"/contact\" element={<ContactPage />} />\r\n        <Route path=\"/gallery\" element={<GalleryPage />} />\r\n        <Route path=\"/terms\" element={<TermsPage />} />\r\n        <Route path=\"/privacy-policy\" element={<PrivacyPolicyPage />} />\r\n        <Route path=\"/profile/:slug\" element={<ProfilePage />} />\r\n        <Route path=\"/whishlist\" element={<WhishlistPage />} />\r\n        <Route path=\"/cart\" element={<CartPage />} />\r\n        <Route path=\"/my-orders\" element={<MyOrdersPage />} />\r\n        <Route path=\"/my-orders/:id\" element={<MyOrdersDetailsPage />} />\r\n\r\n        \r\n        {/* Protected Routes */}\r\n\r\n        <Route\r\n          path=\"/checkout\"\r\n          element={\r\n            <ProtectedRoute>\r\n              <CheckoutPage />\r\n            </ProtectedRoute>\r\n          }\r\n        />\r\n      </Routes>\r\n    </BrowserRouter>\r\n  );\r\n};\r\n\r\nexport default AppRoutes;\r\n"
+        }
+    ]
+}

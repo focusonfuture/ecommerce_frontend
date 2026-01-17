@@ -3,7 +3,7 @@ import api from "./api";
 const authService = {
   async login(email, password) {
     const res = await api.post("/login/", {
-      email,       
+      email,
       password,
     });
 
@@ -34,8 +34,7 @@ const authService = {
   },
 
   logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.clear();
   },
 
   isLoggedIn() {

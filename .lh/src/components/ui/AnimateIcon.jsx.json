@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/ui/AnimateIcon.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1768644984804,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1768645109867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,40 @@\n import { motion } from \"framer-motion\";\r\n \r\n-export function AnimateIcon({ children, animateOnHover = false }) {\r\n+export function AnimateIcon({\r\n+  children,\r\n+  animateOnHover = false,\r\n+  loop = false,\r\n+}) {\r\n   return (\r\n     <motion.span\r\n-      whileHover={animateOnHover ? { scale: 1.15, rotate: -10 } : undefined}\r\n       style={{ display: \"inline-flex\" }}\r\n+\r\n+      /* HOVER ANIMATION */\r\n+      whileHover={\r\n+        animateOnHover\r\n+          ? { scale: 1.15, rotate: -10 }\r\n+          : undefined\r\n+      }\r\n+\r\n+      /* LOOP ANIMATION */\r\n+      animate={\r\n+        loop\r\n+          ? {\r\n+              x: [0, 4, 0],\r\n+            }\r\n+          : undefined\r\n+      }\r\n+\r\n+      transition={\r\n+        loop\r\n+          ? {\r\n+              duration: 1.2,\r\n+              repeat: Infinity,\r\n+              ease: \"easeInOut\",\r\n+            }\r\n+          : undefined\r\n+      }\r\n     >\r\n       {children}\r\n     </motion.span>\r\n   );\r\n"
+                },
+                {
+                    "date": 1768645148763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,40 +1,11 @@\n import { motion } from \"framer-motion\";\r\n \r\n-export function AnimateIcon({\r\n-  children,\r\n-  animateOnHover = false,\r\n-  loop = false,\r\n-}) {\r\n+export function AnimateIcon({ children, animateOnHover = false }) {\r\n   return (\r\n     <motion.span\r\n+      whileHover={animateOnHover ? { scale: 1.15, rotate: -10 } : undefined}\r\n       style={{ display: \"inline-flex\" }}\r\n-\r\n-      /* HOVER ANIMATION */\r\n-      whileHover={\r\n-        animateOnHover\r\n-          ? { scale: 1.15, rotate: -10 }\r\n-          : undefined\r\n-      }\r\n-\r\n-      /* LOOP ANIMATION */\r\n-      animate={\r\n-        loop\r\n-          ? {\r\n-              x: [0, 4, 0],\r\n-            }\r\n-          : undefined\r\n-      }\r\n-\r\n-      transition={\r\n-        loop\r\n-          ? {\r\n-              duration: 1.2,\r\n-              repeat: Infinity,\r\n-              ease: \"easeInOut\",\r\n-            }\r\n-          : undefined\r\n-      }\r\n     >\r\n       {children}\r\n     </motion.span>\r\n   );\r\n"
+                }
+            ],
+            "date": 1768644984804,
+            "name": "Commit-0",
+            "content": "import { motion } from \"framer-motion\";\r\n\r\nexport function AnimateIcon({ children, animateOnHover = false }) {\r\n  return (\r\n    <motion.span\r\n      whileHover={animateOnHover ? { scale: 1.15, rotate: -10 } : undefined}\r\n      style={{ display: \"inline-flex\" }}\r\n    >\r\n      {children}\r\n    </motion.span>\r\n  );\r\n}\r\n"
+        }
+    ]
+}

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api";
+const API_URL = "https://admin.nikandu.in/";
 
 const productService = {
   async getProducts(page = 1) {
