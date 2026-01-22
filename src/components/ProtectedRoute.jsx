@@ -1,14 +1,11 @@
-import { useState } from "react";
+// src/components/ProtectedRoute.jsx
 import { useLocation, useNavigate } from "react-router-dom";
 import LoginRequiredPopup from "./LoginRequiredPopup";
 
 const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("access_token");
   const location = useLocation();
   const navigate = useNavigate();
-
-  // Show popup only when not logged in
-  const [showPopup] = useState(!token);
 
   const handleLogin = () => {
     navigate(`/login?redirect=${location.pathname}`);
@@ -18,23 +15,19 @@ const ProtectedRoute = ({ children }) => {
     navigate("/");
   };
 
-  return (
-    <>
-      {/* Always render the protected page */}
-      <div className={!token ? "protected-blur" : ""}>
-        {children}
-      </div>
+  //  Do NOT render protected content if not logged in
+  if (!token) {
+    return (
+      <LoginRequiredPopup
+        visible={true}
+        onLogin={handleLogin}
+        onCancel={handleCancel}
+      />
+    );
+  }
 
-      {/* If not logged in → show popup */}
-      {!token && (
-        <LoginRequiredPopup
-          visible={showPopup}
-          onLogin={handleLogin}
-          onCancel={handleCancel}
-        />
-      )}
-    </>
-  );
+  // ✅ Safe to render
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;

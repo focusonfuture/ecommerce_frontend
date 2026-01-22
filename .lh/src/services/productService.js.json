@@ -3,11 +3,47 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1768623305587,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1768803080656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,5 @@\n-import axios from \"axios\";\r\n-\r\n+import api from \"./api\";\r\n const API_URL = \"https://admin.nikandu.in/\";\r\n \r\n const productService = {\r\n   async getProducts(page = 1) {\r\n"
+                },
+                {
+                    "date": 1768803105225,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,11 @@\n import api from \"./api\";\r\n-const API_URL = \"https://admin.nikandu.in/\";\r\n \r\n+\r\n+\r\n const productService = {\r\n   async getProducts(page = 1) {\r\n-    const res = await axios.get(`${API_URL}/products/?page=${page}`);\r\n+    const res = await a.get(`${API_URL}/products/?page=${page}`);\r\n     return res.data;\r\n   }\r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1768803142924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \r\n \r\n const productService = {\r\n   async getProducts(page = 1) {\r\n-    const res = await a.get(`${API_URL}/products/?page=${page}`);\r\n+    const res = await api.get(`${API_URL}/productlist/?page=${page}`);\r\n     return res.data;\r\n   }\r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1768803173958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \r\n \r\n const productService = {\r\n   async getProducts(page = 1) {\r\n-    const res = await api.get(`${API_URL}/productlist/?page=${page}`);\r\n+    const res = await api.get(`${API_URL/products/?page=${page}`);\r\n     return res.data;\r\n   }\r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1768803805636,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,15 @@\n \r\n \r\n const productService = {\r\n   async getProducts(page = 1) {\r\n-    const res = await api.get(`${API_URL/products/?page=${page}`);\r\n+    const res = await api.get(\"/products/\")\r\n+  .catch(err => {\r\n+    console.log(\"STATUS:\", err.response?.status);\r\n+    console.log(\"HEADERS:\", err.response?.headers);\r\n+    console.log(\"DATA:\", err.response?.data);\r\n+  });\r\n+\r\n     return res.data;\r\n   }\r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1768804175166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,39 @@\n+import api from \"./api\";\r\n+\r\n+const productService = {\r\n+  async getProducts(page = 1) {\r\n+    try {\r\n+      const res = await api.get(\"/products/\", {\r\n+        params: { page },\r\n+        validateStatus: () => true, // prevent axios auto-throw\r\n+      });\r\n+\r\n+      const contentType = res.headers[\"content-type\"] || \"\";\r\n+\r\n+      // 🔴 Backend returned HTML (login redirect)\r\n+      if (contentType.includes(\"text/html\")) {\r\n+        console.error(\"❌ HTML response instead of JSON (auth issue)\");\r\n+        return { products: [], totalItems: 0 };\r\n+      }\r\n+\r\n+      // ✅ Normalize possible backend formats\r\n+      return {\r\n+        products:\r\n+          res.data?.products ||\r\n+          res.data?.data ||\r\n+          [],\r\n+        totalItems:\r\n+          res.data?.totalItems ||\r\n+          res.data?.total ||\r\n+          res.data?.count ||\r\n+          0,\r\n+      };\r\n+\r\n+    } catch (err) {\r\n+      console.error(\"❌ Product API error:\", err);\r\n+      return { products: [], totalItems: 0 };\r\n+    }\r\n+  },\r\n+};\r\n+\r\n+export default productService;\r\n"
+                },
+                {
+                    "date": 1768804181736,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,11 +9,11 @@\n       });\r\n \r\n       const contentType = res.headers[\"content-type\"] || \"\";\r\n \r\n-      // 🔴 Backend returned HTML (login redirect)\r\n+      //  Backend returned HTML (login redirect)\r\n       if (contentType.includes(\"text/html\")) {\r\n-        console.error(\"❌ HTML response instead of JSON (auth issue)\");\r\n+        console.error(\" HTML response instead of JSON (auth issue)\");\r\n         return { products: [], totalItems: 0 };\r\n       }\r\n \r\n       // ✅ Normalize possible backend formats\r\n@@ -29,29 +29,11 @@\n           0,\r\n       };\r\n \r\n     } catch (err) {\r\n-      console.error(\"❌ Product API error:\", err);\r\n+      console.error(\" Product API error:\", err);\r\n       return { products: [], totalItems: 0 };\r\n     }\r\n   },\r\n };\r\n \r\n export default productService;\r\n-import api from \"./api\";\r\n-\r\n-\r\n-\r\n-const productService = {\r\n-  async getProducts(page = 1) {\r\n-    const res = await api.get(\"/products/\")\r\n-  .catch(err => {\r\n-    console.log(\"STATUS:\", err.response?.status);\r\n-    console.log(\"HEADERS:\", err.response?.headers);\r\n-    console.log(\"DATA:\", err.response?.data);\r\n-  });\r\n-\r\n-    return res.data;\r\n-  }\r\n-};\r\n-\r\n-export default productService;\r\n"
+                },
+                {
+                    "date": 1768806744689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,39 +1,28 @@\n import api from \"./api\";\r\n \r\n const productService = {\r\n   async getProducts(page = 1) {\r\n-    try {\r\n-      const res = await api.get(\"/products/\", {\r\n-        params: { page },\r\n-        validateStatus: () => true, // prevent axios auto-throw\r\n-      });\r\n+    const res = await api.get(\"/api/products/\", {\r\n+      params: { page },\r\n+    });\r\n \r\n-      const contentType = res.headers[\"content-type\"] || \"\";\r\n+    // HARD validation — fail fast if backend is wrong\r\n+    if (\r\n+      !res ||\r\n+      typeof res.data !== \"object\" ||\r\n+      !Array.isArray(res.data.results)\r\n+    ) {\r\n+      throw new Error(\"Invalid products API response\");\r\n+    }\r\n \r\n-      //  Backend returned HTML (login redirect)\r\n-      if (contentType.includes(\"text/html\")) {\r\n-        console.error(\" HTML response instead of JSON (auth issue)\");\r\n-        return { products: [], totalItems: 0 };\r\n-      }\r\n-\r\n-      //  Normalize possible backend formats\r\n-      return {\r\n-        products:\r\n-          res.data?.products ||\r\n-          res.data?.data ||\r\n-          [],\r\n-        totalItems:\r\n-          res.data?.totalItems ||\r\n-          res.data?.total ||\r\n-          res.data?.count ||\r\n-          0,\r\n-      };\r\n-\r\n-    } catch (err) {\r\n-      console.error(\" Product API error:\", err);\r\n-      return { products: [], totalItems: 0 };\r\n-    }\r\n+    return {\r\n+      products: res.data.results,\r\n+      totalItems:\r\n+        typeof res.data.count === \"number\"\r\n+          ? res.data.count\r\n+          : res.data.results.length,\r\n+    };\r\n   },\r\n };\r\n \r\n export default productService;\r\n"
+                },
+                {
+                    "date": 1768807937556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,12 @@\n+import api from \"./api\";\r\n+\r\n+\r\n+\r\n+const productService = {\r\n+  async getProducts(page = 1) {\r\n+    const res = await api.get(`${API/products/?page=${page}`);\r\n+    return res.data;\r\n+  }\r\n+};\r\n+\r\n+export default productService;\r\n"
                 }
             ],
             "date": 1768623305587,

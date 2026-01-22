@@ -3,37 +3,39 @@ import { useNavigate } from "react-router-dom";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import productService from "../../services/productService";
-import { useToast } from "../toast/Toast";
+import AddToCartSuccessModal from "../cart/AddToCartSuccessModal";
 
 const ProductList = () => {
   const navigate = useNavigate();
-  const { showToast } = useToast();
 
   // ─────────────────────────────────────────────
   // BACKEND PRODUCT DATA STATES
   // ─────────────────────────────────────────────
-  
+
   const [products, setProducts] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const perPage = 20;
-
   const [currentPage, setCurrentPage] = useState(1);
+  const [showCartSuccess, setShowCartSuccess] = useState(false);
 
-  // load products from backend
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const data = await productService.getProducts(currentPage);
 
-        setProducts(data.products);
-        setTotalItems(data.totalItems);
-      } catch (error) {
-        console.error("Failed to fetch products:", error);
-      }
-    };
+ useEffect(() => {
+  const loadProducts = async () => {
+    try {
+      const products = await productService.getProducts(currentPage);
 
-    loadProducts();
-  }, [currentPage]);
+      console.log("RAW PRODUCTS FROM BACKEND:", products);
+
+      setProducts(products);
+      setTotalItems(products.length);
+    } catch (error) {
+      console.error("Failed to fetch products:", error);
+    }
+  };
+
+  loadProducts();
+}, [currentPage]);
+
 
   // ─────────────────────────────────────────────
   // PAGINATION CALCULATIONS
@@ -61,8 +63,44 @@ const ProductList = () => {
       setCurrentPage(p);
       window.scrollTo({ top: 200, behavior: "smooth" });
     },
-    [totalPages]
+    [totalPages],
   );
+
+  const CART_KEY = "cart_items";
+
+  const addToCart = (product) => {
+  const cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+
+  const existingItem = cart.find((item) => item.id === product.id);
+
+  let updatedCart;
+
+  if (existingItem) {
+    updatedCart = cart.map((item) =>
+      item.id === product.id
+        ? { ...item, qty: item.qty + 1 }
+        : item
+    );
+  } else {
+    updatedCart = [
+      ...cart,
+      {
+        id: product.id,
+        name: product.name,
+        slug: product.slug,
+        image: product.image,
+        price: product.price_min,
+        qty: 1,
+      },
+    ];
+  }
+
+  localStorage.setItem(CART_KEY, JSON.stringify(updatedCart));
+
+  //  OPEN SUCCESS MODAL
+  setShowCartSuccess(true);
+};
+
 
   // ─────────────────────────────────────────────
   // MOBILE FILTER PANEL
@@ -70,12 +108,15 @@ const ProductList = () => {
   const openFilters = () => {
     document.querySelector(".mobile-filter-panel")?.classList.add("active");
     document.querySelector(".filter-overlay")?.classList.add("show");
+    document.body.style.overflow = "hidden";
   };
 
   const closeFilters = () => {
     document.querySelector(".mobile-filter-panel")?.classList.remove("active");
     document.querySelector(".filter-overlay")?.classList.remove("show");
   };
+
+ 
 
   // ─────────────────────────────────────────────
   // PRICE FILTER STATE
@@ -85,7 +126,6 @@ const ProductList = () => {
   // ─────────────────────────────────────────────
   // UI START
   // ─────────────────────────────────────────────
-
 
   return (
     <main>
@@ -333,73 +373,84 @@ const ProductList = () => {
                 <div className="tab-pane fade show active" id="grid">
                   <div className="row g-3">
                     {products.map((item) => (
-                        <div
-                          className="col-xl-3 col-lg-4 col-md-6 col-sm-6"
-                          key={item.id}
-                        >
-                          <div className="product__item product__item-d">
-
-                            <div className="product__thumb fix">
-                              <div className="product-image w-img">
-                                <a onClick={() => navigate(`/product/${item.slug}`)}>
-                                  <img src={item.image} alt={item.name} />
-                                </a>
-                              </div>
-
-                              <div className="product-action">
-                                <button className="icon-box icon-box-1">
-                                  <i className="fal fa-eye" />
-                                </button>
-                                <button className="icon-box icon-box-1">
-                                  <i className="fal fa-heart" />
-                                </button>
-                              </div>
+                      <div
+                        className="col-xl-3 col-lg-4 col-md-6 col-sm-6"
+                        key={item.id}
+                      >
+                        <div className="product__item product__item-d">
+                          <div className="product__thumb fix">
+                            <div className="product-image w-img">
+                              <a
+                                onClick={() =>
+                                  navigate(`/product/${item.slug}`)
+                                }
+                              >
+                                <img src={item.image} alt={item.name} />
+                              </a>
                             </div>
 
-                            <div className="product__content-3">
-                              <h6>
-                                <a onClick={() => navigate(`/product/${item.slug}`)}>
-                                  {item.name}
-                                </a>
-                              </h6>
-
-                              <div className="rating mb-5">
-                                <ul>
-                                  {[1,2,3,4,5].map((i) => (
-                                    <li key={i}>
-                                      <i className={i <= item.rating ? "fas fa-star" : "fal fa-star"} />
-                                    </li>
-                                  ))}
-                                </ul>
-                                <span>({item.reviews} review)</span>
-                              </div>
-
-                              <div className="price mb-10">
-                                <span>${item.price_min} - ${item.price_max}</span>
-                              </div>
+                            <div className="product-action">
+                              <button className="icon-box icon-box-1">
+                                <i className="fal fa-eye" />
+                              </button>
+                              <button className="icon-box icon-box-1">
+                                <i className="fal fa-heart" />
+                              </button>
                             </div>
-
-                            <button
-                              className="cart-btn w-100"
-                              onClick={() => {
-                                showToast("✔ Product added to cart");
-                                navigate("/cart");
-                              }}
-                            >
-                              Add to Cart
-                            </button>
-
-                            <button
-                              className="wc-checkout w-100 quickview-yellow"
-                              onClick={() => navigate(`/product/${item.slug}`)}
-                            >
-                              Quick View
-                            </button>
-
                           </div>
-                        </div>
-                      ))}
 
+                          <div className="product__content-3">
+                            <h6>
+                              <a
+                                onClick={() =>
+                                  navigate(`/product/${item.slug}`)
+                                }
+                              >
+                                {item.name}
+                              </a>
+                            </h6>
+
+                            <div className="rating mb-5">
+                              <ul>
+                                {[1, 2, 3, 4, 5].map((i) => (
+                                  <li key={i}>
+                                    <i
+                                      className={
+                                        i <= item.rating
+                                          ? "fas fa-star"
+                                          : "fal fa-star"
+                                      }
+                                    />
+                                  </li>
+                                ))}
+                              </ul>
+                              <span>({item.reviews} review)</span>
+                            </div>
+
+                            <div className="price mb-10">
+                              <span>
+                                ${item.price_min} - ${item.price_max}
+                              </span>
+                            </div>
+                          </div>
+
+                          <button
+                            className=" cart-btn"
+                            onClick={() => addToCart(item)}
+                          >
+                            Add to Cart
+                          </button>
+
+
+                          <button
+                            className="wc-checkout w-100 quickview-yellow"
+                            onClick={() => navigate(`/product/${item.slug}`)}
+                          >
+                            Quick View
+                          </button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -407,57 +458,74 @@ const ProductList = () => {
                 <div className="tab-pane fade" id="list">
                   <div className="product-list-wrapper d-flex flex-column gap-3">
                     {products.map((item) => (
-                        <div className="product-list-item d-flex p-3 border rounded" key={item.id}>
-                          
-                          <div className="product-list-img me-3" style={{ width: 120 }}>
-                            <a onClick={() => navigate(`/product/${item.slug}`)}>
-                              <img src={item.image} alt={item.name} className="img-fluid rounded" />
-                            </a>
-                          </div>
-
-                          <div className="product-list-content flex-grow-1">
-                            <h5 className="mb-2">
-                              <a onClick={() => navigate(`/product/${item.slug}`)}>
-                                {item.name}
-                              </a>
-                            </h5>
-
-                            <div className="rating mb-2">
-                              <ul className="d-inline-flex">
-                                {[1,2,3,4,5].map((i) => (
-                                  <li key={i}>
-                                    <i className={i <= item.rating ? "fas fa-star" : "fal fa-star"} />
-                                  </li>
-                                ))}
-                              </ul>
-                              <span className="ms-2">({item.reviews} review)</span>
-                            </div>
-
-                            <p className="text-muted mb-2">
-                              Short description…
-                            </p>
-
-                            <div className="price mb-3">
-                              <span style={{ fontSize: 18, fontWeight: 600 }}>
-                                ${item.price_min} - ${item.price_max}
-                              </span>
-                            </div>
-
-                            <div className="d-flex gap-2">
-                              <button className="btn-small cart-btn">Add to Cart</button>
-
-                              <button
-                                className="btn-small wc-checkout quickview-yellow"
-                                onClick={() => navigate(`/product/${item.slug}`)}
-                              >
-                                Quick View
-                              </button>
-                            </div>
-                          </div>
-
+                      <div
+                        className="product-list-item d-flex p-3 border rounded"
+                        key={item.id}
+                      >
+                        <div
+                          className="product-list-img me-3"
+                          style={{ width: 120 }}
+                        >
+                          <a onClick={() => navigate(`/product/${item.slug}`)}>
+                            <img
+                              src={item.image}
+                              alt={item.name}
+                              className="img-fluid rounded"
+                            />
+                          </a>
                         </div>
-                      ))}
 
+                        <div className="product-list-content flex-grow-1">
+                          <h5 className="mb-2">
+                            <a
+                              onClick={() => navigate(`/product/${item.slug}`)}
+                            >
+                              {item.name}
+                            </a>
+                          </h5>
+
+                          <div className="rating mb-2">
+                            <ul className="d-inline-flex">
+                              {[1, 2, 3, 4, 5].map((i) => (
+                                <li key={i}>
+                                  <i
+                                    className={
+                                      i <= item.rating
+                                        ? "fas fa-star"
+                                        : "fal fa-star"
+                                    }
+                                  />
+                                </li>
+                              ))}
+                            </ul>
+                            <span className="ms-2">
+                              ({item.reviews} review)
+                            </span>
+                          </div>
+
+                          <p className="text-muted mb-2">Short description…</p>
+
+                          <div className="price mb-3">
+                            <span style={{ fontSize: 18, fontWeight: 600 }}>
+                              ${item.price_min} - ${item.price_max}
+                            </span>
+                          </div>
+
+                          <div className="d-flex gap-2">
+                            <button className="btn-small cart-btn">
+                              Add to Cart
+                            </button>
+
+                            <button
+                              className="btn-small wc-checkout quickview-yellow"
+                              onClick={() => navigate(`/product/${item.slug}`)}
+                            >
+                              Quick View
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -691,6 +759,12 @@ const ProductList = () => {
 
       {/* Overlay */}
       <div className="filter-overlay" onClick={closeFilters} />
+
+        {/* ADD TO CART SUCCESS MODAL */}
+      <AddToCartSuccessModal
+        open={showCartSuccess}
+        onClose={() => setShowCartSuccess(false)}
+      />
     </main>
   );
 };

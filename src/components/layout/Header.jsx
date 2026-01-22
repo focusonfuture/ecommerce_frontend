@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { isLoggedIn, logout } from "../../utils/auth";
-import categoryService from "../../services/categoryService";
+// import categoryService from "../../services/categoryService";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -90,18 +90,18 @@ const Header = () => {
 
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    const loadCategories = async () => {
-      try {
-        const data = await categoryService.getMenuCategories();
-        setCategories(data);
-      } catch (err) {
-        console.error("Category load failed", err);
-      }
-    };
+  // useEffect(() => {
+  //   const loadCategories = async () => {
+  //     try {
+  //       const data = await categoryService.getMenuCategories();
+  //       setCategories(data);
+  //     } catch (err) {
+  //       console.error("Category load failed", err);
+  //     }
+  //   };
 
-    loadCategories();
-  }, []);
+  //   loadCategories();
+  // }, []);
 
   return (
     <>

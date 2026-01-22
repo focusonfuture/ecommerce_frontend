@@ -24,14 +24,9 @@ const LoginComponent = () => {
       setPopupEmail(email);
       setPopupVisible(true);
     } catch (err) {
-      console.log("LOGIN ERROR:", err.response?.data); // ← SHOW REAL BACKEND ERROR
-
-      setError(
-        err.response?.data?.detail ||
-        err.response?.data?.message ||
-        "Invalid email or password"
-      );
+      setError(err.message);
     }
+
   };
 
   return (

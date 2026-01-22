@@ -1,44 +1,40 @@
+// src/services/authService.js
 import api from "./api";
+
+const ACCESS_TOKEN_KEY = "access_token";
+const USER_KEY = "user";
 
 const authService = {
   async login(email, password) {
-    const res = await api.post("/login/", {
-      email,
-      password,
-    });
+    const res = await api.post("/login/", { email, password });
+
+    if (!res.data?.access) {
+      throw new Error("Invalid login response");
+    }
 
     return {
-      token: res.data.access,
-      refresh: res.data.refresh,
+      access: res.data.access,
+      refresh: res.data.refresh ?? null,
       user: { email },
     };
   },
 
-  async register({ username, email, password, phone, firstName, lastName }) {
-    const res = await api.post("/register/", {
-      username,
-      email,
-      password,
-      password2: password,
-      first_name: firstName,
-      last_name: lastName,
-      phone,
-    });
-
-    return res.data;
+  async register(payload) {
+    await api.post("/register/", payload);
   },
 
-  saveSession(token, user) {
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
+  saveSession(accessToken, user) {
+    localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
   },
 
   logout() {
-    localStorage.clear();
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
   },
 
   isLoggedIn() {
-    return !!localStorage.getItem("token");
+    return Boolean(localStorage.getItem(ACCESS_TOKEN_KEY));
   },
 };
 

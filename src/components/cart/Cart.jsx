@@ -137,6 +137,12 @@ const Cart = () => {
                 <li>
                   Total <span>$250.00</span>
                 </li>
+                <li>
+                  Taxes <span>$0.00</span>
+                </li>
+                <li>
+                  
+                </li>
               </ul>
 
               <Link
