@@ -1,12 +1,22 @@
-// import api from "./api";
+// src/services/categoryService.js
+import api from "./api";
 
-// const categoryService = {
-//   async getMenuCategories() {
-//     const res = await api.get("/categories/");
-    
-//     // Only categories allowed in menu
-//     return res.data.filter(cat => cat.show_in_menu);
-//   },
-// };
+const categoryService = {
+  async getCategories() {
+    const res = await api.get("/products/categories");
 
-// export default categoryService;
+    // HARD GUARD
+    if (
+      !res.data ||
+      typeof res.data !== "object" ||
+      !Array.isArray(res.data.results)
+    ) {
+      throw new Error("Invalid category API response");
+    }
+
+    // ✅ RETURN ARRAY ONLY
+    return res.data.results;
+  },
+};
+
+export default categoryService;

@@ -1,107 +1,135 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { isLoggedIn, logout } from "../../utils/auth";
-// import categoryService from "../../services/categoryService";
+import categoryService from "../../services/categoryService";
 
 const Header = () => {
   const navigate = useNavigate();
 
+  /* -------------------------------
+     AUTH
+  -------------------------------- */
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
 
-  useEffect(() => {
-    // -------------------------------
-    // 1. MENU HOVER + MOBILE TOGGLE
-    // -------------------------------
-    const mq = window.matchMedia("(min-width: 992px)");
+  /* -------------------------------
+     STATE
+  -------------------------------- */
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
-    const menu = document.querySelector(".main-menu");
-    if (menu) {
-      const items = menu.querySelectorAll("ul > li");
+  /* -------------------------------
+     SEARCH SUBMIT
+  -------------------------------- */
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
 
-      const clearHover = (li) => li.classList.remove("open");
-      const setHover = (li) => li.classList.add("open");
+    const params = new URLSearchParams();
 
-      // Remove old handlers
-      items.forEach((li) => {
-        const submenu = li.querySelector("ul, .mega-menu");
-        if (!submenu) return;
-
-        const newLi = li.cloneNode(true);
-        li.parentNode.replaceChild(newLi, li);
-      });
-
-      // Re-query after cloning
-      const items2 = menu.querySelectorAll("ul > li");
-
-      items2.forEach((li) => {
-        const submenu = li.querySelector("ul, .mega-menu");
-        if (!submenu) return;
-
-        const link = li.querySelector("a");
-
-        const onEnter = () => setHover(li);
-        const onLeave = () => clearHover(li);
-        const onClick = (e) => {
-          if (!mq.matches) {
-            e.preventDefault();
-            const isOpen = li.classList.toggle("open");
-            if (submenu) submenu.style.display = isOpen ? "block" : "none";
-          }
-        };
-
-        li.addEventListener("mouseenter", onEnter);
-        li.addEventListener("mouseleave", onLeave);
-        if (link) link.addEventListener("click", onClick);
-
-        if (!mq.matches && submenu) submenu.style.display = "none";
-
-        li._menuHandlers = { onEnter, onLeave, onClick };
-      });
-
-      // Cleanup
-      return () => {
-        const cleanupItems = menu.querySelectorAll("ul > li");
-        cleanupItems.forEach((li) => {
-          const h = li._menuHandlers;
-          if (h) {
-            li.removeEventListener("mouseenter", h.onEnter);
-            li.removeEventListener("mouseleave", h.onLeave);
-            const link = li.querySelector("a");
-            if (link) link.removeEventListener("click", h.onClick);
-          }
-        });
-      };
+    if (searchTerm.trim()) {
+      params.append("q", searchTerm.trim());
     }
+
+    if (selectedCategory) {
+      params.append("category", selectedCategory);
+    }
+
+    navigate(`/shop?${params.toString()}`);
+  };
+
+  /* -------------------------------
+     CATEGORY LOAD
+  -------------------------------- */
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const list = await categoryService.getCategories();
+
+        if (Array.isArray(list)) {
+          setCategories(list);
+        } else {
+          setCategories([]);
+        }
+
+        // re-init niceSelect AFTER categories load
+        setTimeout(() => {
+          if (window.$ && window.$.fn?.niceSelect) {
+            window.$("select").niceSelect("destroy");
+            window.$("select").niceSelect();
+          }
+        }, 0);
+
+      } catch (err) {
+        console.error("Category load failed", err);
+        setCategories([]);
+      }
+    };
+
+    loadCategories();
   }, []);
 
-  // -------------------------------
-  // 2. NICE-SELECT INITIALIZATION
-  // -------------------------------
+  /* -------------------------------
+     MENU HOVER + MOBILE TOGGLE
+  -------------------------------- */
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 992px)");
+    const menu = document.querySelector(".main-menu");
+
+    if (!menu) return;
+
+    const items = menu.querySelectorAll("ul > li");
+
+    items.forEach((li) => {
+      const submenu = li.querySelector("ul, .mega-menu");
+      if (!submenu) return;
+
+      const onEnter = () => mq.matches && li.classList.add("open");
+      const onLeave = () => mq.matches && li.classList.remove("open");
+      const onClick = (e) => {
+        if (!mq.matches) {
+          e.preventDefault();
+          li.classList.toggle("open");
+        }
+      };
+
+      li.addEventListener("mouseenter", onEnter);
+      li.addEventListener("mouseleave", onLeave);
+
+      const link = li.querySelector("a");
+      if (link) link.addEventListener("click", onClick);
+
+      li._handlers = { onEnter, onLeave, onClick };
+    });
+
+    return () => {
+      items.forEach((li) => {
+        const h = li._handlers;
+        if (!h) return;
+        li.removeEventListener("mouseenter", h.onEnter);
+        li.removeEventListener("mouseleave", h.onLeave);
+        const link = li.querySelector("a");
+        if (link) link.removeEventListener("click", h.onClick);
+      });
+    };
+  }, []);
+
+  /* -------------------------------
+     NICE SELECT (INITIAL)
+  -------------------------------- */
   useEffect(() => {
     setTimeout(() => {
-      if (window.$ && window.$.fn && window.$.fn.niceSelect) {
+      if (window.$ && window.$.fn?.niceSelect) {
         window.$("select").niceSelect();
       }
     }, 0);
   }, []);
 
-  const [categories, setCategories] = useState([]);
-
-  // useEffect(() => {
-  //   const loadCategories = async () => {
-  //     try {
-  //       const data = await categoryService.getMenuCategories();
-  //       setCategories(data);
-  //     } catch (err) {
-  //       console.error("Category load failed", err);
-  //     }
-  //   };
-
-  //   loadCategories();
-  // }, []);
+  /* ===============================
+     UI
+  =============================== */
 
   return (
     <>
@@ -204,38 +232,36 @@ const Header = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-xl-5 col-lg-4 d-none d-lg-block">
-                  <div className="header__search">
-                    <form action="#">
-                      <div className="header__search-box">
-                        <input
-                          className="search-input"
-                          type="text"
-                          placeholder="I'm shopping for..."
-                        />
-                        <button className="button" type="submit">
-                          <i className="far fa-search" />
-                        </button>
-                      </div>
-                      <div className="header__search-cat">
-                        <select>
-                          <option>All Categories</option>
-                          <option>Best Seller Products</option>
-                          <option>Top 10 Offers</option>
-                          <option>New Arrivals</option>
-                          <option>Phones &amp; Tablets</option>
-                          <option>Electronics &amp; Digital</option>
-                          <option>Fashion &amp; Clothings</option>
-                          <option>Jewelry &amp; Watches</option>
-                          <option>Health &amp; Beauty</option>
-                          <option>Sound &amp; Speakers</option>
-                          <option>TV &amp; Audio</option>
-                          <option>Computers</option>
-                        </select>
-                      </div>
-                    </form>
-                  </div>
+               <div className="col-xl-5 col-lg-4 d-none d-lg-block">
+                <div className="header__search">
+                  <form onSubmit={(e) => e.preventDefault()}>
+                    <div className="header__search-box">
+                      <input
+                        className="search-input"
+                        type="text"
+                        placeholder="I'm shopping for..."
+                      />
+                      <button className="button" type="submit">
+                        <i className="far fa-search" />
+                      </button>
+                    </div>
+
+                    <div className="header__search-cat">
+                      <select>
+                        <option value="">All Categories</option>
+
+                        {Array.isArray(categories) &&
+                          categories.map((cat) => (
+                            <option key={cat.id} value={cat.slug}>
+                              {cat.name}
+                            </option>
+                          ))}
+                      </select>
+                    </div>
+                  </form>
                 </div>
+              </div>
+
                 <div className="col-xl-4 col-lg-5 col-md-8 col-sm-8">
                   <div className="header-action">
                     {/*  USER LOGIN / LOGOUT SWITCH */}
@@ -850,22 +876,11 @@ const Header = () => {
                                 <Link to={`/category/${cat.slug}`}>
                                   {cat.name}
                                 </Link>
-
-                                {cat.children && cat.children.length > 0 && (
-                                  <ul className="mega-item">
-                                    {cat.children.map((child) => (
-                                      <li key={child.id}>
-                                        <Link to={`/category/${child.slug}`}>
-                                          {child.name}
-                                        </Link>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                )}
                               </li>
                             ))}
                           </ul>
                         </li>
+
 
                         <li>
                           <Link to="/profile">Profile</Link>

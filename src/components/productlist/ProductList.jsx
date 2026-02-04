@@ -19,15 +19,16 @@ const ProductList = () => {
   const [showCartSuccess, setShowCartSuccess] = useState(false);
 
 
- useEffect(() => {
+useEffect(() => {
   const loadProducts = async () => {
     try {
-      const products = await productService.getProducts(currentPage);
+      const { products, total } =
+        await productService.getProducts(currentPage);
 
-      console.log("RAW PRODUCTS FROM BACKEND:", products);
+      console.log("PRODUCTS:", products);
 
       setProducts(products);
-      setTotalItems(products.length);
+      setTotalItems(total);
     } catch (error) {
       console.error("Failed to fetch products:", error);
     }
@@ -35,6 +36,7 @@ const ProductList = () => {
 
   loadProducts();
 }, [currentPage]);
+
 
 
   // ─────────────────────────────────────────────

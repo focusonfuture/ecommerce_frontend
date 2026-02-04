@@ -1,23 +1,28 @@
+// src/services/productService.js
 import api from "./api";
 
 const productService = {
   async getProducts(page = 1) {
-    const res = await api.get("/products/", {
+    const res = await api.get("/products/products/", {
       params: { page },
     });
 
-    // Django view may return HTML → catch it early
+    // If backend returned HTML, endpoint is wrong
     if (typeof res.data === "string") {
-      throw new Error(
-        "Backend returned HTML, not JSON. /products/ is not an API endpoint."
-      );
+      throw new Error("Backend returned HTML instead of JSON");
     }
 
-    if (!Array.isArray(res.data)) {
-      throw new Error("Expected product array from backend");
+    // Validate paginated response
+    if (!res.data || !Array.isArray(res.data.results)) {
+      throw new Error("Invalid products API response shape");
     }
 
-    return res.data;
+    return {
+      products: res.data.results,
+      total: res.data.count,
+      next: res.data.next,
+      previous: res.data.previous,
+    };
   },
 };
 

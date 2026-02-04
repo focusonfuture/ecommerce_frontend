@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/services/categoryService.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1770196683822,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1770196969514,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,28 +1,22 @@\n+// src/services/categoryService.js\r\n import api from \"./api\";\r\n \r\n const categoryService = {\r\n-  async getCategories(page = 1) {\r\n-    const res = await api.get(\"/products/categories\", {\r\n-      params: { page },\r\n-    });\r\n+  async getCategories() {\r\n+    const res = await api.get(\"/products/categories\");\r\n \r\n-    // If backend returns HTML, endpoint is wrong\r\n-    if (typeof res.data === \"string\") {\r\n-      throw new Error(\"Backend returned HTML instead of JSON\");\r\n+    // HARD GUARD\r\n+    if (\r\n+      !res.data ||\r\n+      typeof res.data !== \"object\" ||\r\n+      !Array.isArray(res.data.results)\r\n+    ) {\r\n+      throw new Error(\"Invalid category API response\");\r\n     }\r\n \r\n-    // DRF paginated response expected\r\n-    if (!res.data || !Array.isArray(res.data.results)) {\r\n-      throw new Error(\"Invalid categories API response shape\");\r\n-    }\r\n-\r\n-    return {\r\n-      categories: res.data.results,\r\n-      total: res.data.count,\r\n-      next: res.data.next,\r\n-      previous: res.data.previous,\r\n-    };\r\n+    // ✅ RETURN ARRAY ONLY\r\n+    return res.data.results;\r\n   },\r\n };\r\n \r\n export default categoryService;\r\n"
+                }
+            ],
+            "date": 1770196683822,
+            "name": "Commit-0",
+            "content": "import api from \"./api\";\r\n\r\nconst categoryService = {\r\n  async getCategories(page = 1) {\r\n    const res = await api.get(\"/products/categories\", {\r\n      params: { page },\r\n    });\r\n\r\n    // If backend returns HTML, endpoint is wrong\r\n    if (typeof res.data === \"string\") {\r\n      throw new Error(\"Backend returned HTML instead of JSON\");\r\n    }\r\n\r\n    // DRF paginated response expected\r\n    if (!res.data || !Array.isArray(res.data.results)) {\r\n      throw new Error(\"Invalid categories API response shape\");\r\n    }\r\n\r\n    return {\r\n      categories: res.data.results,\r\n      total: res.data.count,\r\n      next: res.data.next,\r\n      previous: res.data.previous,\r\n    };\r\n  },\r\n};\r\n\r\nexport default categoryService;\r\n"
+        }
+    ]
+}
