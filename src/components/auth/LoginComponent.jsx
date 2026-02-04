@@ -18,15 +18,19 @@ const LoginComponent = () => {
     setError("");
 
     try {
-      const data = await authService.login(email, password);
-      authService.saveSession(data.token, data.user);
+      await authService.login(email, password);
 
       setPopupEmail(email);
       setPopupVisible(true);
     } catch (err) {
-      setError(err.message);
-    }
+      console.error("Login error:", err?.response?.data || err);
 
+      setError(
+        err?.response?.data?.detail ||
+        err?.response?.data?.message ||
+        "Invalid email or password"
+      );
+    }
   };
 
   return (
@@ -58,10 +62,12 @@ const LoginComponent = () => {
                   />
 
                   {error && (
-                    <p style={{ color: "red", marginTop: "10px" }}>{error}</p>
+                    <p style={{ color: "red", marginTop: 10 }}>{error}</p>
                   )}
 
-                  <button className="tp-in-btn w-100">Login</button>
+                  <button className="tp-in-btn w-100" type="submit">
+                    Login
+                  </button>
                 </form>
 
                 <p className="text-center mt-3">

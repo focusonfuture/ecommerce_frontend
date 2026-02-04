@@ -6,26 +6,21 @@ const USER_KEY = "user";
 
 const authService = {
   async login(email, password) {
-    const res = await api.post("/login/", { email, password });
+    const res = await api.post("/auth/login/", { email, password });
 
     if (!res.data?.access) {
       throw new Error("Invalid login response");
     }
 
-    return {
-      access: res.data.access,
-      refresh: res.data.refresh ?? null,
-      user: { email },
-    };
+    localStorage.setItem(ACCESS_TOKEN_KEY, res.data.access);
+    localStorage.setItem(USER_KEY, JSON.stringify(res.data.user || { email }));
+
+    return res.data;
   },
 
   async register(payload) {
-    await api.post("/register/", payload);
-  },
-
-  saveSession(accessToken, user) {
-    localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
-    localStorage.setItem(USER_KEY, JSON.stringify(user));
+    // THIS LINE IS NON-NEGOTIABLE
+    return await api.post("/auth/register/", payload);
   },
 
   logout() {

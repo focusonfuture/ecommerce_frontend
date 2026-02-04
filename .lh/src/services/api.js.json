@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/services/api.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1770120038507,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1770194701430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,32 @@\n import axios from \"axios\";\r\n \r\n const api = axios.create({\r\n-  baseURL: process.env.REACT_APP_API_URL,\r\n+  baseURL: process.env.REACT_APP_API_URL, // https://admin-ecommerce.nikandu.in/api\r\n   headers: {\r\n     \"Content-Type\": \"application/json\",\r\n     Accept: \"application/json\",\r\n   },\r\n });\r\n \r\n-api.interceptors.request.use((config) => {\r\n-  const token = localStorage.getItem(\"access_token\"); // 👈 FIXED\r\n-  if (token) {\r\n-    config.headers.Authorization = `Bearer ${token}`;\r\n-  }\r\n-  return config;\r\n-});\r\n+/**\r\n+ * Attach token ONLY for protected routes\r\n+ * Never send Authorization for login/register\r\n+ */\r\n+api.interceptors.request.use(\r\n+  (config) => {\r\n+    const token = localStorage.getItem(\"access_token\");\r\n \r\n+    const isPublicEndpoint =\r\n+      config.url.includes(\"/auth/login\") ||\r\n+      config.url.includes(\"/auth/register\");\r\n+\r\n+    if (token && !isPublicEndpoint) {\r\n+      config.headers.Authorization = `Bearer ${token}`;\r\n+    }\r\n+\r\n+    return config;\r\n+  },\r\n+  (error) => Promise.reject(error)\r\n+);\r\n+\r\n export default api;\r\n"
+                }
+            ],
+            "date": 1770120038507,
+            "name": "Commit-0",
+            "content": "import axios from \"axios\";\r\n\r\nconst api = axios.create({\r\n  baseURL: process.env.REACT_APP_API_URL,\r\n  headers: {\r\n    \"Content-Type\": \"application/json\",\r\n    Accept: \"application/json\",\r\n  },\r\n});\r\n\r\napi.interceptors.request.use((config) => {\r\n  const token = localStorage.getItem(\"access_token\"); // 👈 FIXED\r\n  if (token) {\r\n    config.headers.Authorization = `Bearer ${token}`;\r\n  }\r\n  return config;\r\n});\r\n\r\nexport default api;\r\n"
+        }
+    ]
+}

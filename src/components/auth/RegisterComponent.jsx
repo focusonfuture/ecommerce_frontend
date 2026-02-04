@@ -18,12 +18,12 @@ const RegisterComponent = () => {
 
   const [error, setError] = useState("");
 
-  // popup
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupName, setPopupName] = useState("");
 
-  const onChange = (e) =>
+  const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -36,22 +36,21 @@ const RegisterComponent = () => {
 
     try {
       await authService.register({
-        username: form.username,
-        email: form.email,
-        phone: form.phone,
-        firstName: form.first_name,
-        lastName: form.last_name,
-        password: form.password,
-      });
+  username: form.username,
+  email: form.email,
+  phone: form.phone,
+  first_name: form.first_name,
+  last_name: form.last_name,
+  password: form.password,
+  password2: form.password2,
+});
 
-      // Set popup name (email or username)
+
       setPopupName(form.username || form.email);
-
-      // Show success popup
       setPopupVisible(true);
 
     } catch (err) {
-      console.error("Register error:", err);
+      console.error("Register error:", err?.response?.data || err);
       setError("Registration failed. Please check your details.");
     }
   };
@@ -66,12 +65,10 @@ const RegisterComponent = () => {
                 <h5>Register</h5>
 
                 <form onSubmit={handleRegister}>
-                  
                   <label>Username *</label>
                   <input
                     type="text"
                     name="username"
-                    placeholder="Enter Username"
                     value={form.username}
                     onChange={onChange}
                     required
@@ -81,7 +78,6 @@ const RegisterComponent = () => {
                   <input
                     type="email"
                     name="email"
-                    placeholder="Enter email"
                     value={form.email}
                     onChange={onChange}
                     required
@@ -91,7 +87,6 @@ const RegisterComponent = () => {
                   <input
                     type="text"
                     name="phone"
-                    placeholder="Enter phone number"
                     value={form.phone}
                     onChange={onChange}
                     required
@@ -101,7 +96,6 @@ const RegisterComponent = () => {
                   <input
                     type="text"
                     name="first_name"
-                    placeholder="Enter first name"
                     value={form.first_name}
                     onChange={onChange}
                     required
@@ -111,7 +105,6 @@ const RegisterComponent = () => {
                   <input
                     type="text"
                     name="last_name"
-                    placeholder="Enter last name"
                     value={form.last_name}
                     onChange={onChange}
                     required
@@ -121,7 +114,6 @@ const RegisterComponent = () => {
                   <input
                     type="password"
                     name="password"
-                    placeholder="Enter password"
                     value={form.password}
                     onChange={onChange}
                     required
@@ -131,14 +123,13 @@ const RegisterComponent = () => {
                   <input
                     type="password"
                     name="password2"
-                    placeholder="Re-enter password"
                     value={form.password2}
                     onChange={onChange}
                     required
                   />
 
                   {error && (
-                    <p style={{ color: "red", marginTop: "10px" }}>{error}</p>
+                    <p style={{ color: "red", marginTop: 10 }}>{error}</p>
                   )}
 
                   <button className="tp-in-btn w-100 mt-3" type="submit">
@@ -149,20 +140,18 @@ const RegisterComponent = () => {
                 <p className="text-center mt-3">
                   Already have an account? <a href="/login">Login</a>
                 </p>
-
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* SUCCESS POPUP */}
       <RegisterSuccessPopup
         visible={popupVisible}
         username={popupName}
         onClose={() => {
           setPopupVisible(false);
-          navigate("/login"); 
+          navigate("/login");
         }}
         autoCloseMs={2000}
       />
